@@ -39,8 +39,8 @@ const Navbar = () => {
           </NavItemWrapper>
           <NavItemWrapper>search</NavItemWrapper>
           <NavItemWrapper>sort</NavItemWrapper>
-          <WriteExperience />
         </div>
+        <WriteExperience />
       </motion.div>
     </nav>
   )
