@@ -18,7 +18,7 @@ const ThemeSwitch = () => {
       <BsSun
         className={`absolute top-0 ${
           theme === 'light' ? 'translate-y-0' : 'translate-y-3'
-        } transition-transform transform-duration-300 w-6 h-6`}
+        } transition-transform transform-duration-300 w-6  h-6`}
       />
     </div>
   )
