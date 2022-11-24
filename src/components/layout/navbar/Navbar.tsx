@@ -4,12 +4,13 @@ import React from 'react'
 import { FaBeer } from 'react-icons/fa'
 
 import Logo from '../../shared/Logo'
+import NavItemWrapper from '../../shared/NavItemWrapper'
 import ThemeSwitch from '../../shared/ThemeSwitch'
 import WriteExperience from '../../shared/WriteExperience'
 
 const Navbar = () => {
   return (
-    <nav className="py-7 flex justify-between items-center sticky top-0">
+    <nav className="py-7 px-[2px] flex justify-between items-center ">
       <motion.div
         initial={{ x: -500, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -31,12 +32,16 @@ const Navbar = () => {
           duration: 0.8,
           delay: 0.5
         }}
-        className="flex items-center justify-items-center gap-5"
+        className="h-10 flex items-center justify-items-center divide-x"
       >
-        <ThemeSwitch />
-        <div>search</div>
-        <div>sort</div>
-        <WriteExperience />
+        <NavItemWrapper>
+          <ThemeSwitch />
+        </NavItemWrapper>
+        <NavItemWrapper>search</NavItemWrapper>
+        <NavItemWrapper>sort</NavItemWrapper>
+        <NavItemWrapper last>
+          <WriteExperience />
+        </NavItemWrapper>
       </motion.div>
     </nav>
   )

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import { BsSun } from 'react-icons/bs'
-import { ThemeContext } from '../../context/themeSwitch.context'
+import { ThemeContext } from '../../context/ThemeSwitch.context'
 
 const ThemeSwitch = () => {
   const { theme, setTheme } = useContext(ThemeContext)
@@ -12,13 +12,13 @@ const ThemeSwitch = () => {
 
   return (
     <div
-      className="h-9 w-9 self-end cursor-pointer border-b-4 overflow-hidden relative flex justify-center"
+      className="h-7 w-7 cursor-pointer border-b-2 overflow-hidden relative flex justify-center"
       onClick={switchTheme}
     >
       <BsSun
         className={`absolute top-0 ${
-          theme === 'light' ? 'translate-y-0' : 'translate-y-4'
-        } transition-transform transform-duration-300 w-7 h-7`}
+          theme === 'light' ? 'translate-y-0' : 'translate-y-3'
+        } transition-transform transform-duration-300 w-6 h-6`}
       />
     </div>
   )
