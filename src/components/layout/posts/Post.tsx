@@ -23,7 +23,7 @@ const Post = ({ content, likes, dislikes, date, id }: Props) => {
       <div className="px-8 py-3">
         <div className="flex justify-between pb-2">
           <p>{`#${id}`}</p>
-          <p className="capitalize">{dateFormat}</p>
+          <p className="capitalize ">{dateFormat}</p>
         </div>
         <div>
           <p className="dark:text-primary-dark">{content}</p>
