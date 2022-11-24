@@ -32,7 +32,7 @@ const Navbar = () => {
           duration: 0.8,
           delay: 0.5
         }}
-        className="h-10 flex items-center justify-items-center divide-x ml-auto"
+        className="h-10 flex items-center justify-items-center divide-x ml-auto "
       >
         <NavItemWrapper>
           <ThemeSwitch />
