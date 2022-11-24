@@ -10,7 +10,7 @@ import WriteExperience from '../../shared/WriteExperience'
 
 const Navbar = () => {
   return (
-    <nav className="py-7 px-[2px] flex justify-between items-center ">
+    <nav className="py-5 px-[2px] flex justify-between items-center ">
       <motion.div
         initial={{ x: -500, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -32,14 +32,13 @@ const Navbar = () => {
           duration: 0.8,
           delay: 0.5
         }}
-        className="flex"
+        className="flex items-center"
       >
-        <div className="h-10 flex items-center justify-items-center divide-x ml-auto">
-          <NavItemWrapper>
-            <ThemeSwitch />
-          </NavItemWrapper>
-          <NavItemWrapper>search</NavItemWrapper>
-          <NavItemWrapper>sort</NavItemWrapper>
+        <div className="h-8 flex items-center justify-center divide-x ml-auto text-base mr-6 border-r-[1px]">
+          <ThemeSwitch />
+          <NavItemWrapper>Video</NavItemWrapper>
+          <NavItemWrapper>Post</NavItemWrapper>
+          <NavItemWrapper>Sve</NavItemWrapper>
         </div>
         <WriteExperience />
       </motion.div>

@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { posts } from '../../data/postsdata'
+import SortTable from '../../SortTable'
 import Post from './Post'
 
 const PostsContainer = () => {
+  // const sortWidth = isSortOpen ? 'w-'
+
   return (
-    <div className="max-w-3xl mx-auto px-5 py-7">
+    <div className="max-w-3xl mx-auto px-5 my-6 relative">
       <div className="flex flex-col gap-6">
         {posts.map(({ content, like, dislike, created_at, id }, index) => {
           return (
@@ -31,6 +34,14 @@ const PostsContainer = () => {
           )
         })}
       </div>
+      <motion.div
+        initial={{ x: '-100px', opacity: 0 }}
+        animate={{ x: '100%', opacity: 1 }}
+        transition={{ duration: 0.7, delay: 1.7, type: 'spring' }}
+        className="absolute right-0 top-0 w-fit h-fit"
+      >
+        <SortTable />
+      </motion.div>
     </div>
   )
 }

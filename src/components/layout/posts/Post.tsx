@@ -19,14 +19,16 @@ const Post = ({ content, likes, dislikes, date, id }: Props) => {
   }).format(new Date(date))
 
   return (
-    <div className="bg-main-gray dark:bg-gray-dark rounded-md overflow-hidden cursor-pointer">
+    <div className="bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer">
       <div className="px-8 py-3">
         <div className="flex justify-between pb-2">
           <p>{`#${id}`}</p>
           <p className="capitalize ">{dateFormat}</p>
         </div>
         <div>
-          <p className="dark:text-primary-dark">{content}</p>
+          <p className="text-black font-medium dark:text-primary-dark text-xl">
+            {content}
+          </p>
         </div>
       </div>
       <div className="w-full grid grid-cols-4 place-items-center pb-3">
