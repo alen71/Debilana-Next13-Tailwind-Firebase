@@ -32,15 +32,16 @@ const Navbar = () => {
           duration: 0.8,
           delay: 0.5
         }}
-        className="h-10 flex items-center justify-items-center divide-x ml-auto"
       >
-        <NavItemWrapper>
-          <ThemeSwitch />
-        </NavItemWrapper>
-        <NavItemWrapper>search</NavItemWrapper>
-        <NavItemWrapper>sort</NavItemWrapper>
+        <div className="h-10 flex items-center justify-items-center divide-x ml-auto">
+          <NavItemWrapper>
+            <ThemeSwitch />
+          </NavItemWrapper>
+          <NavItemWrapper>search</NavItemWrapper>
+          <NavItemWrapper>sort</NavItemWrapper>
+          <WriteExperience />
+        </div>
       </motion.div>
-      <WriteExperience />
     </nav>
   )
 }
