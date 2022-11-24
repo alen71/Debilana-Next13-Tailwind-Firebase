@@ -1,4 +1,4 @@
-import { createContext, Dispatch, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 export const ThemeContext = createContext({
   setTheme: (theme: string) => '',

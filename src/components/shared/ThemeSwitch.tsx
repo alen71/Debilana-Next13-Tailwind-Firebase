@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeSwitch.context'
 
 import { BsSun } from 'react-icons/bs'
+import { ThemeContext } from '../../context/ThemeSwitch.context'
 
 const ThemeSwitch = () => {
   const { theme, setTheme } = useContext(ThemeContext)
