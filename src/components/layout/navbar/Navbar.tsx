@@ -32,6 +32,7 @@ const Navbar = () => {
           duration: 0.8,
           delay: 0.5
         }}
+        className="flex"
       >
         <div className="h-10 flex items-center justify-items-center divide-x ml-auto">
           <NavItemWrapper>
