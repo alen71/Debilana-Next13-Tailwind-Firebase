@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
-import { BsSun } from 'react-icons/bs'
-import { FiMoon } from 'react-icons/fi'
+import SunSvg from '../../assets/sun.svg'
+import MoonSvg from '../../assets/moon.svg'
 import { ThemeContext } from '../../context/ThemeSwitch.context'
 
 const ThemeSwitch = () => {
@@ -11,22 +11,32 @@ const ThemeSwitch = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
   }
 
+  const sunPosition = theme === 'light' ? '' : 'translate-y-[100px]'
+  const moonPosition = theme === 'light' ? 'translate-y-[100px]' : ''
+
   return (
-    <button
-      className="h-7 w-7 mx-5 cursor-pointer border-b-2 overflow-hidden relative flex justify-center"
-      onClick={switchTheme}
-    >
-      <BsSun
-        className={`absolute top-0 ${
-          theme === 'light' ? 'translate-y-0' : 'translate-y-[110%]'
-        } transition-transform transform-duration-500 w-6  h-6`}
-      />
-      <FiMoon
-        className={`absolute top-0 ${
-          theme === 'light' ? 'translate-y-full' : 'translate-y-0'
-        } transition-transform transform-duration-500 w-6  h-6`}
-      />
-    </button>
+    <>
+      <button
+        className="group uppercase w-full mt-24 border-b-[1px] flex items-center pl-3 overflow-hidden relative"
+        onClick={switchTheme}
+      >
+        <div
+          className={`${sunPosition} h-9 w-9 cursor-pointe rounded-full absolute top-0 flex items-center justify-center bg-yellow group-hover:bg-yellow-hover transition-transform transform-duration-500`}
+        >
+          <SunSvg className="absolute w-5 h-5 " />
+        </div>
+        <div
+          className={`${moonPosition} h-9 w-9 cursor-pointe rounded-full absolute top-0 flex items-center justify-center bg-white group-hover:bg-gray-text-hover text-black transition-transform transform-duration-500`}
+        >
+          <MoonSvg className="absolute" />
+        </div>
+        <div className=" pl-12 gap-3 group-hover:text-gray-text-hover dark:group-hover:text-gray-text-hover-dark">
+          <p className="py-2 cursor-pointer uppercase text-center">
+            tamna tema
+          </p>
+        </div>
+      </button>
+    </>
   )
 }
 

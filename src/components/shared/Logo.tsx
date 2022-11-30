@@ -8,9 +8,9 @@ const Logo = () => {
   return (
     <Link
       href="/"
-      className="flex items-center justify-center w-[11.25rem] h-[1.875rem] relative"
+      className="flex items-center justify-start w-fit h-[1.875rem] relative"
     >
-      <LogoDebilana className="dark:text-primary-dark scale-150" />
+      <LogoDebilana className="dark:text-primary-dark" />
     </Link>
   )
 }

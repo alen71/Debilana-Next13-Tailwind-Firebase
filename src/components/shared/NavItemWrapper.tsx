@@ -9,9 +9,11 @@ const NavItemWrapper = ({ last = false, children }: Props) => {
   const isLast = last ? 'pr-0' : ''
   return (
     <div
-      className={`px-6 ${isLast} flex items-center text-center h-full hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover select-none`}
+      className={`px-[18px] ${isLast} flex items-center text-center h-fit  select-none uppercase text-base font-bold`}
     >
-      {children}
+      <span className="hover:text-gray-text-hover dark:hover:text-gray-text-hover-dark cursor-pointer">
+        {children}
+      </span>
     </div>
   )
 }

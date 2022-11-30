@@ -1,41 +1,42 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+import LikeSvg from '../../assets/like.svg'
+import DislikeSvg from '../../assets/dislike.svg'
+import CommentSvg from '../../assets/commnet.svg'
+import ThemeSwitch from '../shared/ThemeSwitch'
 
 const tabs = [
-  { text: 'Odobravanjima' },
-  { text: 'Osudama' },
-  { text: 'Komentarima' }
+  { icon: <LikeSvg />, text: 'lajkova' },
+  { icon: <DislikeSvg />, text: 'dislajkova' },
+  { icon: <CommentSvg className="scale-[1.7]" />, text: 'komentara' }
 ]
 
-const SortTable = () => {
-  const [isOpen, setIsOpen] = useState(false)
+type Props = {
+  hide?: boolean
+}
 
-  const toggleSortList = () => setIsOpen(!isOpen)
-
-  const open = isOpen
-    ? 'animate-slideIn translate-x-[0] opacity-1 visible'
-    : 'animate-slideOut translate-x-[300%] opacity-0 invisible'
+const SortTable = ({ hide }: Props) => {
+  const isHide = hide ? 'hidden' : ''
 
   return (
     <div
-      onClick={toggleSortList}
-      className="rounded-md bg-main-gray relative dark:bg-gray-dark px-3 py-2 text-center cursor-pointer select-none "
+      className={`${isHide} absolute text-base left-8 top-20 w-[15rem] text-black dark:text-white py-4 rounded-md`}
     >
-      Sort
-      <div
-        className={`absolute left-0 top-14 w-[18rem] ${open} bg-main-gray dark:bg-gray-dark px-3 py-4 rounded-md `}
-      >
-        <div className="mb-4">Sortiraj po broju:</div>
-        <div className="grid grid-rows-3 mt-2 divide-y-[1px] border-y-[1px]">
-          {tabs.map(({ text }) => (
-            <p
-              key={text}
-              className="py-2 hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover"
-            >
-              {text}
-            </p>
-          ))}
-        </div>
+      <div className="mb-2 text-base">Sortiraj po broju:</div>
+      <div className="grid grid-rows-3 mt-2 ">
+        {tabs.map(({ icon, text }) => (
+          <div
+            key={text}
+            className="last:border-b-[1px] border-t-[1px] cursor-pointer"
+          >
+            <div className="flex items-center pl-3 gap-3  hover:text-gray-text-hover dark:hover:text-gray-text-hover-dark">
+              {icon}
+              <p className="py-2  uppercase text-center">{text}</p>
+            </div>
+          </div>
+        ))}
       </div>
+      <ThemeSwitch />
     </div>
   )
 }
