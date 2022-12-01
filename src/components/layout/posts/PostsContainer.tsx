@@ -20,7 +20,7 @@ const PostsContainer = () => {
       {posts.map(({ content, like, dislike, created_at, id }, index) => {
         return (
           <motion.div
-            key={id}
+            key={index}
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{

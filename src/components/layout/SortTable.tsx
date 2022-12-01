@@ -19,15 +19,13 @@ const SortTable = ({ hide }: Props) => {
   const isHide = hide ? 'hidden' : ''
 
   return (
-    <div
-      className={`${isHide} absolute text-base left-8 top-20 w-[15rem] text-black dark:text-white py-4 rounded-md`}
-    >
-      <div className="mb-2 text-base">Sortiraj po broju:</div>
+    <div className="absolute text-base left-8 top-20 w-[15rem] text-black dark:text-white py-4 rounded-md">
+      <div className={`${isHide} mb-2 text-base`}>Sortiraj po broju:</div>
       <div className="grid grid-rows-3 mt-2 ">
         {tabs.map(({ icon, text }) => (
           <div
             key={text}
-            className="last:border-b-[1px] border-t-[1px] cursor-pointer"
+            className={`${isHide} last:border-b-[1px] border-t-[1px] cursor-pointer`}
           >
             <div className="flex items-center pl-3 gap-3  hover:text-gray-text-hover dark:hover:text-gray-text-hover-dark">
               {icon}

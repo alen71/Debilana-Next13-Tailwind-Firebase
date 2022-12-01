@@ -10,9 +10,13 @@ import SortTable from '../SortTable'
 
 type Props = {
   hideSortTable?: boolean
+  hideSearch?: boolean
+  hideNav?: boolean
 }
 
-const Navbar = ({ hideSortTable = false }: Props) => {
+const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
+  const idNavHidden = hideNav ? 'hidden' : ''
+
   return (
     <motion.nav
       initial={{ y: '-100%' }}
@@ -34,7 +38,7 @@ const Navbar = ({ hideSortTable = false }: Props) => {
           <Logo />
         </motion.div>
 
-        <SearchBar />
+        <SearchBar hide={hideSearch} />
 
         <motion.div
           initial={{ x: 500, opacity: 0 }}
@@ -45,7 +49,7 @@ const Navbar = ({ hideSortTable = false }: Props) => {
             duration: 0.8,
             delay: 0.5
           }}
-          className="flex items-center"
+          className={`${idNavHidden} flex items-center`}
         >
           <div className="h-8 flex items-center justify-center divide-x divide-gray-text-hover ml-auto text-base mr-6">
             <NavItemWrapper>novo</NavItemWrapper>

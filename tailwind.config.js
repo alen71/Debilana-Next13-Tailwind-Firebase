@@ -21,12 +21,13 @@ module.exports = {
       'gray-dark-hover': '#121212',
       'main-gray': '#B7B7B7',
       'gray-bg': '#DADADA',
-      'gray-text-hover': '#a1a1a1',
+      'gray-text-hover': '#8c8c8c',
       'gray-text-hover-dark': '#525252',
       'light-gray-text': '#696969',
       black: '#000',
       white: '#fff',
       yellow: '#FFB800',
+      'light-yellow': '#FFD601',
       'yellow-hover': '#FFDD85'
     },
     extend: {}

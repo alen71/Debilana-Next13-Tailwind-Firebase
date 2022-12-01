@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 
 import LupaSvg from '../../assets/lupa.svg'
 
-const SearchBar = () => {
+type Props = {
+  hide?: boolean
+}
+
+const SearchBar = ({ hide }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
   const setFocus = () => {
@@ -16,9 +20,11 @@ const SearchBar = () => {
     ? 'placeholder:text-black placeholder:dark:text-primary-dark'
     : 'placeholder:text-gray-text-hover'
 
+  const isHide = hide ? 'hidden' : ''
+
   return (
     <div
-      className={`${inputColor} rounded-lg max-w-[400px] h-[38px] overflow-hidden border-2 flex items-center gap-[14px] pl-[14px]`}
+      className={`${inputColor} ${isHide} rounded-lg max-w-[400px] h-[38px] overflow-hidden border-2 flex items-center gap-[14px] pl-[14px]`}
     >
       <button className="cursor-pointer">
         <LupaSvg />
