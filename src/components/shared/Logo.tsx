@@ -8,7 +8,7 @@ const Logo = () => {
   return (
     <Link
       href="/"
-      className="flex items-center justify-start w-fit h-[1.875rem] relative"
+      className="flex items-center justify-start w-36 xl:w-fit h-[1.875rem] relative"
     >
       <LogoDebilana className="dark:text-primary-dark" />
     </Link>

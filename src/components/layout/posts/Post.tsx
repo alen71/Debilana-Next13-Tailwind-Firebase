@@ -23,33 +23,33 @@ const Post = ({ content, likes, dislikes, date, id }: Props) => {
   }).format(new Date(date))
 
   return (
-    <div className="bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer">
+    <div className="text-sm sm:text-base bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer">
       <div className="px-8 py-5">
         <div className="flex justify-between pb-2">
           <p>{`#${id}`}</p>
           <p className="capitalize ">{dateFormat}</p>
         </div>
         <div>
-          <p className="text-black font-medium dark:text-primary-dark text-xl">
+          <p className="text-black font-medium dark:text-primary-dark">
             {content}
           </p>
         </div>
       </div>
       <div className="w-full grid grid-cols-4 divide-x border-t-[1px] text-black dark:text-white ">
         <p className="flex items-center justify-center py-[10px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">
-          <LikeSvg />
+          <LikeSvg className="scale-[0.7] sm:scale-[1]" />
           <span>{dislikes}</span>
         </p>
         <p className="flex items-center justify-center py-[10px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">
-          <DislikeSvg className="translate-y-[2px]" />
+          <DislikeSvg className="scale-[0.7] sm:scale-[1] translate-y-[2px]" />
           <span>{likes}</span>
         </p>
         <div className="flex items-center justify-center gap-4 py-[10px] hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">
-          <CommentSvg className="scale-[1.8]" />
+          <CommentSvg className="scale-[1.4] sm:scale-[1.8]" />
           <span>34</span>
         </div>
         <div className="py-[10px] grid place-items-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">
-          <ShareSvg className="scale-[1.8]" />
+          <ShareSvg className="scale-[1.4] sm:scale-[1.8]" />
         </div>
       </div>
     </div>

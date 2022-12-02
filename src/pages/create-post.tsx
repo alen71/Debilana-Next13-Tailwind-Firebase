@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Navbar from '../components/layout/navbar/Navbar'
 import ImageSvg from '../assets/image.svg'
+import TextareaCustom from '../components/shared/TextareaCustom'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -20,17 +21,25 @@ const CreatePost = () => {
     : 'bg-gray-text-hover pointer-events-none'
 
   return (
-    <div className="h-screen mt-[71px] pt-6">
+    <div className="h-screen pt-[71px] pb-6 overflow-y-auto">
       <Navbar hideSortTable hideSearch hideNav />
 
       <div className="max-w-[700px] mx-auto">
-        <h2 className="font-bold text-xl mb-6">Napravi objavu</h2>
-        <form className="flex gap-5 flex-col rounded-md bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14">
-          <textarea
+        <p className="text-center text-3xl mt-6 pb-4">
+          Pravila za objavljivanje sadržaja su:
+        </p>
+        <p className="text-center font-bold uppercase text-5xl mb-6">
+          10 božijih zapovesti
+        </p>
+        <h2 className="font-bold text-2xl mb-6 capitalize pl-6">
+          napravi objavu
+        </h2>
+        <form className="flex gap-5 flex-col rounded-md bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6">
+          <TextareaCustom
             rows={10}
             placeholder="* Napiši nešto..."
+            name="Create post"
             required
-            className="w-full bg-transparent border-2 border-gray-text-hover placeholder:text-gray-text-hover focus:placeholder:text-black focus:border-black focus:dark:border-yellow focus:placeholder:dark:text-yellow outline-none rounded-[4px] py-[6px] px-[14px]"
             onChange={checkTyping}
           />
           <div>

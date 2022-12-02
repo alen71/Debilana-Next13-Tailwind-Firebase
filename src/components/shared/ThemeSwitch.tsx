@@ -17,22 +17,25 @@ const ThemeSwitch = () => {
   return (
     <>
       <button
-        className="group uppercase w-full mt-24 border-b-[1px] flex items-center pl-3 overflow-hidden relative"
+        className="group bg-primary-light-hover dark:bg-gray-dark md:transparent uppercase w-full mt-12 md:mt-24 border-b-[1px] border-t-[1px] md:border-t-0 flex justify-center md:justify-start items-center pl-3 py-1 md:py-0 overflow-hidden relative"
         onClick={switchTheme}
       >
-        <div
-          className={`${sunPosition} h-9 w-9 cursor-pointe rounded-full absolute top-0 flex items-center justify-center bg-yellow group-hover:bg-yellow-hover transition-transform transform-duration-500`}
-        >
-          <SunSvg className="absolute w-5 h-5 " />
+        <div>
+          <div
+            className={`${sunPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] md:top-0 flex items-center justify-center bg-yellow group-hover:bg-yellow-hover transition-transform transform-duration-500`}
+          >
+            <SunSvg className="absolute w-5 h-5 " />
+          </div>
+          <div
+            className={`${moonPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] md:top-0 flex items-center justify-center bg-white group-hover:bg-gray-text-hover text-black transition-transform transform-duration-500`}
+          >
+            <MoonSvg className="absolute" />
+          </div>
         </div>
-        <div
-          className={`${moonPosition} h-9 w-9 cursor-pointe rounded-full absolute top-0 flex items-center justify-center bg-white group-hover:bg-gray-text-hover text-black transition-transform transform-duration-500`}
-        >
-          <MoonSvg className="absolute" />
-        </div>
+
         <div className=" pl-12 gap-3 group-hover:text-gray-text-hover dark:group-hover:text-gray-text-hover-dark">
           <p className="py-2 cursor-pointer uppercase text-center">
-            tamna tema
+            {theme === 'light' ? 'svetla tema' : 'tamna tema'}
           </p>
         </div>
       </button>
