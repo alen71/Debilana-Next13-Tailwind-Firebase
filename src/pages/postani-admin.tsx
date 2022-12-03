@@ -59,7 +59,7 @@ const BeAdmin = () => {
     : 'bg-gray-text-hover pointer-events-none'
 
   return (
-    <div className="h-screen pt-[71px] overflow-y-auto">
+    <div className="h-screen pt-[71px] pb-6 overflow-y-auto">
       <Navbar hideSearch hideSortTable />
 
       <div className="mx-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
