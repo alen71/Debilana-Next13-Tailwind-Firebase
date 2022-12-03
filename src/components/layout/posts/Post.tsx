@@ -29,11 +29,9 @@ const Post = ({ content, likes, dislikes, date, id }: Props) => {
           <p>{`#${id}`}</p>
           <p className="capitalize ">{dateFormat}</p>
         </div>
-        <div>
-          <p className="text-black font-medium dark:text-primary-dark">
-            {content}
-          </p>
-        </div>
+        <p className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg">
+          {content}
+        </p>
       </div>
       <div className="w-full grid grid-cols-4 divide-x border-t-[1px] text-black dark:text-white ">
         <p className="flex items-center justify-center py-[10px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import HamburgerNavbar from '../layout/navbar/HamburgerNavbar'
+import HamburgerNavbar from './HamburgerNavbar'
 
 type Props = {
   isMenuOpen: boolean

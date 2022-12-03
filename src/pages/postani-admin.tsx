@@ -62,17 +62,19 @@ const BeAdmin = () => {
     <div className="h-screen pt-[71px] overflow-y-auto">
       <Navbar hideSearch hideSortTable />
 
-      <div className="max-w-[700px] mx-auto">
-        <p className="text-center text-3xl mt-6 pb-4">Pravila za ADMINA su:</p>
-        <p className="text-center font-bold uppercase text-5xl mb-6">
+      <div className="mx-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
+        <p className="text-center text-xl sm:text-3xl mt-6 pb-2 sm:pb-4">
+          Pravila za ADMINA su:
+        </p>
+        <p className="text-center font-bold uppercase text-3xl sm:text-5xl mb-6">
           10 božijih zapovesti
         </p>
-        <h2 className="font-bold text-2xl mb-6 pl-6 capitalize">
-          postani admin
+        <h2 className="font-bold text-lg sm:text-2xl mb-6 capitalize pl-6">
+          Postani admin
         </h2>
         <form
           onSubmit={formik.handleSubmit}
-          className="flex gap-5 flex-col rounded-md bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6"
+          className="flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6"
         >
           <InputCustom
             type="text"
@@ -102,7 +104,7 @@ const BeAdmin = () => {
             errorMessage={formik.errors.fbAcc}
           />
           <div>
-            <p className="pb-3">
+            <p className="pb-3 dark:text-primary-dark">
               Neko pitanje iz biblije? Ili više pitanja koja ce se random
               prikazivati.
             </p>

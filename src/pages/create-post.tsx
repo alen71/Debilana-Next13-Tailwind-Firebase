@@ -24,17 +24,17 @@ const CreatePost = () => {
     <div className="h-screen pt-[71px] pb-6 overflow-y-auto">
       <Navbar hideSortTable hideSearch hideNav />
 
-      <div className="max-w-[700px] mx-auto">
-        <p className="text-center text-3xl mt-6 pb-4">
+      <div className="mx-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
+        <p className="text-center text-xl sm:text-3xl mt-6 pb-2 sm:pb-4">
           Pravila za objavljivanje sadržaja su:
         </p>
-        <p className="text-center font-bold uppercase text-5xl mb-6">
+        <p className="text-center font-bold uppercase text-3xl sm:text-5xl mb-6">
           10 božijih zapovesti
         </p>
-        <h2 className="font-bold text-2xl mb-6 capitalize pl-6">
+        <h2 className="font-bold text-lg sm:text-2xl mb-6 capitalize pl-6">
           napravi objavu
         </h2>
-        <form className="flex gap-5 flex-col rounded-md bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6">
+        <form className="flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6">
           <TextareaCustom
             rows={10}
             placeholder="* Napiši nešto..."
@@ -67,12 +67,12 @@ const CreatePost = () => {
                 placeholder="Nalepi URL fotografije ili video snimka"
                 className="bg-primary-light border-main-gray focus:border-black focus:dark:border-primary-dark focus:bg-main-gray dark:bg-gray-dark focus:placeholder:text-black focus:placeholder:dark:text-primary-dark w-full rounded-lg py-2 px-3 outline-none placeholder:text-gray-text-hover border-2 "
               />
-              <p className="pt-2">
+              <p className="pt-3 text-center sm:text-left">
                 Podržavamo linkove sa PNG, JPG, GIF or MP4 file.
               </p>
             </div>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-0 justify-between">
             <div className="relative flex items-center gap-4 ">
               <input
                 type="checkbox"

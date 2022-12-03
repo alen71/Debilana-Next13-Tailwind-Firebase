@@ -29,7 +29,7 @@ const SortTable = ({ hide }: Props) => {
             key={text}
             className={`${isHide} last:border-b-[1px] border-t-[1px] cursor-pointer`}
           >
-            <div className="flex items-center justify-center md:justify-start pl-3 gap-3  md:hover:text-gray-text-hover md:dark:hover:text-gray-text-hover-dark hover:bg-primary-light-hover dark:hover:bg-gray-dark md:hover:bg-transparent">
+            <div className="flex items-center justify-center md:justify-start pl-3 gap-3  md:hover:text-gray-text-hover md:dark:hover:text-gray-text-hover-dark hover:bg-primary-light-hover dark:hover:bg-gray-dark md:hover:bg-transparent md:dark:hover:bg-transparent">
               {icon}
               <p className="py-2 uppercase text-center font-semibold">{text}</p>
             </div>

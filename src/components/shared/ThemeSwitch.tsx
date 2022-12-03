@@ -17,7 +17,7 @@ const ThemeSwitch = () => {
   return (
     <>
       <button
-        className="group bg-primary-light-hover dark:bg-gray-dark md:transparent uppercase w-full mt-12 md:mt-24 border-b-[1px] border-t-[1px] md:border-t-0 flex justify-center md:justify-start items-center pl-3 py-1 md:py-0 overflow-hidden relative"
+        className="group bg-primary-light-hover md:bg-transparent dark:bg-gray-dark md:dark:bg-transparent md:transparent uppercase w-full mt-12 md:mt-20 border-b-[1px] border-t-[1px] md:border-t-0 flex justify-center md:justify-start items-center pl-3 py-1 md:py-0 overflow-hidden relative"
         onClick={switchTheme}
       >
         <div>

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-import HamMenuBtn from '../../shared/HamMenuBtn'
+import HamMenuBtn from './HamMenuBtn'
 import Logo from '../../shared/Logo'
 import NavItemWrapper from '../../shared/NavItemWrapper'
 import SearchBar from '../../shared/SearchBar'
@@ -43,7 +43,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
             duration: 0.8,
             delay: 0.5
           }}
-          className="px-3 xl:px-[18px] "
+          className="px-3 xl:px-[18px] mx-auto md:mx-0"
         >
           <Logo />
         </motion.div>
