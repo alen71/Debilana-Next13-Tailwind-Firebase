@@ -19,7 +19,7 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
         <div className="px-4 w-full flex justify-center">
           <SearchBar />
         </div>
-        <div className="w-full border-y-[1px] divide-y-[1px] text-center uppercase font-semibold text-base mt-10 mb-4">
+        <div className="w-full border-y-[1px] divide-y-[1px] dark:text-white text-center uppercase font-semibold text-base mt-10 mb-4">
           <Link
             href="/postani-admin"
             className="cursor-pointer block py-2 hover:bg-primary-light-hover dark:hover:bg-gray-dark"
