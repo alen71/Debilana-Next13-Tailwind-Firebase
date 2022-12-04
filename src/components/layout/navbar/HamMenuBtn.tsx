@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import HamburgerNavbar from './HamburgerNavbar'
 
 type Props = {
@@ -10,15 +9,7 @@ type Props = {
 const HamMenuBtn = ({ toggle, isMenuOpen }: Props) => {
   return (
     <>
-      <motion.div
-        initial={{ x: -500, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{
-          type: 'spring',
-          stiffness: 50,
-          duration: 0.8,
-          delay: 0.5
-        }}
+      <div
         className="flex flex-col justify-between md:hidden w-6 h-[14px] cursor-pointer"
         onClick={toggle}
       >
@@ -37,7 +28,7 @@ const HamMenuBtn = ({ toggle, isMenuOpen }: Props) => {
             isMenuOpen ? 'translate-y-[-6px] rotate-[-45deg]' : ''
           } transition-transform transform-duration-300 w-full h-[2px] bg-black dark:bg-primary-light`}
         ></div>
-      </motion.div>
+      </div>
       <HamburgerNavbar open={isMenuOpen} toggle={toggle} />
     </>
   )

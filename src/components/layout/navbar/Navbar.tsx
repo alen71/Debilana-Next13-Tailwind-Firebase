@@ -34,36 +34,16 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
       <div className="xl:container w-full mx-auto flex justify-between items-center relative">
         <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
 
-        <motion.div
-          initial={{ x: -500, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{
-            type: 'spring',
-            stiffness: 50,
-            duration: 0.8,
-            delay: 0.5
-          }}
-          className="px-3 xl:px-[18px] mx-auto md:mx-0"
-        >
+        <div className="px-3 xl:px-[18px] mx-auto md:mx-0">
           <Logo />
-        </motion.div>
+        </div>
 
-        <div className="hidden lg:flex">
+        <div className="hidden lg:block mx-auto">
           <SearchBar hide={hideSearch} />
         </div>
 
-        <motion.div
-          initial={{ x: 500, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{
-            type: 'spring',
-            stiffness: 50,
-            duration: 0.8,
-            delay: 0.5
-          }}
-          className={`${idNavHidden} flex items-center`}
-        >
-          <div className="h-8 hidden md:flex items-center justify-center divide-x divide-gray-text-hover ml-auto text-sm xl:text-base mr-3 xl:mr-6">
+        <div className={`${idNavHidden} flex items-center ml-auto`}>
+          <div className="h-8 hidden md:flex items-center justify-center divide-x divide-gray-text-hover  text-sm xl:text-base mr-3 xl:mr-6">
             <NavItemWrapper>
               <Link href="#">novo</Link>
             </NavItemWrapper>
@@ -79,7 +59,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
           </div>
 
           <WriteExperience />
-        </motion.div>
+        </div>
         <div className="hidden lg:block">
           <SortTable hide={hideSortTable} />
         </div>

@@ -22,7 +22,7 @@ const CreatePost = () => {
 
   return (
     <div className="h-screen pt-[71px] pb-6 overflow-y-auto">
-      <Navbar hideSortTable hideSearch hideNav />
+      <Navbar hideSortTable hideSearch />
 
       <div className="mx-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
         <p className="text-center text-xl sm:text-3xl mt-6 pb-2 sm:pb-4">
