@@ -34,7 +34,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
       <div className="xl:container w-full mx-auto flex justify-between items-center relative">
         <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
 
-        <div className="px-3 xl:px-[18px] mx-auto md:mx-0">
+        <div className="px-3 xl:px-[18px] mx-auto lg:mx-0">
           <Logo />
         </div>
 
@@ -42,7 +42,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
           <SearchBar hide={hideSearch} />
         </div>
 
-        <div className={`${idNavHidden} flex items-center ml-auto`}>
+        <div className={`${idNavHidden} flex items-center md:ml-auto`}>
           <div className="h-8 hidden md:flex items-center justify-center divide-x divide-gray-text-hover  text-sm xl:text-base mr-3 xl:mr-6">
             <NavItemWrapper>
               <Link href="#">novo</Link>
