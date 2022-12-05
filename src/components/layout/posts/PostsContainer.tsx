@@ -1,11 +1,25 @@
+import { DocumentData } from 'firebase/firestore'
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Posts } from '../../../utils/firebase/firebase-utils'
 
-import { posts } from '../../data/postsdata'
-import SortTable from '../SortTable'
 import Post from './Post'
 
 const PostsContainer = () => {
+  const [posts, setPosts] = useState<DocumentData[]>([])
+
+  useEffect(() => {
+    const getAllPosts = async () => {
+      try {
+        const postsList = await Posts()
+        setPosts(postsList)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getAllPosts()
+  }, [])
+
   return (
     <>
       {posts.map(({ content, like, dislike, created_at, id }, index) => {
@@ -19,7 +33,7 @@ const PostsContainer = () => {
               type: 'spring',
               delay: (index + 2) / 2
             }}
-            className={`snap-start mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl`}
+            className={`snap-start mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[768px]`}
           >
             <Post
               id={id}

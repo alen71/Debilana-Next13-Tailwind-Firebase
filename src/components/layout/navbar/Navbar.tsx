@@ -13,9 +13,10 @@ type Props = {
   hideSortTable?: boolean
   hideSearch?: boolean
   hideNav?: boolean
+  isAnimate?: boolean
 }
 
-const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
+const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -24,12 +25,18 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
 
   const idNavHidden = hideNav ? 'hidden' : ''
 
+  const navAnimation = isAnimate
+    ? {
+        initial: { y: '-100%' },
+        animate: { y: 0 },
+        transition: { duration: 0.5 }
+      }
+    : ''
+
   return (
     <motion.nav
-      initial={{ y: '-100%' }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="flex items-center px-6 md:px-4 xl:px-0  bg-main-gray dark:bg-gray-dark h-[71px] w-[101%] fixed top-0 z-10 border-b-2"
+      {...navAnimation}
+      className="flex items-center px-6 lg:px-4 xl:px-0  bg-main-gray dark:bg-gray-dark h-[71px] w-[101%] fixed top-0 z-10 border-b-2"
     >
       <div className="xl:container w-full mx-auto flex justify-between items-center relative">
         <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
@@ -42,8 +49,8 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
           <SearchBar hide={hideSearch} />
         </div>
 
-        <div className={`${idNavHidden} flex items-center md:ml-auto`}>
-          <div className="h-8 hidden md:flex items-center justify-center divide-x divide-gray-text-hover  text-sm xl:text-base mr-3 xl:mr-6">
+        <div className={`${idNavHidden} flex items-center `}>
+          <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray-text-hover  text-sm xl:text-base mr-3 xl:mr-6">
             <NavItemWrapper>
               <Link href="#">novo</Link>
             </NavItemWrapper>

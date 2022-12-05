@@ -10,7 +10,7 @@ const HamMenuBtn = ({ toggle, isMenuOpen }: Props) => {
   return (
     <>
       <div
-        className="flex flex-col justify-between md:hidden w-6 h-[14px] cursor-pointer"
+        className="flex flex-col justify-between lg:hidden w-6 h-[14px] cursor-pointer"
         onClick={toggle}
       >
         <div

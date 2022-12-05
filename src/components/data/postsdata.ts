@@ -1,4 +1,4 @@
-export const posts = [
+export const postsTest = [
   {
     id: 23523,
     content:

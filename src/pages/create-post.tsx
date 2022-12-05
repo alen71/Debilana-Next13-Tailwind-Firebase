@@ -3,11 +3,17 @@ import React, { useState } from 'react'
 import Navbar from '../components/layout/navbar/Navbar'
 import ImageSvg from '../assets/image.svg'
 import TextareaCustom from '../components/shared/TextareaCustom'
+import CreatePostButton from '../components/shared/CreatePostButton'
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from '../utils/firebase/firebase-utils'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
+  const [textareaText, setTextareaText] = useState('')
 
   const checkTyping = (e: any) => {
+    setTextareaText(e.target.value)
+
     if (e.target.value.length > 0 && !isTyping) {
       setIsTyping(!isTyping)
     } else if (e.target.value.length === 0 && isTyping) {
@@ -15,10 +21,21 @@ const CreatePost = () => {
     }
   }
 
-  console.log(isTyping)
-  const typing = isTyping
-    ? 'bg-gray-text-hover-dark dark:bg-black'
-    : 'bg-gray-text-hover pointer-events-none'
+  const createPostFunction = async (e: any) => {
+    e.preventDefault()
+    console.log(e.target)
+    try {
+      const docRef = await addDoc(collection(db, 'posts'), {
+        content: textareaText,
+        created_at: new Date().toISOString(),
+        like: 0,
+        dislike: 0
+      })
+      setTextareaText('')
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <div className="h-screen pt-[71px] pb-6 overflow-y-auto">
@@ -34,12 +51,16 @@ const CreatePost = () => {
         <h2 className="font-bold text-lg sm:text-2xl mb-6 capitalize pl-6">
           napravi objavu
         </h2>
-        <form className="flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6">
+        <form
+          className="flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6"
+          onSubmit={createPostFunction}
+        >
           <TextareaCustom
             rows={10}
             placeholder="* Napiši nešto..."
             name="Create post"
             required
+            value={textareaText}
             onChange={checkTyping}
           />
           <div>
@@ -84,9 +105,7 @@ const CreatePost = () => {
               <div className="w-4 h-4 rounded-full block bg-black dark:bg-white absolute top-[6px] left-[6px] invisible peer-checked:visible"></div>
               <p>Da li želiš da ostaneš anoniman?</p>
             </div>
-            <button className={`${typing} px-8 py-1 rounded-full text-white `}>
-              Postavi
-            </button>
+            <CreatePostButton isTyping={isTyping} />
           </div>
         </form>
       </div>

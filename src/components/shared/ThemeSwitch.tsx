@@ -17,17 +17,17 @@ const ThemeSwitch = () => {
   return (
     <>
       <button
-        className="group bg-primary-light-hover md:bg-transparent dark:bg-gray-dark md:dark:bg-transparent md:transparent uppercase w-full mt-12 md:mt-20 border-b-[1px] border-t-[1px] md:border-t-0 flex justify-center md:justify-start items-center pl-3 py-1 md:py-0 overflow-hidden relative"
+        className="group bg-primary-light-hover lg:bg-transparent dark:bg-gray-dark lg:dark:bg-transparent lg:transparent uppercase w-full mt-12 lg:mt-20 border-b-[1px] border-t-[1px] lg:border-t-0 flex justify-center lg:justify-start items-center pl-3 py-1 lg:py-0 overflow-hidden relative"
         onClick={switchTheme}
       >
         <div>
           <div
-            className={`${sunPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] md:top-0 flex items-center justify-center bg-yellow group-hover:bg-yellow-hover transition-transform transform-duration-500`}
+            className={`${sunPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] lg:top-0 flex items-center justify-center bg-yellow group-hover:bg-yellow-hover transition-transform transform-duration-500`}
           >
             <SunSvg className="absolute w-5 h-5 " />
           </div>
           <div
-            className={`${moonPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] md:top-0 flex items-center justify-center bg-white group-hover:bg-gray-text-hover text-black transition-transform transform-duration-500`}
+            className={`${moonPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] lg:top-0 flex items-center justify-center bg-white group-hover:bg-gray-text-hover text-black transition-transform transform-duration-500`}
           >
             <MoonSvg className="absolute" />
           </div>

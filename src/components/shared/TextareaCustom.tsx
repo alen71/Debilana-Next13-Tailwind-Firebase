@@ -25,6 +25,7 @@ const TextareaCustom = ({
       placeholder={placeholder}
       required={required}
       rows={rows}
+      value={value}
       className="w-full bg-transparent border-2 border-gray-text-hover placeholder:text-gray-text-hover focus:placeholder:text-black focus:border-black focus:dark:border-yellow focus:placeholder:dark:text-yellow outline-none rounded-[4px] py-[6px] px-[14px]"
       onChange={onChange}
     />
