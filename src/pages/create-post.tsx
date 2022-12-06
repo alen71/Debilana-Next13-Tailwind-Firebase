@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import Navbar from '../components/layout/navbar/Navbar'
 import ImageSvg from '../assets/image.svg'
@@ -6,10 +6,12 @@ import TextareaCustom from '../components/shared/TextareaCustom'
 import CreatePostButton from '../components/shared/CreatePostButton'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../utils/firebase/firebase-utils'
+import { PostCategory, PostsStatus } from '../utils/types/posts.types'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [textareaText, setTextareaText] = useState('')
+  const selectEl = useRef<null | HTMLSelectElement>(null)
 
   const checkTyping = (e: any) => {
     setTextareaText(e.target.value)
@@ -23,22 +25,25 @@ const CreatePost = () => {
 
   const createPostFunction = async (e: any) => {
     e.preventDefault()
-    console.log(e.target)
+
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
+        category: selectEl.current?.value,
         content: textareaText,
         created_at: new Date().toISOString(),
         like: 0,
-        dislike: 0
+        dislike: 0,
+        status: PostsStatus.PENDING
       })
       setTextareaText('')
+      setIsTyping(!isTyping)
     } catch (e) {
       console.log(e)
     }
   }
 
   return (
-    <div className="h-screen pt-[71px] pb-6 overflow-y-auto">
+    <div className="h-screen pb-6 overflow-y-scroll overflow-x-hidden">
       <Navbar hideSortTable hideSearch />
 
       <div className="mx-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
@@ -48,13 +53,33 @@ const CreatePost = () => {
         <p className="text-center font-bold uppercase text-3xl sm:text-5xl mb-6">
           10 božijih zapovesti
         </p>
-        <h2 className="font-bold text-lg sm:text-2xl mb-6 capitalize pl-6">
-          napravi objavu
-        </h2>
+
         <form
           className="flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6"
           onSubmit={createPostFunction}
         >
+          <h2 className="font-bold text-lg sm:text-2xl capitalize text-center">
+            napravi objavu
+          </h2>
+
+          <select
+            ref={selectEl}
+            className="text-center rounded-md py-1 border-2 bg-transparent"
+          >
+            <option
+              value={PostCategory.DEBILANA}
+              className="bg-transparent text-black"
+            >
+              Debilana
+            </option>
+            <option
+              value={PostCategory.GASTARBAJTER}
+              className="bg-transparent text-black"
+            >
+              Gastarbajter
+            </option>
+          </select>
+
           <TextareaCustom
             rows={10}
             placeholder="* Napiši nešto..."

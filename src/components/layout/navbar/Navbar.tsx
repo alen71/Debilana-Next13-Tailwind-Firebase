@@ -36,7 +36,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
   return (
     <motion.nav
       {...navAnimation}
-      className="flex items-center px-6 lg:px-4 xl:px-0  bg-main-gray dark:bg-gray-dark h-[71px] w-[101%] fixed top-0 z-10 border-b-2"
+      className="flex items-center px-6 lg:px-4 xl:px-0  bg-main-gray dark:bg-gray-dark min-h-[71px] w-[101%] z-10 border-b-2 sticky top-0"
     >
       <div className="xl:container w-full mx-auto flex justify-between items-center relative">
         <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
@@ -50,18 +50,18 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
         </div>
 
         <div className={`${idNavHidden} flex items-center `}>
-          <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray-text-hover  text-sm xl:text-base mr-3 xl:mr-6">
+          <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray-text-hover  text-xs xl:text-sm mr-3 xl:mr-6">
             <NavItemWrapper>
               <Link href="#">novo</Link>
             </NavItemWrapper>
             <NavItemWrapper>
-              <Link href="#">u trendingu</Link>
+              <Link href="#">Debilana</Link>
             </NavItemWrapper>
             <NavItemWrapper>
-              <Link href="#">najbolje</Link>
+              <Link href="#">Gastarbajteri</Link>
             </NavItemWrapper>
             <NavItemWrapper>
-              <Link href="/postani-admin">postani admin</Link>
+              <Link href="/login-admin">login za admina</Link>
             </NavItemWrapper>
           </div>
 

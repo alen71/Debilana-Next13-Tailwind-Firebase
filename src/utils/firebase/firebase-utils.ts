@@ -5,29 +5,32 @@ import {
   getDoc,
   setDoc,
   collection,
-  writeBatch,
   query,
   getDocs,
-  Firestore
+  Firestore,
+  limit,
+  orderBy,
+  where
 } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBIZa7NDEA2RDovYJYYY7q5U543Qg7Eowo',
-  authDomain: 'debilana-e9580.firebaseapp.com',
-  projectId: 'debilana-e9580',
-  storageBucket: 'debilana-e9580.appspot.com',
-  messagingSenderId: '200927340297',
-  appId: '1:200927340297:web:4fea9872615687cf0f95d8'
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID
 }
 
 const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app)
 
-async function getPosts(db: Firestore) {
+console.log(app)
+
+export async function getPosts() {
   const postsCol = collection(db, 'posts')
-  const postSnapshot = await getDocs(postsCol)
+  const q = query(postsCol, where('status', '==', 'approved'), limit(10))
+  const postSnapshot = await getDocs(q)
   const posts = postSnapshot.docs.map(doc => doc.data())
   return posts
 }
-
-export const Posts = () => getPosts(db)
