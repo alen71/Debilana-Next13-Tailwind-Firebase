@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import BackgroundBlur from '../../shared/BackgroundBlur'
 import SearchBar from '../../shared/SearchBar'
 import SortTable from '../SortTable'
 
@@ -11,12 +12,7 @@ type Props = {
 const HamburgerNavbar = ({ open, toggle }: Props) => {
   return (
     <>
-      <div
-        className={`${
-          open ? 'block' : 'hidden'
-        } fixed top-[71px] left-0 w-screen h-screen z-20 backdrop-blur-md`}
-        onClick={toggle}
-      ></div>
+      <BackgroundBlur open={open} toggle={toggle} />
       <div
         className={`${
           open ? 'translate-x-0' : 'translate-x-[-100%]'

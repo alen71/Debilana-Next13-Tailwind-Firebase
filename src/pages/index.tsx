@@ -4,11 +4,11 @@ import { motion } from 'framer-motion'
 import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/navbar/Navbar'
 import { getPosts } from '../utils/firebase/firebase-utils'
-import { IPost } from '../utils/types/posts.types'
+import { IPost, PostsStatus } from '../utils/types/posts.types'
 import Post from '../components/layout/posts/Post'
 
 export async function getServerSideProps() {
-  const posts = await getPosts()
+  const posts = await getPosts(PostsStatus.APPROVED)
   return {
     props: { posts }
   }

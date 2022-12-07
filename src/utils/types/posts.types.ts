@@ -1,4 +1,5 @@
 export type IPost = {
+  admin?: boolean
   id: string
   content: string
   like: number
@@ -15,6 +16,6 @@ export enum PostsStatus {
 }
 
 export enum PostCategory {
-  GASTARBAJTER = 'gastarbajteri',
-  DEBILANA = 'debilana'
+  GASTARBAJTER = 'Gastarbajter',
+  DEBILANA = 'Debilana'
 }
