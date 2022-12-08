@@ -26,10 +26,10 @@ const Post = ({
   const [managed, setManaged] = useState(false)
   const [openDelPopup, setOpenDelPopup] = useState(false)
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
-  const [postLikes, setPostLikes] = useState(like)
-  const [postDislikes, setPostDislike] = useState(dislike)
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setDisliked] = useState(false)
+  const [postLikes, setPostLikes] = useState(like)
+  const [postDislikes, setPostDislikes] = useState(dislike)
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
     day: 'numeric',
@@ -48,19 +48,24 @@ const Post = ({
   }
 
   const postLike = async () => {
-    const like = await likePost(id)
+    const { like, dislike }: any = await likePost(id, isDisliked)
 
     if (typeof like !== 'number') return
     setPostLikes(like)
+    setPostDislikes(dislike)
     setIsLiked(true)
+    setDisliked(false)
   }
 
   const postDislike = async () => {
-    const dislike = await dislikePost(id)
+    const { like, dislike }: any = await dislikePost(id, isLiked)
 
     if (typeof dislike !== 'number') return
-    setPostDislike(dislike)
+
+    setPostDislikes(dislike)
+    setPostLikes(like)
     setDisliked(true)
+    setIsLiked(false)
   }
 
   return (
@@ -85,7 +90,7 @@ const Post = ({
           <>
             <p
               className={`${
-                isLiked || isDisliked ? 'pointer-events-none' : ''
+                isLiked ? 'pointer-events-none' : ''
               } flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
               onClick={postLike}
             >
@@ -98,7 +103,7 @@ const Post = ({
             </p>
             <p
               className={`${
-                isDisliked || isLiked ? 'pointer-events-none' : ''
+                isDisliked ? 'pointer-events-none' : ''
               } flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
               onClick={postDislike}
             >

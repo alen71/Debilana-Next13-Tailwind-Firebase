@@ -80,7 +80,7 @@ export async function approvePost(id: string) {
   }
 }
 
-export async function likePost(id: string) {
+export async function likePost(id: string, isDisliked: boolean) {
   const postRef = doc(db, 'posts', id)
   try {
     return await runTransaction(db, async transaction => {
@@ -89,17 +89,24 @@ export async function likePost(id: string) {
         throw 'Document does not exist!'
       }
 
-      const plusOneLike = sfDoc.data().like + 1
-      transaction.update(postRef, { like: plusOneLike })
+      const plusOneLike: number = sfDoc.data().like + 1
+      const minusOneDislike: number = sfDoc.data().dislike
+      transaction.update(postRef, {
+        like: plusOneLike,
+        dislike: minusOneDislike
+      })
 
-      return plusOneLike
+      return {
+        like: plusOneLike,
+        dislike: isDisliked ? minusOneDislike - 1 : minusOneDislike
+      }
     })
   } catch (e) {
     return false
   }
 }
 
-export async function dislikePost(id: string) {
+export async function dislikePost(id: string, isLiked: boolean) {
   const postRef = doc(db, 'posts', id)
   try {
     return await runTransaction(db, async transaction => {
@@ -108,10 +115,17 @@ export async function dislikePost(id: string) {
         throw 'Document does not exist!'
       }
 
-      const plusOneDislike = sfDoc.data().dislike + 1
-      transaction.update(postRef, { dislike: plusOneDislike })
+      const plusOneDislike: number = sfDoc.data().dislike + 1
+      const minusOneLike: number = sfDoc.data().like
+      transaction.update(postRef, {
+        dislike: plusOneDislike,
+        like: minusOneLike
+      })
 
-      return plusOneDislike
+      return {
+        dislike: plusOneDislike,
+        like: isLiked ? minusOneLike - 1 : minusOneLike
+      }
     })
   } catch (e) {
     return false
