@@ -89,8 +89,10 @@ export async function likePost(id: string, isDisliked: boolean) {
         throw 'Document does not exist!'
       }
 
+      const dislikesNum = sfDoc.data().dislike
       const plusOneLike: number = sfDoc.data().like + 1
-      const minusOneDislike: number = sfDoc.data().dislike
+      const minusOneDislike: number = isDisliked ? dislikesNum - 1 : dislikesNum
+
       transaction.update(postRef, {
         like: plusOneLike,
         dislike: minusOneDislike
@@ -98,7 +100,7 @@ export async function likePost(id: string, isDisliked: boolean) {
 
       return {
         like: plusOneLike,
-        dislike: isDisliked ? minusOneDislike - 1 : minusOneDislike
+        dislike: minusOneDislike
       }
     })
   } catch (e) {
@@ -115,8 +117,10 @@ export async function dislikePost(id: string, isLiked: boolean) {
         throw 'Document does not exist!'
       }
 
+      const likesNum = sfDoc.data().like
       const plusOneDislike: number = sfDoc.data().dislike + 1
-      const minusOneLike: number = sfDoc.data().like
+      const minusOneLike: number = isLiked ? likesNum - 1 : likesNum
+
       transaction.update(postRef, {
         dislike: plusOneDislike,
         like: minusOneLike
@@ -124,7 +128,7 @@ export async function dislikePost(id: string, isLiked: boolean) {
 
       return {
         dislike: plusOneDislike,
-        like: isLiked ? minusOneLike - 1 : minusOneLike
+        like: minusOneLike
       }
     })
   } catch (e) {
