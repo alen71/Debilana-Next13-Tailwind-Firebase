@@ -7,13 +7,13 @@ type Props = {
 const VideoEmbed = ({ url }: Props) => {
   return (
     <div>
-      <embed
+      <iframe
         width="853"
         height="480"
         src={url}
-        // frameBorder="0"
-        // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        // allowFullScreen
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
         title="Embedded youtube"
       />
     </div>

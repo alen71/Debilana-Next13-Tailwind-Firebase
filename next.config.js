@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
+
+const securityHeaders = [
+  {
+    key: 'X-Frame-Options',
+    value: 'DENY'
+  }
+]
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -10,6 +18,16 @@ const nextConfig = {
     })
 
     return config
+  },
+
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: '/:path*',
+        headers: securityHeaders
+      }
+    ]
   }
 }
 
