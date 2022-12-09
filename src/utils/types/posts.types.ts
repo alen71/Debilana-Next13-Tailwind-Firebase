@@ -7,6 +7,7 @@ export type IPost = {
   created_at: string
   status: PostsStatus
   category: PostCategory
+  videoURL: string
 }
 
 export enum PostsStatus {

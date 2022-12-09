@@ -2,11 +2,11 @@ import React from 'react'
 
 import LikeSvg from '../../assets/like.svg'
 import DislikeSvg from '../../assets/dislike.svg'
-import CommentSvg from '../../assets/commnet.svg'
 import ThemeSwitch from '../shared/ThemeSwitch'
+import ArrowUpSvg from '../../assets/arrowup.svg'
 
 const tabs = [
-  { text: 'najnovije' },
+  { icon: <ArrowUpSvg />, text: 'najnovije' },
   { icon: <LikeSvg />, text: 'lajkovi' },
   { icon: <DislikeSvg />, text: 'dislajkovi' }
 ]

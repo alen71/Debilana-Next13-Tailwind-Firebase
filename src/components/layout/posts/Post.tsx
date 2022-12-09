@@ -13,6 +13,7 @@ import {
   likePost
 } from '../../../utils/firebase/firebase-utils'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
+import VideoEmbed from './VideoEmbed'
 
 const Post = ({
   content,
@@ -21,6 +22,7 @@ const Post = ({
   created_at,
   id,
   category,
+  videoURL,
   admin
 }: IPost) => {
   const [managed, setManaged] = useState(false)
@@ -30,6 +32,8 @@ const Post = ({
   const [isDisliked, setDisliked] = useState(false)
   const [postLikes, setPostLikes] = useState(like)
   const [postDislikes, setPostDislikes] = useState(dislike)
+
+  // console.log(videoURL)
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
     day: 'numeric',
@@ -84,6 +88,7 @@ const Post = ({
         <p className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg">
           {content}
         </p>
+        {videoURL.length > 0 && <VideoEmbed url={videoURL} />}
       </div>
       <div className="w-full grid grid-cols-4 divide-x border-t-[1px] text-black dark:text-white ">
         {!admin ? (
