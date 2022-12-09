@@ -88,7 +88,7 @@ const Post = ({
         <p className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg">
           {content}
         </p>
-        {videoURL.length > 0 && <VideoEmbed url={videoURL} />}
+        {/* {videoURL.length > 0 && <VideoEmbed url={videoURL} />} */}
       </div>
       <div className="w-full grid grid-cols-4 divide-x border-t-[1px] text-black dark:text-white ">
         {!admin ? (
