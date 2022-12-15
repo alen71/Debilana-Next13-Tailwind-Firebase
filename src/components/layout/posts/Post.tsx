@@ -91,7 +91,7 @@ const Post = ({
         admin ? 'mb-6' : ''
       } transition-transform duration-300 text-sm sm:text-base bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer`}
     >
-      <div className=" pt-2">
+      <div className="pt-2">
         <div className="flex justify-between pb-2 px-8 border-b-[1px] mb-4 text-xs md:text-sm">
           <p>{category}</p>
           <p className="capitalize ">{dateFormat}</p>
@@ -107,7 +107,7 @@ const Post = ({
         )}
 
         <div className="relative w-full mt-4">
-          {fileName.length > 0 && (
+          {fileName.length > 0 && fileType.includes('image') && (
             <Image
               src={url}
               width={800}
@@ -116,6 +116,10 @@ const Post = ({
               style={{ objectFit: 'cover' }}
               quality={90}
             />
+          )}
+
+          {fileName.length > 0 && fileType.includes('video') && (
+            <video src={url} controls></video>
           )}
         </div>
       </div>

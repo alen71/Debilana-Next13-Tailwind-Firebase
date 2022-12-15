@@ -30,9 +30,7 @@ const app = initializeApp(firebaseConfig)
 export const auth = getAuth()
 export const db = getFirestore(app)
 export const storage = getStorage(app)
-export const imageRef = ref(storage, 'images')
 export const imageListRef = ref(storage, 'images/')
-export const videoRef = ref(storage, 'video')
 export const videoListRef = ref(storage, 'video/')
 
 export async function getPosts(statusCondition: string, category?: string) {

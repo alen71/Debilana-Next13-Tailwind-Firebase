@@ -5,7 +5,7 @@ import ImageSvg from '../assets/image.svg'
 import TextareaCustom from '../components/shared/TextareaCustom'
 import CreatePostButton from '../components/shared/CreatePostButton'
 import { addDoc, collection } from 'firebase/firestore'
-import { db, imageRef, storage } from '../utils/firebase/firebase-utils'
+import { db, storage } from '../utils/firebase/firebase-utils'
 import { PostCategory, PostsStatus } from '../utils/types/posts.types'
 import { ref, uploadBytes, uploadString } from 'firebase/storage'
 
@@ -14,7 +14,7 @@ const CreatePost = () => {
   const [textareaText, setTextareaText] = useState('')
   const [videoURL, setVideoURL] = useState('')
   const [uploadFile, setUploadFile] = useState<any>(null)
-  const maxFileSize = 5 * 1024 * 1024
+  const maxFileSize = 55 * 1024 * 1024
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
 
@@ -55,9 +55,15 @@ const CreatePost = () => {
         const picRef = ref(storage, `images/${uploadFile.name}`)
         const videoRef = ref(storage, `video/${uploadFile.name}`)
 
-        uploadBytes(picRef, uploadFile).then(res => {
-          console.log('radi')
-        })
+        if (uploadFile.type.includes('image')) {
+          uploadBytes(picRef, uploadFile).then(res => {
+            console.log('radi photo')
+          })
+        } else if (uploadFile.type.includes('video')) {
+          uploadBytes(videoRef, uploadFile).then(res => {
+            console.log('radi video')
+          })
+        }
       }
 
       setTextareaText('')
