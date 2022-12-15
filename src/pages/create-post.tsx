@@ -8,12 +8,24 @@ import { addDoc, collection } from 'firebase/firestore'
 import { db, storage } from '../utils/firebase/firebase-utils'
 import { PostCategory, PostsStatus } from '../utils/types/posts.types'
 import { ref, uploadBytes, uploadString } from 'firebase/storage'
+import ReactPlayer from 'react-player'
+import DisplayUploadedFile from '../components/shared/DisplayUploadedFile'
+import MessagePopup from '../components/shared/MessagePopup'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
+  const [displayMessage, setDisplayMessage] = useState({
+    message: '',
+    open: false,
+    type: true
+  })
   const [textareaText, setTextareaText] = useState('')
   const [videoURL, setVideoURL] = useState('')
   const [uploadFile, setUploadFile] = useState<any>(null)
+  const [uploadFileNow, setUploadFileNow] = useState({
+    URL: '',
+    type: ''
+  })
   const maxFileSize = 55 * 1024 * 1024
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
@@ -30,8 +42,6 @@ const CreatePost = () => {
 
   const createPostFunction = async (e: any) => {
     e.preventDefault()
-
-    console.log(uploadFile)
 
     // if (true) return
 
@@ -68,14 +78,48 @@ const CreatePost = () => {
 
       setTextareaText('')
       setIsTyping(!isTyping)
+      setDisplayMessage({
+        message: 'Uspešno ste kreirali objavu!',
+        open: true,
+        type: true
+      })
     } catch (e) {
-      alert(e)
+      setDisplayMessage({
+        message: 'Uspešno ste kreirali objavu!',
+        open: true,
+        type: false
+      })
     }
+  }
+
+  const renderTestFile = (e: any) => {
+    const file = e.target.files[0]
+
+    let url = null
+
+    if (window.createObjectURL != undefined) {
+      url = window.createObjectURL(file)
+    } else if (window.URL != undefined) {
+      url = window.URL.createObjectURL(file)
+    } else if (window.webkitURL != undefined) {
+      url = window.webkitURL.createObjectURL(file)
+    }
+
+    setUploadFileNow({ URL: url, type: file.type })
   }
 
   return (
     <div className="h-screen pb-6 overflow-y-scroll overflow-x-hidden">
       <Navbar hideSortTable hideSearch />
+
+      <MessagePopup
+        isOpen={displayMessage.open}
+        message={displayMessage.message}
+        messageType={displayMessage.type}
+        closeMessage={() =>
+          setDisplayMessage({ ...displayMessage, open: false })
+        }
+      />
 
       <div className="mx-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
         <p className="text-center text-xl sm:text-3xl mt-6 pb-2 sm:pb-4">
@@ -129,18 +173,30 @@ const CreatePost = () => {
                 Izaberi i postavi fotografiju ili video snimak <br />
                 (maksimalna veličina fajla 50mb)
               </p>
-              <button
-                type="button"
-                className="bg-light-yellow hover:bg-yellow text-black overflow-hidden cursor-pointer rounded-full py-2 px-5 leading-[21px] relative"
-              >
-                Odaberi fajl...
-                <input
-                  type="file"
-                  className="opacity-0 absolute top-0 left-0 w-full h-full z-20"
-                  onChange={(e: any) => setUploadFile(e.target.files[0])}
-                  accept="video/* image/jpeg image/png image/webP"
+              <div className="w-full h-64 flex items-center justify-center border-2 border-dashed border-main-gray dark:border-primary-dark relative">
+                <button
+                  type="button"
+                  className="bg-light-yellow hover:bg-yellow text-black overflow-hidden cursor-pointer rounded-full py-2 px-5 leading-[21px] relative"
+                >
+                  Odaberi fajl...
+                  <input
+                    type="file"
+                    className="opacity-0 absolute top-0 left-0 w-full h-full z-20 cursor-pointer"
+                    onChange={(e: any) => {
+                      renderTestFile(e)
+                      setUploadFile(e.target.files[0])
+                    }}
+                    accept="video/* image/jpeg image/png image/webP"
+                  />
+                </button>
+
+                <DisplayUploadedFile
+                  uploadFileNow={uploadFileNow}
+                  setUploadFile={setUploadFile}
+                  setUploadFileNow={setUploadFileNow}
                 />
-              </button>
+              </div>
+
               <p className="py-3">ili</p>
               <input
                 type="text"
@@ -152,6 +208,12 @@ const CreatePost = () => {
               <p className="pt-3 text-center sm:text-left">
                 Podržavamo linkove sa YouTube i Vimeo platforme.
               </p>
+
+              {videoURL.length > 0 && (
+                <div className="mt-4 w-full">
+                  <ReactPlayer url={videoURL} width="100%" />
+                </div>
+              )}
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-0 justify-end">

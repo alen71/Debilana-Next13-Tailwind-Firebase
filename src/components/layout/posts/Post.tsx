@@ -44,7 +44,7 @@ const Post = ({
   }).format(new Date(created_at))
 
   const postDelete = async () => {
-    const isDeleted: any = await deletePost(id)
+    const isDeleted: any = await deletePost(id, fileName, fileType)
     setManaged(isDeleted)
   }
 
@@ -108,18 +108,17 @@ const Post = ({
         )}
 
         <div className="relative w-full mt-4">
-          {fileName.length > 0 && fileType.includes('image') && (
+          {fileName.length > 0 && fileType.startsWith('image') && (
             <Image
               src={url}
               width={800}
               height={300}
               alt={fileName}
               style={{ objectFit: 'cover' }}
-              quality={90}
             />
           )}
 
-          {fileName.length > 0 && fileType.includes('video') && (
+          {fileName.length > 0 && fileType.startsWith('video') && (
             <video src={url} controls></video>
           )}
         </div>

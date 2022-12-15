@@ -15,7 +15,13 @@ import {
   deleteDoc,
   runTransaction
 } from 'firebase/firestore'
-import { getDownloadURL, getStorage, listAll, ref } from 'firebase/storage'
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  listAll,
+  ref
+} from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_VERCEL_API_KEY,
@@ -94,7 +100,19 @@ export async function adminSignOut() {
     .catch(err => false)
 }
 
-export async function deletePost(id: string) {
+export async function deletePost(
+  id: string,
+  fileName: string,
+  fileType: string
+) {
+  if (fileName.length > 0) {
+    const targetRef = fileType.startsWith('image')
+      ? ref(storage, `images/${fileName}`)
+      : ref(storage, `video/${fileName}`)
+
+    deleteObject(targetRef)
+  }
+
   return await deleteDoc(doc(db, 'posts', id))
     .then(res => true)
     .catch(err => false)
@@ -177,7 +195,7 @@ export async function dislikePost(id: string, isLiked: boolean) {
 export async function getFile(fileName: string, fileType: string) {
   if (fileName.length === 0 || fileType.length === 0) return
 
-  const listRef = fileType.includes('image') ? imageListRef : videoListRef
+  const listRef = fileType.startsWith('image') ? imageListRef : videoListRef
 
   const filesList = await listAll(listRef)
 
