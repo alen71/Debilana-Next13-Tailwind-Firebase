@@ -79,6 +79,7 @@ const Post = ({
     const getUrl = async () => {
       const url: any = await getFile(fileName, fileType)
       setUrl(url)
+      console.log(url)
     }
     getUrl()
   }, [])

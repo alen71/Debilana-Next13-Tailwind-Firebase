@@ -183,9 +183,11 @@ export async function getFile(fileName: string, fileType: string) {
 
   if (!filesList) return
 
-  const targetItem = filesList.items.filter(async (file: any) =>
-    file._location.path.includes(fileName)
-  )
+  console.log(filesList.items)
+
+  const targetItem = filesList.items.filter((file: any) => {
+    return file._location.path.includes(fileName)
+  })
 
   return await getDownloadURL(targetItem[0])
 }
