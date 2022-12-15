@@ -8,6 +8,8 @@ export type IPost = {
   status: PostsStatus
   category: PostCategory
   videoURL: string
+  fileName: string
+  fileType: string
 }
 
 export enum PostsStatus {
@@ -17,6 +19,6 @@ export enum PostsStatus {
 }
 
 export enum PostCategory {
-  GASTARBAJTER = 'Gastarbajter',
-  DEBILANA = 'Debilana'
+  GASTARBAJTER = 'gastarbajter',
+  DEBILANA = 'debilana'
 }

@@ -15,7 +15,7 @@ import {
   deleteDoc,
   runTransaction
 } from 'firebase/firestore'
-import { getDatabase, ref, set, update } from 'firebase/database'
+import { getDownloadURL, getStorage, listAll, ref } from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_VERCEL_API_KEY,
@@ -29,10 +29,50 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth()
 export const db = getFirestore(app)
+export const storage = getStorage(app)
+export const imageRef = ref(storage, 'images')
+export const imageListRef = ref(storage, 'images/')
+export const videoRef = ref(storage, 'video')
+export const videoListRef = ref(storage, 'video/')
 
-export async function getPosts(statusCondition: string) {
+export async function getPosts(statusCondition: string, category?: string) {
   const postsCol = collection(db, 'posts')
-  const q = query(postsCol, where('status', '==', statusCondition), limit(10))
+  const q = !category
+    ? query(postsCol, where('status', '==', statusCondition), limit(10))
+    : query(
+        postsCol,
+        where('status', '==', statusCondition),
+        where('category', '==', category),
+        limit(10)
+      )
+  const postSnapshot = await getDocs(q)
+  const posts = postSnapshot.docs.map(doc => {
+    return { ...doc.data(), id: doc.id }
+  })
+  return posts
+}
+
+export async function getSortedPosts(
+  statusCondition: string,
+  sort: string,
+  category?: string
+) {
+  console.log(sort)
+  const postsCol = collection(db, 'posts')
+  const q = category
+    ? query(
+        postsCol,
+        where('status', '==', statusCondition),
+        where('category', '==', category),
+        limit(10),
+        orderBy(sort, 'desc')
+      )
+    : query(
+        postsCol,
+        where('status', '==', statusCondition),
+        limit(10),
+        orderBy(sort, 'desc')
+      )
   const postSnapshot = await getDocs(q)
   const posts = postSnapshot.docs.map(doc => {
     return { ...doc.data(), id: doc.id }
@@ -134,4 +174,20 @@ export async function dislikePost(id: string, isLiked: boolean) {
   } catch (e) {
     return false
   }
+}
+
+export async function getFile(fileName: string, fileType: string) {
+  if (fileName.length === 0 || fileType.length === 0) return
+
+  const listRef = fileType.includes('image') ? imageListRef : videoListRef
+
+  const filesList = await listAll(listRef)
+
+  if (!filesList) return
+
+  const targetItem = filesList.items.filter(async (file: any) =>
+    file._location.path.includes(fileName)
+  )
+
+  return await getDownloadURL(targetItem[0])
 }

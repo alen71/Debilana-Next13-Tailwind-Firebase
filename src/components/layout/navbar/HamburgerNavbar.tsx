@@ -24,28 +24,22 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
           </div>
           <div className="w-full border-y-[1px] divide-y-[1px] dark:text-white text-center uppercase font-semibold text-base mt-10 mb-4">
             <Link
-              href="/postani-admin"
+              href="/debilana"
               className="cursor-pointer block py-2 hover:bg-primary-light-hover dark:hover:bg-gray-dark"
             >
-              Postani admin
+              debilana
             </Link>
             <Link
-              href="#"
+              href="/gastarbajter"
               className="cursor-pointer block py-2 hover:bg-primary-light-hover dark:hover:bg-gray-dark"
             >
-              U trendingu
+              gastarbajter
             </Link>
             <Link
-              href="#"
+              href="/admin-login"
               className="cursor-pointer block py-2 hover:bg-primary-light-hover dark:hover:bg-gray-dark"
             >
-              novo
-            </Link>
-            <Link
-              href="#"
-              className="cursor-pointer block py-2 hover:bg-primary-light-hover dark:hover:bg-gray-dark"
-            >
-              Najbolje
+              login za admina
             </Link>
           </div>
 

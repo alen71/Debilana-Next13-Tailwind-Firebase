@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import ReactPlayer from 'react-player'
 
 import ShareSvg from '../../../assets/share.svg'
 import LikeSvg from '../../../assets/like.svg'
@@ -10,10 +11,11 @@ import {
   approvePost,
   deletePost,
   dislikePost,
+  getFile,
   likePost
 } from '../../../utils/firebase/firebase-utils'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
-import VideoEmbed from './VideoEmbed'
+import Image from 'next/image'
 
 const Post = ({
   content,
@@ -23,17 +25,17 @@ const Post = ({
   id,
   category,
   videoURL,
-  admin
+  admin,
+  fileName,
+  fileType
 }: IPost) => {
   const [managed, setManaged] = useState(false)
   const [openDelPopup, setOpenDelPopup] = useState(false)
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
-  const [isDisliked, setDisliked] = useState(false)
-  const [postLikes, setPostLikes] = useState(like)
-  const [postDislikes, setPostDislikes] = useState(dislike)
-
-  // console.log(videoURL)
+  const [isDisliked, setIsDisliked] = useState(false)
+  const [embedVideo, setEmbedVideo] = useState(false)
+  const [url, setUrl] = useState<string>('')
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
     day: 'numeric',
@@ -42,7 +44,7 @@ const Post = ({
   }).format(new Date(created_at))
 
   const postDelete = async () => {
-    const isDeleted = await deletePost(id)
+    const isDeleted: any = await deletePost(id)
     setManaged(isDeleted)
   }
 
@@ -55,10 +57,9 @@ const Post = ({
     const { like, dislike }: any = await likePost(id, isDisliked)
 
     if (typeof like !== 'number') return
-    setPostLikes(like)
-    setPostDislikes(dislike)
+
     setIsLiked(true)
-    setDisliked(false)
+    setIsDisliked(false)
   }
 
   const postDislike = async () => {
@@ -66,11 +67,21 @@ const Post = ({
 
     if (typeof dislike !== 'number') return
 
-    setPostDislikes(dislike)
-    setPostLikes(like)
-    setDisliked(true)
+    setIsDisliked(true)
     setIsLiked(false)
   }
+
+  useEffect(() => {
+    videoURL.length > 0 && setEmbedVideo(true)
+
+    if (fileName.length === 0) return
+
+    const getUrl = async () => {
+      const url: any = await getFile(fileName, fileType)
+      setUrl(url)
+    }
+    getUrl()
+  }, [])
 
   return (
     <div
@@ -80,15 +91,33 @@ const Post = ({
         admin ? 'mb-6' : ''
       } transition-transform duration-300 text-sm sm:text-base bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer`}
     >
-      <div className="px-8 py-5">
-        <div className="flex justify-between pb-2">
+      <div className=" pt-2">
+        <div className="flex justify-between pb-2 px-8 border-b-[1px] mb-4 text-xs md:text-sm">
           <p>{category}</p>
           <p className="capitalize ">{dateFormat}</p>
         </div>
-        <p className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg">
+        <p className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg px-8">
           {content}
         </p>
-        {videoURL.length > 0 && <VideoEmbed url={videoURL} />}
+
+        {embedVideo && (
+          <div className="mt-4">
+            <ReactPlayer url={videoURL} controls={true} width="100%" />
+          </div>
+        )}
+
+        <div className="relative w-full mt-4">
+          {fileName.length > 0 && (
+            <Image
+              src={url}
+              width={800}
+              height={300}
+              alt={fileName}
+              style={{ objectFit: 'cover' }}
+              quality={90}
+            />
+          )}
+        </div>
       </div>
       <div className="w-full grid grid-cols-4 divide-x border-t-[1px] text-black dark:text-white ">
         {!admin ? (
@@ -104,7 +133,7 @@ const Post = ({
               ) : (
                 <LikeSvg className="scale-[0.7] sm:scale-[1]" />
               )}
-              <span>{postLikes}</span>
+              <span>{isLiked ? like + 1 : like}</span>
             </p>
             <p
               className={`${
@@ -117,7 +146,7 @@ const Post = ({
               ) : (
                 <DislikeSvg className="scale-[0.7] sm:scale-[1] translate-y-[2px]" />
               )}
-              <span>{postDislikes}</span>
+              <span>{isDisliked ? dislike + 1 : dislike}</span>
             </p>
             <div className="md:py-[10px] py-[6px] grid place-items-center col-start-3 col-end-5 hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">
               <ShareSvg className="scale-[1.4] sm:scale-[1.8]" />

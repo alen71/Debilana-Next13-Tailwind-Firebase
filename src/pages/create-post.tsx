@@ -5,14 +5,17 @@ import ImageSvg from '../assets/image.svg'
 import TextareaCustom from '../components/shared/TextareaCustom'
 import CreatePostButton from '../components/shared/CreatePostButton'
 import { addDoc, collection } from 'firebase/firestore'
-import { db } from '../utils/firebase/firebase-utils'
+import { db, imageRef, storage } from '../utils/firebase/firebase-utils'
 import { PostCategory, PostsStatus } from '../utils/types/posts.types'
+import { ref, uploadBytes, uploadString } from 'firebase/storage'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
   const [textareaText, setTextareaText] = useState('')
   const [videoURL, setVideoURL] = useState('')
-  const [videoFile, setVideoFile] = useState('')
+  const [uploadFile, setUploadFile] = useState<any>(null)
+  const maxFileSize = 5 * 1024 * 1024
+
   const selectEl = useRef<null | HTMLSelectElement>(null)
 
   const checkTyping = (e: any) => {
@@ -25,11 +28,13 @@ const CreatePost = () => {
     }
   }
 
-  console.log(videoFile)
-
   const createPostFunction = async (e: any) => {
     e.preventDefault()
-    if (!videoURL.startsWith('https://')) return
+
+    console.log(uploadFile)
+
+    // if (true) return
+
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
         category: selectEl.current?.value,
@@ -38,12 +43,27 @@ const CreatePost = () => {
         like: 0,
         dislike: 0,
         status: PostsStatus.PENDING,
-        videoURL: videoURL.length > 0 ? videoURL : ''
+        videoURL: videoURL.length > 0 ? videoURL : '',
+        fileName: uploadFile.name.length > 0 ? uploadFile.name : '',
+        fileType: uploadFile.name.length > 0 ? uploadFile.type : ''
       })
+
+      if (uploadFile.size > maxFileSize)
+        throw new Error('Fajl je veći od 50mb!')
+
+      if (uploadFile.size < maxFileSize && uploadFile.name.length > 0) {
+        const picRef = ref(storage, `images/${uploadFile.name}`)
+        const videoRef = ref(storage, `video/${uploadFile.name}`)
+
+        uploadBytes(picRef, uploadFile).then(res => {
+          console.log('radi')
+        })
+      }
+
       setTextareaText('')
       setIsTyping(!isTyping)
     } catch (e) {
-      console.log(e)
+      alert(e)
     }
   }
 
@@ -111,7 +131,8 @@ const CreatePost = () => {
                 <input
                   type="file"
                   className="opacity-0 absolute top-0 left-0 w-full h-full z-20"
-                  onChange={(e: any) => setVideoFile(e.target.value)}
+                  onChange={(e: any) => setUploadFile(e.target.files[0])}
+                  accept="video/* image/jpeg image/png image/webP"
                 />
               </button>
               <p className="py-3">ili</p>

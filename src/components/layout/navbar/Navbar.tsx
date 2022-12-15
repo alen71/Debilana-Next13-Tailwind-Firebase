@@ -34,7 +34,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
       }
     : ''
 
-  const { pathname } = useRouter()
+  const { asPath } = useRouter()
 
   return (
     <motion.nav
@@ -48,19 +48,19 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
           <Logo />
         </div>
 
-        <div className="hidden lg:block mx-auto">
+        {/* <div className="hidden lg:block mx-auto">
           <SearchBar hide={hideSearch} />
-        </div>
+        </div> */}
 
-        <div className={`${idNavHidden} flex items-center `}>
+        <div className={`${idNavHidden} flex items-center md:ml-auto`}>
           <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray-text-hover  text-xs xl:text-sm mr-3 xl:mr-6">
-            <NavItemWrapper active={pathname === '/debilana'}>
-              <Link href="#">Debilana</Link>
+            <NavItemWrapper active={asPath.includes('/debilana')}>
+              <Link href="/debilana">Debilana</Link>
             </NavItemWrapper>
-            <NavItemWrapper active={pathname === '/gastarbajter'}>
-              <Link href="#">Gastarbajter</Link>
+            <NavItemWrapper active={asPath.includes('/gastarbajter')}>
+              <Link href="/gastarbajter">Gastarbajter</Link>
             </NavItemWrapper>
-            <NavItemWrapper active={pathname === '/admin-login'}>
+            <NavItemWrapper active={asPath.includes('/admin-login')}>
               <Link href="/admin-login">login za admina</Link>
             </NavItemWrapper>
           </div>

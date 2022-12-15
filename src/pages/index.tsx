@@ -1,4 +1,4 @@
-import { use, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import Footer from '../components/layout/Footer'
@@ -19,7 +19,15 @@ type Props = {
 }
 
 export default function Home({ posts }: Props) {
-  const [postsData, setPostsData] = useState(posts)
+  const [postsData, setPostsData] = useState<IPost[]>(posts)
+
+  // useEffect(() => {
+  //   const test = async () => {
+  //     const posts: any = await getPosts(PostsStatus.APPROVED)
+  //     setPostsData(posts)
+  //   }
+  //   test()
+  // }, [])
 
   return (
     <div className="h-screen  custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
