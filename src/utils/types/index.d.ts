@@ -2,6 +2,6 @@ export {}
 
 declare global {
   interface Window {
-    example: any // 👈️ turn off type checking
+    createObjectURL: any // 👈️ turn off type checking
   }
 }
