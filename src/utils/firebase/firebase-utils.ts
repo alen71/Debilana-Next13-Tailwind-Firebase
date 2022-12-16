@@ -42,12 +42,12 @@ export const videoListRef = ref(storage, 'video/')
 export async function getPosts(statusCondition: string, category?: string) {
   const postsCol = collection(db, 'posts')
   const q = !category
-    ? query(postsCol, where('status', '==', statusCondition), limit(10))
+    ? query(postsCol, where('status', '==', statusCondition), limit(7))
     : query(
         postsCol,
         where('status', '==', statusCondition),
         where('category', '==', category),
-        limit(10)
+        limit(7)
       )
   const postSnapshot = await getDocs(q)
   const posts = postSnapshot.docs.map(doc => {
@@ -68,13 +68,13 @@ export async function getSortedPosts(
         postsCol,
         where('status', '==', statusCondition),
         where('category', '==', category),
-        limit(10),
+        limit(7),
         orderBy(sort, 'desc')
       )
     : query(
         postsCol,
         where('status', '==', statusCondition),
-        limit(10),
+        limit(7),
         orderBy(sort, 'desc')
       )
   const postSnapshot = await getDocs(q)

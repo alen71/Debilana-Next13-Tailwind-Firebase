@@ -1,7 +1,6 @@
 import { use, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/navbar/Navbar'
 import { getPosts } from '../utils/firebase/firebase-utils'
 import { IPost, PostsStatus } from '../utils/types/posts.types'
@@ -21,16 +20,8 @@ type Props = {
 export default function Home({ posts }: Props) {
   const [postsData, setPostsData] = useState<IPost[]>(posts)
 
-  // useEffect(() => {
-  //   const test = async () => {
-  //     const posts: any = await getPosts(PostsStatus.APPROVED)
-  //     setPostsData(posts)
-  //   }
-  //   test()
-  // }, [])
-
   return (
-    <div className="h-screen  custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
+    <div className="h-screen custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
       <Navbar isAnimate />
 
       {postsData.map((post, index) => {

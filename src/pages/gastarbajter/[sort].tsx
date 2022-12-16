@@ -53,7 +53,7 @@ const Sort: NextPage = () => {
   }, [sort])
 
   return (
-    <div className="h-screen  custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
+    <div className="h-screen custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
       <Navbar />
 
       {postsData.map((post, index) => {

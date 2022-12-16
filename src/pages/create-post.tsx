@@ -236,5 +236,3 @@ const CreatePost = () => {
 }
 
 export default CreatePost
-
-// https://www.youtube.com/watch?v=k_dvWmj_ClE&ab_channel=MiroljubPetrovic

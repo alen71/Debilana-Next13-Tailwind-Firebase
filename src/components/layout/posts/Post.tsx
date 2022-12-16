@@ -16,6 +16,7 @@ import {
 } from '../../../utils/firebase/firebase-utils'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const Post = ({
   content,
@@ -48,6 +49,17 @@ const Post = ({
     setManaged(isDeleted)
   }
 
+  const { asPath } = useRouter()
+  useEffect(() => {
+    setManaged(false)
+    setOpenDelPopup(false)
+    setOpenApprovePopup(false)
+    setIsLiked(false)
+    setIsDisliked(false)
+    setEmbedVideo(false)
+    setUrl('')
+  }, [asPath])
+
   const postApprove = async () => {
     const isApproved = await approvePost(id)
     setManaged(isApproved)
@@ -79,10 +91,10 @@ const Post = ({
     const getUrl = async () => {
       const url: any = await getFile(fileName, fileType)
       setUrl(url)
-      console.log(url)
+      console.log(fileName + ': ' + url)
     }
     getUrl()
-  }, [])
+  }, [fileName, fileType, videoURL])
 
   return (
     <div
