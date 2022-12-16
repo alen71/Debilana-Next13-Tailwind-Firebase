@@ -97,8 +97,8 @@ const CreatePost = () => {
 
     let url = null
 
-    if (window.createObjectURL != undefined) {
-      url = window.createObjectURL(file)
+    if (window.example.createObjectURL != undefined) {
+      url = window.example.createObjectURL(file)
     } else if (window.URL != undefined) {
       url = window.URL.createObjectURL(file)
     } else if (window.webkitURL != undefined) {
