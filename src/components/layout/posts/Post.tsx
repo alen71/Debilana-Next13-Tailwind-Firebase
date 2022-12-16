@@ -28,7 +28,8 @@ const Post = ({
   videoURL,
   admin,
   fileName,
-  fileType
+  fileType,
+  curPage
 }: IPost) => {
   const [managed, setManaged] = useState(false)
   const [openDelPopup, setOpenDelPopup] = useState(false)
@@ -58,7 +59,7 @@ const Post = ({
     setIsDisliked(false)
     setEmbedVideo(false)
     setUrl('')
-  }, [asPath])
+  }, [asPath, curPage])
 
   const postApprove = async () => {
     const isApproved = await approvePost(id)
@@ -91,13 +92,13 @@ const Post = ({
     const getUrl = async () => {
       const url: any = await getFile(fileName, fileType)
       setUrl(url)
-      console.log(fileName + ': ' + url)
     }
     getUrl()
-  }, [fileName, fileType, videoURL])
+  }, [fileName, fileType, videoURL, curPage])
 
   return (
     <div
+      datatype={id}
       className={`${
         managed ? 'translate-x-[-500%] absolute w-full mb-0' : ''
       } ${

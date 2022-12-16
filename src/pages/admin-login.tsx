@@ -62,7 +62,7 @@ const AdminLogin = () => {
     <div className="h-screen pb-6 overflow-y-auto ">
       <Navbar hideSortTable />
 
-      <div className="mx-6 pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px] flex flex-col gap-6 relative">
+      <div className="mx-6 pt-20 lg:pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px] flex flex-col gap-6 relative">
         <form
           className={`${hideForm} flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 py-6 mb-6 transition-[position, transform] duration-700`}
           onSubmit={signIn}
@@ -108,8 +108,8 @@ const AdminLogin = () => {
 
         <button
           className={`${
-            signedIn ? 'translate-y-0' : ' translate-y-[-200px]'
-          } px-8 py-1 w-fit rounded-full bg-gray-text-hover-dark text-white dark:bg-gray-dark absolute right-[-150px] top-6 transition-transform duration-500`}
+            signedIn ? 'translate-y-0' : 'translate-y-[-200px]'
+          } px-8 py-1 w-fit rounded-full bg-gray-text-hover-dark text-white dark:bg-gray-dark absolute right-[0] lg:right-[-150px] top-6 transition-transform duration-500`}
           onClick={signOut}
         >
           logout

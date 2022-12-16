@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
+import { ref, uploadBytes, uploadString } from 'firebase/storage'
+import { addDoc, collection } from 'firebase/firestore'
+import { db, storage } from '../utils/firebase/firebase-utils'
 
 import Navbar from '../components/layout/navbar/Navbar'
 import ImageSvg from '../assets/image.svg'
 import TextareaCustom from '../components/shared/TextareaCustom'
 import CreatePostButton from '../components/shared/CreatePostButton'
-import { addDoc, collection } from 'firebase/firestore'
-import { db, storage } from '../utils/firebase/firebase-utils'
 import { PostCategory, PostsStatus } from '../utils/types/posts.types'
-import { ref, uploadBytes, uploadString } from 'firebase/storage'
 import ReactPlayer from 'react-player'
 import DisplayUploadedFile from '../components/shared/DisplayUploadedFile'
 import MessagePopup from '../components/shared/MessagePopup'
@@ -43,6 +43,7 @@ const CreatePost = () => {
   const createPostFunction = async (e: any) => {
     e.preventDefault()
 
+    console.log(uploadFile)
     // if (true) return
 
     try {
@@ -53,15 +54,15 @@ const CreatePost = () => {
         like: 0,
         dislike: 0,
         status: PostsStatus.PENDING,
-        videoURL: videoURL.length > 0 ? videoURL : '',
-        fileName: uploadFile.name.length > 0 ? uploadFile.name : '',
-        fileType: uploadFile.name.length > 0 ? uploadFile.type : ''
+        videoURL: videoURL ? videoURL : '',
+        fileName: uploadFile ? uploadFile.name : '',
+        fileType: uploadFile ? uploadFile.type : ''
       })
 
-      if (uploadFile.size > maxFileSize)
+      if (uploadFile && uploadFile.size > maxFileSize)
         throw new Error('Fajl je veći od 50mb!')
 
-      if (uploadFile.size < maxFileSize && uploadFile.name.length > 0) {
+      if (uploadFile && uploadFile.size < maxFileSize) {
         const picRef = ref(storage, `images/${uploadFile.name}`)
         const videoRef = ref(storage, `video/${uploadFile.name}`)
 
@@ -85,10 +86,11 @@ const CreatePost = () => {
       })
     } catch (e) {
       setDisplayMessage({
-        message: 'Uspešno ste kreirali objavu!',
+        message: 'Objava nije kreirana!',
         open: true,
         type: false
       })
+      console.log(e)
     }
   }
 
@@ -173,7 +175,7 @@ const CreatePost = () => {
                 Izaberi i postavi fotografiju ili video snimak <br />
                 (maksimalna veličina fajla 50mb)
               </p>
-              <div className="w-full h-64 flex items-center justify-center border-2 border-dashed border-main-gray dark:border-primary-dark relative">
+              <div className="w-full h-52 md:h-64 flex items-center justify-center border-2 border-dashed border-main-gray dark:border-primary-dark relative">
                 <button
                   type="button"
                   className="bg-light-yellow hover:bg-yellow text-black overflow-hidden cursor-pointer rounded-full py-2 px-5 leading-[21px] relative"

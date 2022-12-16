@@ -52,7 +52,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
           <SearchBar hide={hideSearch} />
         </div> */}
 
-        <div className={`${idNavHidden} flex items-center md:ml-auto`}>
+        <div className={`${idNavHidden} flex items-center lg:ml-auto`}>
           <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray-text-hover  text-xs xl:text-sm mr-3 xl:mr-6">
             <NavItemWrapper active={asPath.includes('/debilana')}>
               <Link href="/debilana">Debilana</Link>

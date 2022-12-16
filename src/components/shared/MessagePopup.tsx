@@ -30,7 +30,7 @@ const MessagePopup = ({
       >
         <div
           className={`${
-            messageType ? 'border-green' : 'border-red'
+            messageType ? 'border-green' : 'border-red text-red'
           } border-4 w-14 h-14 rounded-full flex items-center justify-center`}
         >
           {messageType ? <SuccessIcon /> : <ErrorIcon />}

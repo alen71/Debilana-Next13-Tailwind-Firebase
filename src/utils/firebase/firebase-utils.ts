@@ -13,7 +13,9 @@ import {
   orderBy,
   where,
   deleteDoc,
-  runTransaction
+  runTransaction,
+  startAfter,
+  startAt
 } from 'firebase/firestore'
 import {
   deleteObject,
@@ -39,21 +41,79 @@ export const storage = getStorage(app)
 export const imageListRef = ref(storage, 'images/')
 export const videoListRef = ref(storage, 'video/')
 
-export async function getPosts(statusCondition: string, category?: string) {
-  const postsCol = collection(db, 'posts')
-  const q = !category
-    ? query(postsCol, where('status', '==', statusCondition), limit(7))
-    : query(
-        postsCol,
-        where('status', '==', statusCondition),
-        where('category', '==', category),
-        limit(7)
-      )
-  const postSnapshot = await getDocs(q)
-  const posts = postSnapshot.docs.map(doc => {
-    return { ...doc.data(), id: doc.id }
-  })
-  return posts
+export async function getPosts(
+  statusCondition: string,
+  category?: string,
+  startFrom = 0
+) {
+  if (startFrom === 0) {
+    const postsCol = collection(db, 'posts')
+    const q = !category
+      ? query(
+          postsCol,
+          where('status', '==', statusCondition),
+          orderBy('created_at', 'desc'),
+          limit(2)
+        )
+      : query(
+          postsCol,
+          where('status', '==', statusCondition),
+          where('category', '==', category),
+          orderBy('created_at', 'desc'),
+          limit(2)
+        )
+    const postSnapshot = await getDocs(q)
+
+    const posts = postSnapshot.docs.map(doc => {
+      return { ...doc.data(), id: doc.id }
+    })
+    return posts
+  } else {
+    console.log(startFrom)
+
+    const first = query(
+      collection(db, 'posts'),
+      orderBy('created_at', 'desc'),
+      limit(startFrom)
+    )
+    const documentSnapshots = await getDocs(first)
+
+    console.log(documentSnapshots.docs)
+
+    const lastVisible =
+      documentSnapshots.docs[documentSnapshots.docs.length - 1]
+    console.log('last', lastVisible.data())
+
+    const postsCol = collection(db, 'posts')
+    const q = !category
+      ? query(
+          postsCol,
+          orderBy('created_at', 'desc'),
+          where('status', '==', statusCondition),
+          startAfter(lastVisible),
+          limit(2)
+        )
+      : query(
+          postsCol,
+          where('status', '==', statusCondition),
+          where('category', '==', category),
+          orderBy('created_at', 'desc'),
+          startAfter(lastVisible),
+          limit(2)
+        )
+    const postSnapshot = await getDocs(q)
+
+    const posts = postSnapshot.docs.map(doc => {
+      return { ...doc.data(), id: doc.id }
+    })
+    return posts
+  }
+}
+
+export async function getPost(id: string) {
+  const postsRef = doc(db, 'posts', id)
+
+  return postsRef
 }
 
 export async function getSortedPosts(
@@ -200,8 +260,6 @@ export async function getFile(fileName: string, fileType: string) {
   const filesList = await listAll(listRef)
 
   if (!filesList) return
-
-  console.log(filesList.items)
 
   const targetItem = filesList.items.filter((file: any) => {
     return file._location.path.includes(fileName)

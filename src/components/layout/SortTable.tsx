@@ -9,9 +9,10 @@ import Link from 'next/link'
 
 type Props = {
   hide?: boolean
+  toggle?: () => void
 }
 
-const SortTable = ({ hide }: Props) => {
+const SortTable = ({ hide, toggle }: Props) => {
   const [tabs, setTabs] = useState([
     { icon: <ArrowUpSvg />, text: 'najnovije' },
     { icon: <LikeSvg />, text: 'lajkovi' },
@@ -33,6 +34,7 @@ const SortTable = ({ hide }: Props) => {
           <div
             key={text}
             className="last:border-b-[1px] border-t-[1px] cursor-pointer"
+            onClick={toggle}
           >
             <Link
               href={`${
