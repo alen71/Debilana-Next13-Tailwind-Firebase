@@ -26,7 +26,7 @@ const SortTable = ({ hide }: Props) => {
     : '/debilana'
 
   return (
-    <div className="text-center lg:text-left lg:absolute text-base lg:left-3 xl:left-14 lg:top-20 w-full xl:w-[15rem] lg:w-40 text-black dark:text-white py-4 rounded-md">
+    <div className="text-center lg:text-left lg:absolute text-base lg:left-3 xl:left-14 lg:top-20 w-full xl:w-[15rem] lg:w-40 text-black dark:text-white py-1 rounded-md">
       <div className={`${isHide} mb-2 text-base uppercase pl-3`}>Sortiraj</div>
       <div className={`${isHide} grid grid-rows-3 mt-2 mb-12 lg:mb-20`}>
         {tabs.map(({ icon, text }) => (
