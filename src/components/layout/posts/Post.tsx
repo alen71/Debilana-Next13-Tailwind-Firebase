@@ -7,16 +7,12 @@ import LikeFillSvg from '../../../assets/like-fill.svg'
 import DislikeSvg from '../../../assets/dislike.svg'
 import DislikeFillSvg from '../../../assets/dislike-fill.svg'
 import { IPost } from '../../../utils/types/posts.types'
-import {
-  approvePost,
-  deletePost,
-  dislikePost,
-  getFile,
-  likePost
-} from '../../../utils/firebase/firebase-utils'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import useInteraction from '../../hooks/useLike'
+import useGetFile from '../../hooks/useGetFile'
+import useManagePost from '../../hooks/useManagePost'
 
 const Post = ({
   content,
@@ -28,16 +24,12 @@ const Post = ({
   videoURL,
   admin,
   fileName,
-  fileType,
-  curPage
+  fileType
 }: IPost) => {
-  const [managed, setManaged] = useState(false)
+  // const [managed, setManaged] = useState(false)
   const [openDelPopup, setOpenDelPopup] = useState(false)
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
-  const [isLiked, setIsLiked] = useState(false)
-  const [isDisliked, setIsDisliked] = useState(false)
   const [embedVideo, setEmbedVideo] = useState(false)
-  const [url, setUrl] = useState<string>('')
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
     day: 'numeric',
@@ -45,56 +37,23 @@ const Post = ({
     year: 'numeric'
   }).format(new Date(created_at))
 
-  const postDelete = async () => {
-    const isDeleted: any = await deletePost(id, fileName, fileType)
-    setManaged(isDeleted)
-  }
-
   const { asPath } = useRouter()
   useEffect(() => {
-    setManaged(false)
     setOpenDelPopup(false)
     setOpenApprovePopup(false)
-    setIsLiked(false)
-    setIsDisliked(false)
     setEmbedVideo(false)
-    setUrl('')
-  }, [asPath, curPage])
+  }, [asPath])
 
-  const postApprove = async () => {
-    const isApproved = await approvePost(id)
-    setManaged(isApproved)
-  }
+  const { managed, deletePost, approvePost } = useManagePost(
+    id,
+    fileName,
+    fileType
+  )
 
-  const postLike = async () => {
-    const { like, dislike }: any = await likePost(id, isDisliked)
+  const { likesNum, dislikesNum, isLiked, isDisliked, dislikePost, likePost } =
+    useInteraction(id, like, dislike)
 
-    if (typeof like !== 'number') return
-
-    setIsLiked(true)
-    setIsDisliked(false)
-  }
-
-  const postDislike = async () => {
-    const { like, dislike }: any = await dislikePost(id, isLiked)
-
-    if (typeof dislike !== 'number') return
-
-    setIsDisliked(true)
-    setIsLiked(false)
-  }
-
-  useEffect(() => {
-    videoURL.length > 0 && setEmbedVideo(true)
-
-    if (fileName.length === 0) return
-
-    const getUrl = async () => {
-      const url: any = await getFile(fileName, fileType)
-      setUrl(url)
-    }
-    getUrl()
-  }, [fileName, fileType, videoURL, curPage])
+  const { url } = useGetFile(fileName, fileType, videoURL, id, asPath)
 
   return (
     <div
@@ -143,27 +102,27 @@ const Post = ({
               className={`${
                 isLiked ? 'pointer-events-none' : ''
               } flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
-              onClick={postLike}
+              onClick={likePost}
             >
               {isLiked ? (
                 <LikeFillSvg className="scale-[0.7] sm:scale-[1]" />
               ) : (
                 <LikeSvg className="scale-[0.7] sm:scale-[1]" />
               )}
-              <span>{isLiked ? like + 1 : like}</span>
+              <span>{likesNum}</span>
             </p>
             <p
               className={`${
                 isDisliked ? 'pointer-events-none' : ''
               } flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
-              onClick={postDislike}
+              onClick={dislikePost}
             >
               {isDisliked ? (
                 <DislikeFillSvg className="scale-[0.7] sm:scale-[1] translate-y-[2px]" />
               ) : (
                 <DislikeSvg className="scale-[0.7] sm:scale-[1] translate-y-[2px]" />
               )}
-              <span>{isDisliked ? dislike + 1 : dislike}</span>
+              <span>{dislikesNum}</span>
             </p>
             <div className="md:py-[10px] py-[6px] grid place-items-center col-start-3 col-end-5 hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">
               <ShareSvg className="scale-[1.4] sm:scale-[1.8]" />
@@ -194,13 +153,13 @@ const Post = ({
         open={openApprovePopup}
         purpose="Odobriti"
         toggle={() => setOpenApprovePopup(false)}
-        action={postApprove}
+        action={approvePost}
       />
       <ApproveOrDelPopup
         open={openDelPopup}
         purpose="Odbiti"
         toggle={() => setOpenDelPopup(false)}
-        action={postDelete}
+        action={deletePost}
       />
     </div>
   )

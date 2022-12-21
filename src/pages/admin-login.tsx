@@ -11,12 +11,15 @@ import {
   getPosts
 } from '../utils/firebase/firebase-utils'
 import { IPost, PostsStatus } from '../utils/types/posts.types'
+import useGetPosts from '../components/hooks/useGetPosts'
 
 const AdminLogin = () => {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [signedIn, setSignedIn] = useState(false)
-  const [posts, setPosts] = useState<IPost[]>([])
+  // const [posts, setPosts] = useState<IPost[]>([])
+
+  const posts = useGetPosts(PostsStatus.PENDING)
 
   const passwordTyping = (e: any) => {
     setPassword(e.target.value)
@@ -25,14 +28,15 @@ const AdminLogin = () => {
   const emailTyping = (e: any) => {
     setEmail(e.target.value)
   }
+  // const test = useGetPosts(PostsStatus.PENDING)
 
-  useEffect(() => {
-    const getAdminPosts = async () => {
-      const posts: any = await getPosts(PostsStatus.PENDING)
-      setPosts(posts)
-    }
-    getAdminPosts()
-  }, [])
+  // useEffect(() => {
+  //   const getAdminPosts = async () => {
+  //     const posts: any = await getPosts(PostsStatus.PENDING)
+  //     setPosts(posts)
+  //   }
+  //   getAdminPosts()
+  // }, [])
 
   const typing =
     password.length > 0 && email.length > 0

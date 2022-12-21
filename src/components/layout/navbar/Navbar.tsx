@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 
 import HamMenuBtn from './HamMenuBtn'
 import Logo from '../../shared/Logo'
@@ -15,9 +15,18 @@ type Props = {
   hideSearch?: boolean
   hideNav?: boolean
   isAnimate?: boolean
+  sortPosts?: string
+  setSortPosts?: Dispatch<SetStateAction<string>>
 }
 
-const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
+const Navbar = ({
+  hideSortTable,
+  hideSearch,
+  hideNav,
+  isAnimate,
+  sortPosts,
+  setSortPosts
+}: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -54,6 +63,15 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
 
         <div className={`${idNavHidden} flex items-center lg:ml-auto`}>
           <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray-text-hover  text-xs xl:text-sm mr-3 xl:mr-6">
+            <NavItemWrapper
+              active={
+                !asPath.includes('/debilana') &&
+                !asPath.includes('/gastarbajter') &&
+                !asPath.includes('/admin-login')
+              }
+            >
+              <Link href="/debilana">Sve</Link>
+            </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/debilana')}>
               <Link href="/debilana">Debilana</Link>
             </NavItemWrapper>
@@ -68,7 +86,11 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
           <WriteExperience />
         </div>
         <div className="hidden lg:block">
-          <SortTable hide={hideSortTable} />
+          <SortTable
+            hide={hideSortTable}
+            sort={sortPosts}
+            setSort={setSortPosts}
+          />
         </div>
       </div>
     </motion.nav>

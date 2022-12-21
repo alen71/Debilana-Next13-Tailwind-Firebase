@@ -63,16 +63,18 @@ const CreatePost = () => {
         throw new Error('Fajl je veći od 50mb!')
 
       if (uploadFile && uploadFile.size < maxFileSize) {
-        const picRef = ref(storage, `images/${uploadFile.name}`)
-        const videoRef = ref(storage, `video/${uploadFile.name}`)
+        const picRef = ref(storage, `images/${docRef.id}/${uploadFile.name}`)
+        const videoRef = ref(storage, `video/${docRef.id}/${uploadFile.name}`)
 
         if (uploadFile.type.includes('image')) {
           uploadBytes(picRef, uploadFile).then(res => {
             console.log('radi photo')
+            console.log(res)
           })
         } else if (uploadFile.type.includes('video')) {
           uploadBytes(videoRef, uploadFile).then(res => {
             console.log('radi video')
+            console.log(res)
           })
         }
       }
