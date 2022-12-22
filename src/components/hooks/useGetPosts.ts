@@ -32,33 +32,56 @@ const useGetPosts = ({
   initialData
 }: Params) => {
   const [data, setData] = useState<IPost[]>(initialData ?? [])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string>()
+
   const cursor = useRef<DocumentSnapshot>()
+  const isEnd = useRef(false)
 
-  const getPost = useCallback(async () => {
-    const constrains = [
-      where('status', '==', PostsStatus.APPROVED),
-      orderBy(sort, 'desc'),
-      limit(limitPerPage)
-    ]
+  const next = useCallback(async () => {
+    if (isEnd.current) return
 
-    if (category) constrains.push(where('category', '==', category))
-    if (cursor.current) constrains.push(startAfter(cursor.current))
+    try {
+      setLoading(true)
+      setError(undefined)
+      const constrains = [
+        where('status', '==', PostsStatus.APPROVED),
+        orderBy(sort, 'desc'),
+        limit(limitPerPage)
+      ]
 
-    const colRef = collection(db, 'posts')
-    const q = query(colRef, ...constrains)
+      if (category) constrains.push(where('category', '==', category))
+      if (cursor.current) constrains.push(startAfter(cursor.current))
+      console.log('current cursor', cursor.current?.data())
 
-    const postSnapshot = await getDocs(q)
-    cursor.current = postSnapshot.docs[postSnapshot.docs.length - 1]
+      const colRef = collection(db, 'posts')
+      const q = query(colRef, ...constrains)
 
-    const postsData = postSnapshot.docs.map(doc => {
-      const data = doc.data() as IPost
-      return { ...data, id: doc.id }
-    })
+      const postSnapshot = await getDocs(q)
 
-    setData(state => {
-      console.log(state, postsData)
-      return [...state, ...postsData]
-    })
+      const postsData = postSnapshot.docs.map(doc => {
+        const data = doc.data() as IPost
+        return { ...data, id: doc.id }
+      })
+
+      console.log('new data', postsData)
+
+      if (postsData.length) {
+        cursor.current = postSnapshot.docs[postSnapshot.docs.length - 1]
+        setData(state => {
+          //   console.log([...state, ...postsData])
+          //   console.log([...new Set([...state, ...postsData].map(i => i.id))])
+          return [...state, ...postsData]
+        })
+      } else {
+        // nema vise itema
+        isEnd.current = true
+      }
+    } catch (error: any) {
+      setError(error?.message || 'Error occurred')
+    } finally {
+      setLoading(false)
+    }
   }, [sort, category, cursor])
 
   const setCursor = useCallback(async () => {
@@ -72,7 +95,7 @@ const useGetPosts = ({
     }
   }, [cursor, setCursor])
 
-  return { getPost, data, cursor }
+  return { next, data, cursor, loading, error }
 }
 
 export default useGetPosts
