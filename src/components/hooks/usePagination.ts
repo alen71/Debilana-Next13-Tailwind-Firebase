@@ -22,22 +22,22 @@ const useTest = (scrollElement: any, sort: string, category?: string) => {
   const [lastEl, setLastEl] = useState<any>(null)
   const [isBottom, setIsBottom] = useState(false)
 
-  const paginate = useCallback(async () => {
-    const q = [
-      where('status', '==', PostsStatus.APPROVED),
-      orderBy(sort, 'desc'),
-      limit(limitPerPage)
-    ]
+  // const paginate = useCallback(async () => {
+  //   const q = [
+  //     where('status', '==', PostsStatus.APPROVED),
+  //     orderBy(sort, 'desc'),
+  //     limit(limitPerPage)
+  //   ]
 
-    //   if (docSnap) q.push(startAfter(docSnap))
+  //   //   if (docSnap) q.push(startAfter(docSnap))
 
-    const res = usePagination<IPost[]>(query(collection(db, 'posts'), ...q), {
-      limit: limitPerPage
-    })
-  }, [isBottom, category])
+  //   //   const res = usePagination<IPost[]>(query(collection(db, 'posts'), ...q), {
+  //   //     limit: limitPerPage
+  //   //   })
+  //   // }, [isBottom, category])
 
-  // useEffect(() => {
-  //   if (isBottom) paginate()
+  //   // useEffect(() => {
+  //   //   if (isBottom) paginate()
   // }, [scrollElement, isBottom, paginate])
 
   return postsData

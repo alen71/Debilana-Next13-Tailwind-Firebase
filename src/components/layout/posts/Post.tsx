@@ -10,7 +10,7 @@ import { IPost } from '../../../utils/types/posts.types'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import useInteraction from '../../hooks/useLike'
+import useInteraction from '../../hooks/useInteraction'
 import useGetFile from '../../hooks/useGetFile'
 import useManagePost from '../../hooks/useManagePost'
 
