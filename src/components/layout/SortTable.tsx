@@ -32,7 +32,7 @@ const SortTable = ({ hide, sort, toggle, setSort }: Props) => {
             onClick={toggle}
           >
             <div
-              onClick={() => setSort(sortBy)}
+              onClick={() => (setSort ? setSort(sortBy) : '')}
               className={`${
                 sort === sortBy
                   ? 'lg:text-gray-text-hover lg:dark:text-gray-text-hover-dark'
