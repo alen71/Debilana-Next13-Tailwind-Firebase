@@ -5,12 +5,11 @@ import { NextPage } from 'next'
 
 import Navbar from '../components/layout/navbar/Navbar'
 import Post from '../components/layout/posts/Post'
-import { IPost } from '../utils/types/posts.types'
-import usePagination from '../components/hooks/usePagination'
+import { IPost, PostSort } from '../utils/types/posts.types'
 
 const Sort: NextPage = () => {
   const [postsData, setPostsData] = useState<IPost[]>([])
-  const [sort, setSort] = useState('created_at')
+  const [sort, setSort] = useState<PostSort>(PostSort.NEW)
   const scrollEl = useRef<HTMLDivElement>(null)
 
   const router = useRouter()

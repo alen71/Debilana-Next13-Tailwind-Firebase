@@ -26,7 +26,6 @@ const Post = ({
   fileName,
   fileType
 }: IPost) => {
-  // const [managed, setManaged] = useState(false)
   const [openDelPopup, setOpenDelPopup] = useState(false)
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
   const [embedVideo, setEmbedVideo] = useState(false)

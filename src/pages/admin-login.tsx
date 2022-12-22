@@ -17,9 +17,9 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [signedIn, setSignedIn] = useState(false)
-  // const [posts, setPosts] = useState<IPost[]>([])
+  const [posts, setPosts] = useState<IPost[]>([])
 
-  const posts = useGetPosts(PostsStatus.PENDING)
+  // const { data } = useGetPosts()
 
   const passwordTyping = (e: any) => {
     setPassword(e.target.value)
@@ -30,13 +30,13 @@ const AdminLogin = () => {
   }
   // const test = useGetPosts(PostsStatus.PENDING)
 
-  // useEffect(() => {
-  //   const getAdminPosts = async () => {
-  //     const posts: any = await getPosts(PostsStatus.PENDING)
-  //     setPosts(posts)
-  //   }
-  //   getAdminPosts()
-  // }, [])
+  useEffect(() => {
+    const getAdminPosts = async () => {
+      const posts: any = await getPosts(PostsStatus.PENDING)
+      setPosts(posts)
+    }
+    getAdminPosts()
+  }, [])
 
   const typing =
     password.length > 0 && email.length > 0

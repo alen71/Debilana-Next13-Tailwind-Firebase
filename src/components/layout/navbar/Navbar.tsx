@@ -15,18 +15,9 @@ type Props = {
   hideSearch?: boolean
   hideNav?: boolean
   isAnimate?: boolean
-  sortPosts?: string
-  setSortPosts?: Dispatch<SetStateAction<string>>
 }
 
-const Navbar = ({
-  hideSortTable,
-  hideSearch,
-  hideNav,
-  isAnimate,
-  sortPosts,
-  setSortPosts
-}: Props) => {
+const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -86,11 +77,7 @@ const Navbar = ({
           <WriteExperience />
         </div>
         <div className="hidden lg:block">
-          <SortTable
-            hide={hideSortTable}
-            sort={sortPosts}
-            setSort={setSortPosts}
-          />
+          <SortTable hide={hideSortTable} />
         </div>
       </div>
     </motion.nav>

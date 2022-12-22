@@ -4,19 +4,19 @@ import LikeSvg from '../../assets/like.svg'
 import DislikeSvg from '../../assets/dislike.svg'
 import ThemeSwitch from '../shared/ThemeSwitch'
 import ArrowUpSvg from '../../assets/arrowup.svg'
+import { PostSort } from '../../utils/types/posts.types'
 
 type Props = {
   hide?: boolean
   sort?: string
   toggle?: () => void
-  setSort?: Dispatch<SetStateAction<string>>
 }
 
-const SortTable = ({ hide, sort, toggle, setSort }: Props) => {
+const SortTable = ({ hide, sort, toggle }: Props) => {
   const [tabs, setTabs] = useState([
-    { icon: <ArrowUpSvg />, text: 'najnovije', sortBy: 'created_at' },
-    { icon: <LikeSvg />, text: 'lajkovi', sortBy: 'like' },
-    { icon: <DislikeSvg />, text: 'dislajkovi', sortBy: 'dislike' }
+    { icon: <ArrowUpSvg />, text: 'najnovije', sortBy: PostSort.NEW },
+    { icon: <LikeSvg />, text: 'lajkovi', sortBy: PostSort.LIKE },
+    { icon: <DislikeSvg />, text: 'dislajkovi', sortBy: PostSort.DISLIKE }
   ])
 
   const isHide = hide ? 'hidden' : ''
@@ -32,7 +32,6 @@ const SortTable = ({ hide, sort, toggle, setSort }: Props) => {
             onClick={toggle}
           >
             <div
-              onClick={() => (setSort ? setSort(sortBy) : '')}
               className={`${
                 sort === sortBy
                   ? 'lg:text-gray-text-hover lg:dark:text-gray-text-hover-dark'

@@ -19,7 +19,6 @@ type Props = {
 }
 
 export default function Home({ posts }: Props) {
-  const [sort, setSort] = useState('created_at')
   const loader = useRef(null)
   const observer = useRef<any>()
 
@@ -45,7 +44,7 @@ export default function Home({ posts }: Props) {
 
   return (
     <div className="h-screen overflow-y-scroll overflow-x-hidden flex flex-col gap-6 items-center ">
-      <Navbar isAnimate sortPosts={sort} setSortPosts={setSort} />
+      <Navbar isAnimate />
 
       {data.map((post, index) => {
         return (
