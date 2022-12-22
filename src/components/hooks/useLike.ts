@@ -36,7 +36,7 @@ const useInteraction = (id: string, like: number, dislike: number) => {
     } catch (e) {
       return false
     }
-  }, [isDisliked])
+  }, [isDisliked, id])
 
   const dislikePost = useCallback(async () => {
     const postRef = doc(db, 'posts', id)
@@ -65,7 +65,7 @@ const useInteraction = (id: string, like: number, dislike: number) => {
     } catch (e) {
       return false
     }
-  }, [isLiked])
+  }, [isLiked, id])
 
   return { likesNum, dislikesNum, isLiked, isDisliked, dislikePost, likePost }
 }

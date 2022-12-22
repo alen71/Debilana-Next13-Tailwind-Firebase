@@ -19,6 +19,13 @@ export enum PostsStatus {
 }
 
 export enum PostCategory {
+  OSTALO = 'ostalo',
   GASTARBAJTER = 'gastarbajter',
   DEBILANA = 'debilana'
+}
+
+export enum PostSort {
+  LIKE = 'like',
+  DISLIKE = 'dislike',
+  NEW = 'created_at'
 }

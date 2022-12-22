@@ -24,6 +24,7 @@ import {
   listAll,
   ref
 } from 'firebase/storage'
+import { limitPerPage } from '../const'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_VERCEL_API_KEY,
@@ -53,7 +54,7 @@ export async function getPosts(statusCondition: string, category?: string) {
         where('status', '==', statusCondition),
         where('category', '==', category),
         orderBy('created_at', 'desc'),
-        limit(3)
+        limit(limitPerPage)
       )
   const postSnapshot = await getDocs(q)
 
