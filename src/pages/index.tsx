@@ -20,36 +20,28 @@ type Props = {
 
 export default function Home({ posts }: Props) {
   const [sort, setSort] = useState('created_at')
-  const loader = useRef<HTMLDivElement>(null)
+  const loader = useRef(null)
+  const observer = useRef<any>()
 
   const { next, data, loading, error } = useGetPosts({
     sort: PostSort.NEW,
     initialData: posts
   })
 
-  const handleObserver = useCallback(
-    (entries: any) => {
-      const target = entries[0]
-      if (target.isIntersecting) {
-        console.log('next')
-        next()
-      }
+  const lastElementRef = useCallback(
+    (node: any) => {
+      if (loading) return
+      if (observer.current) observer.current?.disconnect()
+      observer.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          next()
+        }
+      })
+
+      if (node) observer.current.observe(node)
     },
-    [next]
+    [loading, next]
   )
-
-  useEffect(() => {
-    const option = {
-      root: null,
-      rootMargin: '20px',
-      threshold: 0
-    }
-    console.log('set observer')
-    const observer = new IntersectionObserver(handleObserver, option)
-    if (loader.current) observer.observe(loader.current)
-
-    return observer.disconnect
-  }, [handleObserver])
 
   return (
     <div className="h-screen overflow-y-scroll overflow-x-hidden flex flex-col gap-6 items-center ">
@@ -58,6 +50,7 @@ export default function Home({ posts }: Props) {
       {data.map((post, index) => {
         return (
           <motion.div
+            ref={data.length === index + 1 ? lastElementRef : undefined}
             key={post.id}
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}

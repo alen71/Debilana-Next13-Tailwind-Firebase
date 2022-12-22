@@ -52,7 +52,6 @@ const useGetPosts = ({
 
       if (category) constrains.push(where('category', '==', category))
       if (cursor.current) constrains.push(startAfter(cursor.current))
-      console.log('current cursor', cursor.current?.data())
 
       const colRef = collection(db, 'posts')
       const q = query(colRef, ...constrains)
@@ -64,17 +63,12 @@ const useGetPosts = ({
         return { ...data, id: doc.id }
       })
 
-      console.log('new data', postsData)
-
       if (postsData.length) {
         cursor.current = postSnapshot.docs[postSnapshot.docs.length - 1]
         setData(state => {
-          //   console.log([...state, ...postsData])
-          //   console.log([...new Set([...state, ...postsData].map(i => i.id))])
           return [...state, ...postsData]
         })
       } else {
-        // nema vise itema
         isEnd.current = true
       }
     } catch (error: any) {
