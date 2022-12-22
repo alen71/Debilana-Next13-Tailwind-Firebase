@@ -17,7 +17,7 @@ const Sort: NextPage = () => {
 
   return (
     <div className="h-screen custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
-      <Navbar sortPosts={sort} setSortPosts={setSort} />
+      <Navbar />
 
       {postsData.map((post, index) => {
         return (
