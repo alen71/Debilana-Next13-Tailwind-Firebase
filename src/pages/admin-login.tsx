@@ -12,14 +12,14 @@ import {
 } from '../utils/firebase/firebase-utils'
 import { IPost, PostsStatus } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
+import useAdminLoggedIn from '../store/useAdminLoggedIn'
 
 const AdminLogin = () => {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  const [signedIn, setSignedIn] = useState(false)
   const [posts, setPosts] = useState<IPost[]>([])
 
-  // const { data } = useGetPosts()
+  const { loggedIn, setLoggedIn } = useAdminLoggedIn()
 
   const passwordTyping = (e: any) => {
     setPassword(e.target.value)
@@ -28,22 +28,22 @@ const AdminLogin = () => {
   const emailTyping = (e: any) => {
     setEmail(e.target.value)
   }
-  // const test = useGetPosts(PostsStatus.PENDING)
 
   useEffect(() => {
     const getAdminPosts = async () => {
+      if (!loggedIn) return
       const posts: any = await getPosts(PostsStatus.PENDING)
       setPosts(posts)
     }
     getAdminPosts()
-  }, [])
+  }, [loggedIn])
 
   const typing =
     password.length > 0 && email.length > 0
       ? 'bg-gray-text-hover-dark dark:bg-black'
       : 'bg-gray-text-hover pointer-events-none'
 
-  const hideForm = signedIn
+  const hideForm = loggedIn
     ? 'translate-x-[-500%] absolute w-full'
     : 'translate-x-0'
 
@@ -51,15 +51,15 @@ const AdminLogin = () => {
     e.preventDefault()
     const user = await adminSignIn(email, password)
 
-    user.accessToken ? setSignedIn(true) : setSignedIn(false)
+    user.accessToken ? setLoggedIn(true) : setLoggedIn(false)
   }
 
   const signOut = async () => {
-    const test = await adminSignOut()
+    const loggedOut = await adminSignOut()
 
-    if (!test) return
+    if (!loggedOut) return
 
-    setSignedIn(false)
+    setLoggedIn(false)
   }
 
   return (
@@ -93,7 +93,7 @@ const AdminLogin = () => {
           </button>
         </form>
         <div className="h-fit">
-          {signedIn &&
+          {loggedIn &&
             posts.map((post, index) => (
               <motion.div
                 key={index}
@@ -112,7 +112,7 @@ const AdminLogin = () => {
 
         <button
           className={`${
-            signedIn ? 'translate-y-0' : 'translate-y-[-200px]'
+            loggedIn ? 'translate-y-0' : 'translate-y-[-200px]'
           } px-8 py-1 w-fit rounded-full bg-gray-text-hover-dark text-white dark:bg-gray-dark absolute right-[0] lg:right-[-150px] top-6 transition-transform duration-500`}
           onClick={signOut}
         >

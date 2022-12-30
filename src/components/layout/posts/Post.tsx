@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 import ShareSvg from '../../../assets/share.svg'
+import ErrorSvg from '../../../assets/error-icon.svg'
 import LikeSvg from '../../../assets/like.svg'
 import LikeFillSvg from '../../../assets/like-fill.svg'
 import DislikeSvg from '../../../assets/dislike.svg'
 import DislikeFillSvg from '../../../assets/dislike-fill.svg'
 import { IPost } from '../../../utils/types/posts.types'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
 import useInteraction from '../../../hooks/useInteraction'
 import useGetFile from '../../../hooks/useGetFile'
 import useManagePost from '../../../hooks/useManagePost'
+import useAdminLoggedIn from '../../../store/useAdminLoggedIn'
 
 const Post = ({
   content,
@@ -29,6 +31,8 @@ const Post = ({
   const [openDelPopup, setOpenDelPopup] = useState(false)
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
   const [embedVideo, setEmbedVideo] = useState(false)
+
+  const { loggedIn } = useAdminLoggedIn()
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
     day: 'numeric',
@@ -67,6 +71,14 @@ const Post = ({
         <div className="flex justify-between pb-2 px-8 border-b-[1px] mb-4 text-xs md:text-sm">
           <p>{category}</p>
           <p className="capitalize ">{dateFormat}</p>
+          {loggedIn && (
+            <div
+              className="text-red hover:scale-125 duration-200"
+              onClick={() => setOpenDelPopup(true)}
+            >
+              <ErrorSvg />
+            </div>
+          )}
         </div>
         <p className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg px-8">
           {content}
@@ -156,7 +168,7 @@ const Post = ({
       />
       <ApproveOrDelPopup
         open={openDelPopup}
-        purpose="Odbiti"
+        purpose="Obrisati"
         toggle={() => setOpenDelPopup(false)}
         action={deletePost}
       />

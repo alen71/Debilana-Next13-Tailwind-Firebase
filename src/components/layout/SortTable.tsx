@@ -42,9 +42,7 @@ const SortTable = ({ hide }: Props) => {
           >
             <div
               className={`${
-                router.asPath.includes('new') ||
-                router.asPath.includes('like') ||
-                router.asPath.includes('dislike')
+                router.asPath.includes(link)
                   ? 'lg:text-gray-text-hover lg:dark:text-gray-text-hover-dark'
                   : ''
               } flex items-center justify-center lg:justify-start pl-3 gap-3  lg:hover:text-gray-text-hover lg:dark:hover:text-gray-text-hover-dark hover:bg-primary-light-hover dark:hover:bg-gray-dark lg:hover:bg-transparent lg:dark:hover:bg-transparent`}

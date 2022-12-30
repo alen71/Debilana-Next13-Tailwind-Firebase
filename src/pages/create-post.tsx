@@ -11,6 +11,8 @@ import { PostCategory, PostsStatus } from '../utils/types/posts.types'
 import ReactPlayer from 'react-player'
 import DisplayUploadedFile from '../components/shared/DisplayUploadedFile'
 import MessagePopup from '../components/shared/MessagePopup'
+import { maxFileSize } from '../utils/const'
+import useAdminLoggedIn from '../store/useAdminLoggedIn'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -26,7 +28,7 @@ const CreatePost = () => {
     URL: '',
     type: ''
   })
-  const maxFileSize = 55 * 1024 * 1024
+  const { loggedIn } = useAdminLoggedIn()
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
 
@@ -53,7 +55,7 @@ const CreatePost = () => {
         created_at: new Date().toISOString(),
         like: 0,
         dislike: 0,
-        status: PostsStatus.PENDING,
+        status: loggedIn ? PostsStatus.APPROVED : PostsStatus.PENDING,
         videoURL: videoURL ? videoURL : '',
         fileName: uploadFile ? uploadFile.name : '',
         fileType: uploadFile ? uploadFile.type : ''
@@ -134,7 +136,7 @@ const CreatePost = () => {
         </p>
 
         <form
-          className="flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6"
+          className="relative flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6"
           onSubmit={createPostFunction}
         >
           <h2 className="font-bold text-lg sm:text-2xl capitalize text-center">
@@ -233,6 +235,13 @@ const CreatePost = () => {
             </div> */}
             <CreatePostButton isTyping={isTyping} />
           </div>
+          <p
+            className={`${
+              loggedIn ? 'block' : 'hidden'
+            } absolute bottom-6 left-0 w-full text-center uppercase font-semibold`}
+          >
+            Kao adminu, post će biti automatski odobren!
+          </p>
         </form>
       </div>
     </div>
