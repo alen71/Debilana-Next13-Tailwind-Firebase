@@ -1,6 +1,6 @@
 import { getDownloadURL, listAll, ref } from 'firebase/storage'
 import React, { useCallback, useEffect, useState } from 'react'
-import { storage } from '../../utils/firebase/firebase-utils'
+import { storage } from '../utils/firebase/firebase-utils'
 
 const useGetFile = (
   fileName: string,

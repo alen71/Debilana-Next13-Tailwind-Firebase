@@ -26,6 +26,7 @@ import {
   ref
 } from 'firebase/storage'
 import { limitPerPage } from '../const'
+import { PostSort, PostsStatus } from '../types/posts.types'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_VERCEL_API_KEY,
@@ -41,20 +42,24 @@ export const auth = getAuth()
 export const db = getFirestore(app)
 export const storage = getStorage(app)
 
-export async function getPosts(statusCondition: string, category?: string) {
+export async function getPosts(
+  statusCondition: string,
+  sort = PostSort.NEW,
+  category?: string
+) {
   const postsCol = collection(db, 'posts')
   const q = !category
     ? query(
         postsCol,
         where('status', '==', statusCondition),
-        orderBy('created_at', 'desc'),
-        limit(3)
+        orderBy(sort, 'desc'),
+        limit(limitPerPage)
       )
     : query(
         postsCol,
         where('status', '==', statusCondition),
         where('category', '==', category),
-        orderBy('created_at', 'desc'),
+        orderBy(sort, 'desc'),
         limit(limitPerPage)
       )
   const postSnapshot = await getDocs(q)

@@ -11,7 +11,7 @@ import {
   getPosts
 } from '../utils/firebase/firebase-utils'
 import { IPost, PostsStatus } from '../utils/types/posts.types'
-import useGetPosts from '../components/hooks/useGetPosts'
+import useGetPosts from '../hooks/useGetPosts'
 
 const AdminLogin = () => {
   const [password, setPassword] = useState('')

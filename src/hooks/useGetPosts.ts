@@ -11,14 +11,14 @@ import {
   where
 } from 'firebase/firestore'
 import { useCallback, useState, useEffect, useRef } from 'react'
-import { limitPerPage } from '../../utils/const'
-import { db } from '../../utils/firebase/firebase-utils'
+import { limitPerPage } from '../utils/const'
+import { db, getPosts } from '../utils/firebase/firebase-utils'
 import {
   IPost,
   PostCategory,
   PostSort,
   PostsStatus
-} from '../../utils/types/posts.types'
+} from '../utils/types/posts.types'
 
 type Params = {
   sort?: PostSort
@@ -40,7 +40,6 @@ const useGetPosts = ({
 
   const next = useCallback(async () => {
     if (isEnd.current) return
-
     try {
       setLoading(true)
       setError(undefined)
@@ -79,8 +78,16 @@ const useGetPosts = ({
   }, [sort, category, cursor])
 
   const setCursor = useCallback(async () => {
-    const lastDoc = await getDoc(doc(db, 'posts', data[data.length - 1].id))
-    cursor.current = lastDoc
+    if (data.length > 0) {
+      console.log('vec ima elemenata')
+      const lastDoc = await getDoc(doc(db, 'posts', data[data.length - 1].id))
+      cursor.current = lastDoc
+    } else {
+      console.log('nema elemenata')
+      const posts = await getPosts(PostsStatus.APPROVED, sort, category)
+      const lastDoc = await getDoc(doc(db, 'posts', posts[posts.length - 1].id))
+      cursor.current = lastDoc
+    }
   }, [data])
 
   useEffect(() => {
@@ -88,6 +95,11 @@ const useGetPosts = ({
       setCursor()
     }
   }, [cursor, setCursor])
+
+  useEffect(() => {
+    if (initialData) return
+    next()
+  }, [cursor, category])
 
   return { next, data, cursor, loading, error }
 }

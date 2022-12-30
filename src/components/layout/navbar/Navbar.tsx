@@ -64,10 +64,10 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
               <Link href="/debilana">Sve</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/debilana')}>
-              <Link href="/debilana">Debilana</Link>
+              <Link href="/debilana/new">Debilana</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/gastarbajter')}>
-              <Link href="/gastarbajter">Gastarbajter</Link>
+              <Link href="/gastarbajter/new">Gastarbajter</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/admin-login')}>
               <Link href="/admin-login">login za admina</Link>

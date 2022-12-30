@@ -1,6 +1,6 @@
 import { doc, runTransaction } from 'firebase/firestore'
 import React, { useCallback, useState } from 'react'
-import { db } from '../../utils/firebase/firebase-utils'
+import { db } from '../utils/firebase/firebase-utils'
 
 const useInteraction = (id: string, like: number, dislike: number) => {
   const [isLiked, setIsLiked] = useState(false)

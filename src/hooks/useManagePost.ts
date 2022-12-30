@@ -2,7 +2,7 @@ import { error } from 'console'
 import { deleteDoc, doc, runTransaction } from 'firebase/firestore'
 import { deleteObject, ref } from 'firebase/storage'
 import React, { useCallback, useState } from 'react'
-import { db, storage } from '../../utils/firebase/firebase-utils'
+import { db, storage } from '../utils/firebase/firebase-utils'
 
 const useManagePost = (id: string, fileName: string, fileType: string) => {
   const [managed, setManaged] = useState(false)
