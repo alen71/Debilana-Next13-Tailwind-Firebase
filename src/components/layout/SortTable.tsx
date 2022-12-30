@@ -9,9 +9,10 @@ import { useRouter } from 'next/router'
 
 type Props = {
   hide?: boolean
+  toggle?: () => void
 }
 
-const SortTable = ({ hide }: Props) => {
+const SortTable = ({ hide, toggle }: Props) => {
   const [tabs, setTabs] = useState([
     { icon: <ArrowUpSvg />, text: 'najnovije', link: 'new' },
     { icon: <LikeSvg />, text: 'lajkovi', link: 'like' },
@@ -31,6 +32,7 @@ const SortTable = ({ hide }: Props) => {
             key={text}
             className="last:border-b-[1px] border-t-[1px] cursor-pointer"
             onClick={() => {
+              toggle && toggle()
               if (router.asPath.includes('debilana')) {
                 router.push(`/debilana/${link}`)
               } else if (router.asPath.includes('gastarbajter')) {
