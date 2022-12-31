@@ -72,9 +72,7 @@ export async function getPosts(
 }
 
 export async function getPost(id: string) {
-  const postsRef = doc(db, 'posts', id)
-
-  return postsRef
+  return await getDoc(doc(db, 'posts', id))
 }
 
 export async function adminSignIn(email: string, password: string) {

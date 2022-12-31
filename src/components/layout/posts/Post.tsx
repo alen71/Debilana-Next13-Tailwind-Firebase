@@ -15,6 +15,7 @@ import useInteraction from '../../../hooks/useInteraction'
 import useGetFile from '../../../hooks/useGetFile'
 import useManagePost from '../../../hooks/useManagePost'
 import useAdminLoggedIn from '../../../store/useAdminLoggedIn'
+import useCopyToClipboard from '../../../hooks/useCopyToClipboard'
 
 const Post = ({
   content,
@@ -32,6 +33,7 @@ const Post = ({
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
   const [embedVideo, setEmbedVideo] = useState(false)
 
+  const { copied, copyToClipboard } = useCopyToClipboard(id)
   const { loggedIn } = useAdminLoggedIn()
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
@@ -40,7 +42,9 @@ const Post = ({
     year: 'numeric'
   }).format(new Date(created_at))
 
-  const { asPath } = useRouter()
+  const router = useRouter()
+  const asPath = router.asPath
+
   useEffect(() => {
     setOpenDelPopup(false)
     setOpenApprovePopup(false)
@@ -68,7 +72,10 @@ const Post = ({
       } transition-transform duration-300 text-sm sm:text-base bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer`}
     >
       <div className="pt-2">
-        <div className="flex justify-between pb-2 px-8 border-b-[1px] mb-4 text-xs md:text-sm">
+        <div
+          className="flex justify-between pb-2 px-8 border-b-[1px] mb-4 text-xs md:text-sm"
+          onClick={() => router.push(`/single-post/${id}`)}
+        >
           <p>{category}</p>
           <p className="capitalize ">{dateFormat}</p>
           {loggedIn && (
@@ -80,7 +87,10 @@ const Post = ({
             </div>
           )}
         </div>
-        <p className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg px-8">
+        <p
+          className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg px-8"
+          onClick={() => router.push(`/single-post/${id}`)}
+        >
           {content}
         </p>
 
@@ -90,7 +100,10 @@ const Post = ({
           </div>
         )}
 
-        <div className="relative w-full mt-4">
+        <div
+          className="relative w-full mt-4"
+          onClick={() => router.push(`/single-post/${id}`)}
+        >
           {fileName.length > 0 && fileType.startsWith('image') && (
             <Image
               src={url}
@@ -135,8 +148,22 @@ const Post = ({
               )}
               <span>{dislikesNum}</span>
             </p>
-            <div className="md:py-[10px] py-[6px] grid place-items-center col-start-3 col-end-5 hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover">
-              <ShareSvg className="scale-[1.4] sm:scale-[1.8]" />
+            <div
+              className="md:py-[10px] py-[6px] relative grid place-items-center col-start-3 col-end-5 hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover"
+              onClick={copyToClipboard}
+            >
+              <ShareSvg
+                className={`${
+                  copied ? 'opacity-0' : 'opacity-100'
+                } scale-[1.4] sm:scale-[1.8] duration-300`}
+              />
+              <p
+                className={`${
+                  copied ? 'opacity-100' : 'opacity-0'
+                } duration-300 font-semibold absolute md:text-xl`}
+              >
+                Copied to clipboard!
+              </p>
             </div>
           </>
         ) : (

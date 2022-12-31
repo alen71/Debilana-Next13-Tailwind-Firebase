@@ -58,7 +58,7 @@ export default function Home({ posts }: Props) {
               type: 'spring',
               delay: 0.5 * index
             }}
-            className={` mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
+            className={`mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
           >
             <Post {...post} />
           </motion.div>
