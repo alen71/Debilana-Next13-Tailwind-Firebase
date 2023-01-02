@@ -12,14 +12,20 @@ import {
 } from '../utils/firebase/firebase-utils'
 import { IPost, PostsStatus } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
-import useAdminLoggedIn from '../store/useAdminLoggedIn'
+import useUserLogIn from '../store/useUserLogIn'
+import MessagePopup from '../components/shared/MessagePopup'
 
 const AdminLogin = () => {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [posts, setPosts] = useState<IPost[]>([])
+  const [displayMessage, setDisplayMessage] = useState({
+    message: '',
+    open: false,
+    type: true
+  })
 
-  const { loggedIn, setLoggedIn } = useAdminLoggedIn()
+  const { loggedIn } = useUserLogIn()
 
   const passwordTyping = (e: any) => {
     setPassword(e.target.value)
@@ -49,22 +55,38 @@ const AdminLogin = () => {
 
   const signIn = async (e: any) => {
     e.preventDefault()
-    const user = await adminSignIn(email, password)
+    try {
+      const user = await adminSignIn(email, password)
 
-    user.accessToken ? setLoggedIn(true) : setLoggedIn(false)
+      if (!user.accessToken) throw new Error()
+    } catch (err) {
+      console.log('radil')
+      setDisplayMessage({
+        message: 'Password ili email nisu tačni!',
+        open: true,
+        type: false
+      })
+    }
   }
 
   const signOut = async () => {
     const loggedOut = await adminSignOut()
 
     if (!loggedOut) return
-
-    setLoggedIn(false)
   }
 
   return (
     <div className="h-screen pb-6 overflow-y-auto ">
       <Navbar hideSortTable />
+
+      <MessagePopup
+        isOpen={displayMessage.open}
+        message={displayMessage.message}
+        messageType={displayMessage.type}
+        closeMessage={() =>
+          setDisplayMessage({ ...displayMessage, open: false })
+        }
+      />
 
       <div className="mx-6 pt-20 lg:pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px] flex flex-col gap-6 relative">
         <form

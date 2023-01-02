@@ -14,7 +14,7 @@ import ApproveOrDelPopup from './ApproveOrDelPopup'
 import useInteraction from '../../../hooks/useInteraction'
 import useGetFile from '../../../hooks/useGetFile'
 import useManagePost from '../../../hooks/useManagePost'
-import useAdminLoggedIn from '../../../store/useAdminLoggedIn'
+import useUserLogIn from '../../../store/useUserLogIn'
 import useCopyToClipboard from '../../../hooks/useCopyToClipboard'
 
 const Post = ({
@@ -34,7 +34,7 @@ const Post = ({
   const [embedVideo, setEmbedVideo] = useState(false)
 
   const { copied, copyToClipboard } = useCopyToClipboard(id)
-  const { loggedIn } = useAdminLoggedIn()
+  const { loggedIn } = useUserLogIn()
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
     day: 'numeric',
@@ -81,7 +81,10 @@ const Post = ({
           {loggedIn && (
             <div
               className="text-red hover:scale-125 duration-200"
-              onClick={() => setOpenDelPopup(true)}
+              onClick={(e: any) => {
+                e.stopPropagation()
+                setOpenDelPopup(true)
+              }}
             >
               <ErrorSvg />
             </div>

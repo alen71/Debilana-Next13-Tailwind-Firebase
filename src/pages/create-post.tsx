@@ -12,7 +12,7 @@ import ReactPlayer from 'react-player'
 import DisplayUploadedFile from '../components/shared/DisplayUploadedFile'
 import MessagePopup from '../components/shared/MessagePopup'
 import { maxFileSize } from '../utils/const'
-import useAdminLoggedIn from '../store/useAdminLoggedIn'
+import useUserLogIn from '../store/useUserLogIn'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -28,7 +28,7 @@ const CreatePost = () => {
     URL: '',
     type: ''
   })
-  const { loggedIn } = useAdminLoggedIn()
+  const { loggedIn } = useUserLogIn()
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
 
@@ -238,7 +238,7 @@ const CreatePost = () => {
           <p
             className={`${
               loggedIn ? 'block' : 'hidden'
-            } absolute bottom-6 left-0 w-full text-center uppercase font-semibold`}
+            } absolute bottom-4 left-0 w-full text-center uppercase font-semibold`}
           >
             Kao adminu, post će biti automatski odobren!
           </p>

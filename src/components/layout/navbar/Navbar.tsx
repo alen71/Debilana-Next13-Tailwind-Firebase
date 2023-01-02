@@ -9,6 +9,8 @@ import SearchBar from '../../shared/SearchBar'
 import WriteExperience from '../../shared/WriteExperience'
 import SortTable from '../SortTable'
 import { useRouter } from 'next/router'
+import useUserLogIn from '../../../store/useUserLogIn'
+import { adminSignOut } from '../../../utils/firebase/firebase-utils'
 
 type Props = {
   hideSortTable?: boolean
@@ -18,7 +20,9 @@ type Props = {
 }
 
 const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
+  const { asPath } = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { loggedIn, setLoggedIn } = useUserLogIn()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -33,8 +37,6 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
         transition: { duration: 0.5 }
       }
     : ''
-
-  const { asPath } = useRouter()
 
   return (
     <motion.nav
@@ -61,7 +63,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
                 !asPath.includes('/admin-login')
               }
             >
-              <Link href="/debilana">Sve</Link>
+              <Link href="/">Sve</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/debilana')}>
               <Link href="/debilana/new">Debilana</Link>
@@ -70,7 +72,11 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
               <Link href="/gastarbajter/new">Gastarbajter</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/admin-login')}>
-              <Link href="/admin-login">login za admina</Link>
+              {loggedIn ? (
+                <div onClick={() => adminSignOut()}>log out</div>
+              ) : (
+                <Link href="/admin-login">login za admina</Link>
+              )}
             </NavItemWrapper>
           </div>
 
