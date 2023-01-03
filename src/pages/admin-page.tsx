@@ -6,8 +6,8 @@ import Navbar from '../components/layout/navbar/Navbar'
 import Post from '../components/layout/posts/Post'
 import InputCustom from '../components/shared/InputCustom'
 import {
-  adminSignIn,
-  adminSignOut,
+  userSignIn,
+  userSignOut,
   getPosts
 } from '../utils/firebase/firebase-utils'
 import { IPost, PostsStatus } from '../utils/types/posts.types'
@@ -56,7 +56,7 @@ const AdminLogin = () => {
   const signIn = async (e: any) => {
     e.preventDefault()
     try {
-      const user = await adminSignIn(email, password)
+      const user = await userSignIn(email, password)
 
       if (!user.accessToken) throw new Error()
     } catch (err) {
@@ -70,7 +70,7 @@ const AdminLogin = () => {
   }
 
   const signOut = async () => {
-    const loggedOut = await adminSignOut()
+    const loggedOut = await userSignOut()
 
     if (!loggedOut) return
   }
@@ -115,6 +115,11 @@ const AdminLogin = () => {
           </button>
         </form>
         <div className="h-fit">
+          {loggedIn && posts.length === 0 && (
+            <p className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-xl font-semibold">
+              Lista je prazna
+            </p>
+          )}
           {loggedIn &&
             posts.map((post, index) => (
               <motion.div

@@ -45,9 +45,6 @@ const CreatePost = () => {
   const createPostFunction = async (e: any) => {
     e.preventDefault()
 
-    console.log(uploadFile)
-    // if (true) return
-
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
         category: selectEl.current?.value,
@@ -223,16 +220,6 @@ const CreatePost = () => {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-0 justify-end">
-            {/* <div className="relative flex items-center gap-4 ">
-              <input
-                type="checkbox"
-                name="is visible"
-                className="peer w-6 h-6 absolute left-[2px] top-[2px] opacity-0 cursor-pointer z-10"
-              />
-              <div className="w-7 h-7 border-2 block rounded-full "></div>
-              <div className="w-4 h-4 rounded-full block bg-black dark:bg-white absolute top-[6px] left-[6px] invisible peer-checked:visible"></div>
-              <p>Da li želiš da ostaneš anoniman?</p>
-            </div> */}
             <CreatePostButton isTyping={isTyping} />
           </div>
           <p

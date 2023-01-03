@@ -13,6 +13,7 @@ const useGetFile = (
   const [embedVideo, setEmbedVideo] = useState(false)
 
   const getFile = useCallback(async () => {
+    console.log(videoURL.length > 0)
     videoURL.length > 0 && setEmbedVideo(true)
 
     if (fileName.length === 0 || fileType.length === 0) return
@@ -21,7 +22,6 @@ const useGetFile = (
     const videoListRef = ref(storage, `video/${id}`)
 
     const listRef = fileType.startsWith('image') ? imageListRef : videoListRef
-    console.log(listRef)
     const filesList = await listAll(listRef)
 
     if (!filesList) return
@@ -35,7 +35,7 @@ const useGetFile = (
     getFile()
   }, [])
 
-  return { url }
+  return { url, embedVideo, setEmbedVideo }
 }
 
 export default useGetFile

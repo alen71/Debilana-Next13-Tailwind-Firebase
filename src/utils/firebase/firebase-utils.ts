@@ -75,7 +75,7 @@ export async function getPost(id: string) {
   return await getDoc(doc(db, 'posts', id))
 }
 
-export async function adminSignIn(email: string, password: string) {
+export async function userSignIn(email: string, password: string) {
   return await signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       return userCredential.user
@@ -85,7 +85,7 @@ export async function adminSignIn(email: string, password: string) {
     })
 }
 
-export async function adminSignOut() {
+export async function userSignOut() {
   return await signOut(auth)
     .then(res => true)
     .catch(err => false)

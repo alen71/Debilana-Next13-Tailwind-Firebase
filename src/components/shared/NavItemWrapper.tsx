@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 type Props = {
   children: ReactNode
   last?: boolean
-  active?: boolean
+  active?: boolean | null
 }
 
 const NavItemWrapper = ({ last, children, active }: Props) => {

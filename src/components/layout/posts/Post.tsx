@@ -31,7 +31,6 @@ const Post = ({
 }: IPost) => {
   const [openDelPopup, setOpenDelPopup] = useState(false)
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
-  const [embedVideo, setEmbedVideo] = useState(false)
 
   const { copied, copyToClipboard } = useCopyToClipboard(id)
   const { loggedIn } = useUserLogIn()
@@ -48,7 +47,6 @@ const Post = ({
   useEffect(() => {
     setOpenDelPopup(false)
     setOpenApprovePopup(false)
-    setEmbedVideo(false)
   }, [asPath])
 
   const { managed, deletePost, approvePost } = useManagePost(
@@ -60,7 +58,13 @@ const Post = ({
   const { likesNum, dislikesNum, isLiked, isDisliked, dislikePost, likePost } =
     useInteraction(id, like, dislike)
 
-  const { url } = useGetFile(fileName, fileType, videoURL, id, asPath)
+  const { url, embedVideo, setEmbedVideo } = useGetFile(
+    fileName,
+    fileType,
+    videoURL,
+    id,
+    asPath
+  )
 
   return (
     <div
@@ -69,7 +73,7 @@ const Post = ({
         managed ? 'translate-x-[-500%] absolute w-full mb-0' : ''
       } ${
         admin ? 'mb-6' : ''
-      } transition-transform duration-300 text-sm sm:text-base bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer`}
+      } transition-transform duration-500 text-sm sm:text-base bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer`}
     >
       <div className="pt-2">
         <div
@@ -78,7 +82,7 @@ const Post = ({
         >
           <p>{category}</p>
           <p className="capitalize ">{dateFormat}</p>
-          {loggedIn && (
+          {loggedIn && !asPath.includes('admin-page') && (
             <div
               className="text-red hover:scale-125 duration-200"
               onClick={(e: any) => {
@@ -118,7 +122,11 @@ const Post = ({
           )}
 
           {fileName.length > 0 && fileType.startsWith('video') && (
-            <video src={url} controls></video>
+            <video
+              src={url}
+              controls
+              className="h-60 lg:h-[365px] w-full bg-black dark:bg-gray-text-hover"
+            ></video>
           )}
         </div>
       </div>
@@ -126,9 +134,7 @@ const Post = ({
         {!admin ? (
           <>
             <p
-              className={`${
-                isLiked ? 'pointer-events-none' : ''
-              } flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
+              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
               onClick={likePost}
             >
               {isLiked ? (
@@ -139,9 +145,7 @@ const Post = ({
               <span>{likesNum}</span>
             </p>
             <p
-              className={`${
-                isDisliked ? 'pointer-events-none' : ''
-              } flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
+              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
               onClick={dislikePost}
             >
               {isDisliked ? (

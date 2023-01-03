@@ -10,7 +10,7 @@ import WriteExperience from '../../shared/WriteExperience'
 import SortTable from '../SortTable'
 import { useRouter } from 'next/router'
 import useUserLogIn from '../../../store/useUserLogIn'
-import { adminSignOut } from '../../../utils/firebase/firebase-utils'
+import { userSignOut } from '../../../utils/firebase/firebase-utils'
 
 type Props = {
   hideSortTable?: boolean
@@ -60,7 +60,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
               active={
                 !asPath.includes('/debilana') &&
                 !asPath.includes('/gastarbajter') &&
-                !asPath.includes('/admin-login')
+                !asPath.includes('/admin-page')
               }
             >
               <Link href="/">Sve</Link>
@@ -71,12 +71,11 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
             <NavItemWrapper active={asPath.includes('/gastarbajter')}>
               <Link href="/gastarbajter/new">Gastarbajter</Link>
             </NavItemWrapper>
-            <NavItemWrapper active={asPath.includes('/admin-login')}>
-              {loggedIn ? (
-                <div onClick={() => adminSignOut()}>log out</div>
-              ) : (
-                <Link href="/admin-login">login za admina</Link>
-              )}
+            <NavItemWrapper active={asPath.includes('/admin-page')}>
+              <Link href="/admin-page">admin stranica</Link>
+            </NavItemWrapper>
+            <NavItemWrapper active={loggedIn && !asPath.includes('admin-page')}>
+              <div onClick={() => userSignOut()}>log out</div>
             </NavItemWrapper>
           </div>
 

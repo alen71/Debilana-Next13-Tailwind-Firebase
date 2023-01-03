@@ -4,7 +4,6 @@ import LikeSvg from '../../assets/like.svg'
 import DislikeSvg from '../../assets/dislike.svg'
 import ThemeSwitch from '../shared/ThemeSwitch'
 import ArrowUpSvg from '../../assets/arrowup.svg'
-import { PostSort } from '../../utils/types/posts.types'
 import { useRouter } from 'next/router'
 
 type Props = {
