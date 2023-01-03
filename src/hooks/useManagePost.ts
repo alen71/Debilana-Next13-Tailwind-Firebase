@@ -21,7 +21,7 @@ const useManagePost = (id: string, fileName: string, fileType: string) => {
         .then(res => true)
         .catch(err => false)
 
-      if (isDeleted) throw new Error('Post nije obrisan!')
+      if (!isDeleted) throw new Error('Post nije obrisan!')
 
       setManaged(true)
     } catch (err) {

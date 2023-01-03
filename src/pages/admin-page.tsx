@@ -116,7 +116,7 @@ const AdminLogin = () => {
         </form>
         <div className="h-fit">
           {loggedIn && posts.length === 0 && (
-            <p className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-xl font-semibold">
+            <p className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-xl font-semibold">
               Lista je prazna
             </p>
           )}
