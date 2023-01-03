@@ -74,9 +74,11 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
             <NavItemWrapper active={asPath.includes('/admin-page')}>
               <Link href="/admin-page">admin stranica</Link>
             </NavItemWrapper>
-            <NavItemWrapper active={loggedIn && !asPath.includes('admin-page')}>
-              <div onClick={() => userSignOut()}>log out</div>
-            </NavItemWrapper>
+            {loggedIn && !asPath.includes('admin-page') && (
+              <NavItemWrapper>
+                <div onClick={() => userSignOut()}>log out</div>
+              </NavItemWrapper>
+            )}
           </div>
 
           <WriteExperience />
