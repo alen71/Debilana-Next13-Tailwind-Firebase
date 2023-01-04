@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import useUserLogIn from '../../../store/useUserLogIn'
 import { userSignOut } from '../../../utils/firebase/firebase-utils'
@@ -10,7 +11,27 @@ type Props = {
   toggle: () => void
 }
 
+const hamburgerLinks = [
+  {
+    href: '/',
+    name: 'New'
+  },
+  {
+    href: 'debilana/new',
+    name: 'Debilana'
+  },
+  {
+    href: 'gastarbajter/new',
+    name: 'Gastarbajter'
+  },
+  {
+    href: '/admin-page',
+    name: 'Admin stranica'
+  }
+]
+
 const HamburgerNavbar = ({ open, toggle }: Props) => {
+  const { asPath } = useRouter()
   const { loggedIn } = useUserLogIn()
 
   return (
@@ -25,35 +46,21 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
           {/* <div className="px-4 w-full flex justify-center">
             <SearchBar />
           </div> */}
-          <div className="w-full border-y-[1px] divide-y-[1px] divide-gray dark:text-white text-center uppercase font-semibold text-base mt-10 mb-4">
-            <Link
-              href="/"
-              className="cursor-pointer block py-2 hover:bg-gray-bg dark:hover:bg-gray-dark"
-              onClick={toggle}
-            >
-              new
-            </Link>
-            <Link
-              href="/debilana/new"
-              className="cursor-pointer block py-2 hover:bg-gray-bg dark:hover:bg-gray-dark"
-              onClick={toggle}
-            >
-              debilana
-            </Link>
-            <Link
-              href="/gastarbajter/new"
-              className="cursor-pointer block py-2 hover:bg-gray-bg dark:hover:bg-gray-dark"
-              onClick={toggle}
-            >
-              gastarbajter
-            </Link>
-            <Link
-              href="/admin-page"
-              className="cursor-pointer block py-2 hover:bg-gray-bg dark:hover:bg-gray-dark"
-              onClick={toggle}
-            >
-              admin stranica
-            </Link>
+          <div className="w-full border-y-[1px] divide-y-[1px] divide-gray dark:text-white text-center uppercase text-base mt-10 mb-4">
+            {hamburgerLinks.map(({ href, name }) => (
+              <Link
+                key={name}
+                href={href}
+                className={`${
+                  asPath.includes(`/${name.toLowerCase()}`)
+                    ? 'text-primary dark:text-primary'
+                    : 'text-black dark:text-white'
+                } cursor-pointer block py-2  hover:text-primary hover:dark:text-primary`}
+                onClick={toggle}
+              >
+                {name}
+              </Link>
+            ))}
             {loggedIn && (
               <div
                 className="cursor-pointer block py-2 hover:bg-gray-bg dark:hover:bg-gray-dark"
