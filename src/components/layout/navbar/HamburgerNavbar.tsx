@@ -19,7 +19,7 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
       <div
         className={`${
           open ? 'translate-x-0' : 'translate-x-[-100%]'
-        } w-full min-[450px]:w-[450px] transition-transform translate-duration-1000 min-h-screen z-40 fixed top-[71px] left-0  bg-main-gray dark:bg-gray-dark py-5`}
+        } w-full min-[450px]:w-[450px] transition-transform translate-duration-1000 min-h-screen z-40 fixed top-[71px] left-0  bg-main-gray dark:bg-gray-dark py-5 block lg:hidden`}
       >
         <div className="w-full flex flex-col items-center">
           {/* <div className="px-4 w-full flex justify-center">

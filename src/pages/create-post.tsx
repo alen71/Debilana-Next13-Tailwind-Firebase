@@ -124,35 +124,26 @@ const CreatePost = () => {
         }
       />
 
-      <div className="mx-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
-        <p className="text-center text-xl sm:text-3xl mt-6 pb-2 sm:pb-4">
-          Pravila za objavljivanje sadržaja su:
-        </p>
-        <p className="text-center font-bold uppercase text-3xl sm:text-5xl mb-6">
-          10 božijih zapovesti
-        </p>
-
+      <div className="mx-6 pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
         <form
-          className="relative flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 pt-8 pb-14 mb-6"
+          className="relative flex gap-5 flex-col rounded-md text-sm sm:text-base bg-white dark:bg-black px-6 pt-8 pb-14 mb-6 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray"
           onSubmit={createPostFunction}
         >
-          <h2 className="font-bold text-lg sm:text-2xl capitalize text-center">
-            napravi objavu
-          </h2>
+          <h2 className="font-bold text-lg sm:text-2xl">Napravi objavu</h2>
 
           <select
             ref={selectEl}
-            className="text-center rounded-md py-1 border-2 bg-transparent"
+            className="text-center rounded-md py-1 border-[1px] bg-transparent text-gray"
           >
             <option
               value={PostCategory.DEBILANA}
-              className="bg-transparent text-black"
+              className="bg-transparent text-gray"
             >
               Debilana
             </option>
             <option
               value={PostCategory.GASTARBAJTER}
-              className="bg-transparent text-black"
+              className="bg-transparent text-gray"
             >
               Gastarbajter
             </option>
@@ -167,19 +158,19 @@ const CreatePost = () => {
             onChange={checkTyping}
           />
           <div>
-            <p className="pb-2">
+            <p className="pb-2 text-black dark:text-white">
               Polje za dodavanje slike ili video snimka nije obavezno.
             </p>
-            <div className="w-full  bg-white dark:bg-black rounded-md border-2 px-5 pb-5 pt-7 flex flex-col items-center">
-              <ImageSvg className="lg:scale-125 dark:text-white" />
+            <div className="w-full text-gray bg-white dark:bg-black rounded-md border-[1px] border-gray px-5 pb-5 pt-7 flex flex-col items-center">
+              <ImageSvg className="lg:scale-125 text-gray" />
               <p className="mb-3 mt-6 text-center">
                 Izaberi i postavi fotografiju ili video snimak <br />
                 (maksimalna veličina fajla 50mb)
               </p>
-              <div className="w-full h-52 md:h-64 flex items-center justify-center border-2 border-dashed border-main-gray dark:border-primary-dark relative">
+              <div className="w-full h-52 md:h-64 flex items-center justify-center border-[1px] border-dashed border-primary relative">
                 <button
                   type="button"
-                  className="bg-light-yellow hover:bg-yellow text-black overflow-hidden cursor-pointer rounded-full py-2 px-5 leading-[21px] relative"
+                  className="bg-primary hover:bg-primary-light text-black overflow-hidden cursor-pointer rounded-full py-2 px-5 leading-[21px] relative"
                 >
                   Odaberi fajl...
                   <input
@@ -206,7 +197,7 @@ const CreatePost = () => {
                 placeholder="Nalepi URL video snimka"
                 value={videoURL}
                 onChange={(e: any) => setVideoURL(e.target.value)}
-                className="bg-primary-light border-main-gray focus:border-black focus:dark:border-primary-dark focus:bg-main-gray dark:bg-gray-dark focus:placeholder:text-black focus:placeholder:dark:text-primary-dark w-full rounded-lg py-2 px-3 outline-none placeholder:text-gray-text-hover border-2 "
+                className="bg-transparent border-gray focus:border-black focus:dark:border-white placeholder:dark:text-gray focus:placeholder:dark:text-white focus:placeholder:text-black w-full rounded-lg py-2 px-3 outline-none border-[1px] placeholder:text-xs sm:placeholder:text-sm"
               />
               <p className="pt-3 text-center sm:text-left">
                 Podržavamo linkove sa YouTube i Vimeo platforme.
@@ -225,11 +216,15 @@ const CreatePost = () => {
           <p
             className={`${
               loggedIn ? 'block' : 'hidden'
-            } absolute bottom-4 left-0 w-full text-center uppercase font-semibold`}
+            } absolute bottom-4 left-0 w-full text-center uppercase text-black dark:text-white`}
           >
             Kao adminu, post će biti automatski odobren!
           </p>
         </form>
+
+        <p className="text-black dark:text-white text-base sm:text-lg text-center">
+          Pravila za objavljivanje sadržaja su 10 Božijih zapovesti!
+        </p>
       </div>
     </div>
   )

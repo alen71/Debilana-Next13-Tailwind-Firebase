@@ -41,7 +41,8 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
   return (
     <motion.nav
       {...navAnimation}
-      className="flex items-center px-6 lg:px-4 xl:px-0  bg-main-gray dark:bg-gray-dark min-h-[71px] w-full z-10 border-b-2 sticky top-0"
+      className="flex items-center px-6 lg:px-4 xl:px-0  bg-white dark:bg-black min-h-[71px] w-full z-10 
+      shadow-md dark:border-b-[1px] dark:shadow-none dark:border-gray sticky top-0"
     >
       <div className="xl:container w-full mx-auto flex justify-between items-center relative">
         <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
@@ -55,7 +56,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
         </div> */}
 
         <div className={`${idNavHidden} flex items-center lg:ml-auto`}>
-          <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray-text-hover  text-xs xl:text-sm mr-3 xl:mr-6">
+          <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray dark:divide-gray text-xs xl:text-sm mr-3 xl:mr-6">
             <NavItemWrapper
               active={
                 !asPath.includes('/debilana') &&

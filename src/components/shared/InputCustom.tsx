@@ -26,7 +26,7 @@ const InputCustom = ({
       required={required}
       onChange={onChange}
       value={value}
-      className="border-2 border-gray-text-hover placeholder:text-gray-text-hover focus:placeholder:text-black focus:border-black focus:dark:border-yellow focus:placeholder:dark:text-yellow outline-none bg-transparent rounded-[4px] py-[6px] px-[14px]"
+      className="border-[1px] border-gray focus:border-black focus:dark:border-white text-gray focus:text-black focus:dark:text-white focus:placeholder:dark:text-white focus:placeholder:text-black outline-none bg-transparent rounded-[4px] py-[6px] px-[14px]"
     />
   )
 }

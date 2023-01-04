@@ -46,8 +46,8 @@ const AdminLogin = () => {
 
   const typing =
     password.length > 0 && email.length > 0
-      ? 'bg-gray-text-hover-dark dark:bg-black'
-      : 'bg-gray-text-hover pointer-events-none'
+      ? 'bg-primary'
+      : 'bg-primary-light pointer-events-none'
 
   const hideForm = loggedIn
     ? 'translate-x-[-500%] absolute w-full'
@@ -90,10 +90,10 @@ const AdminLogin = () => {
 
       <div className="mx-6 pt-20 lg:pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px] flex flex-col gap-6 relative">
         <form
-          className={`${hideForm} flex gap-5 flex-col rounded-md text-sm sm:text-base bg-main-gray dark:bg-gray-dark px-6 py-6 mb-6 transition-[position, transform] duration-700`}
+          className={`${hideForm} flex gap-5 flex-col rounded-md text-sm sm:text-base bg-transparent px-6 py-6 mb-6 transition-[position, transform] duration-700 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray`}
           onSubmit={signIn}
         >
-          <p className="font-bold text-lg sm:text-2xl text-center">Uloguj se</p>
+          <p className="text-base sm:text-lg text-center">Uloguj se</p>
           <InputCustom
             type="email"
             name="email"
@@ -140,7 +140,7 @@ const AdminLogin = () => {
         <button
           className={`${
             loggedIn ? 'translate-y-0' : 'translate-y-[-200px]'
-          } px-8 py-1 w-fit rounded-full bg-gray-text-hover-dark text-white dark:bg-gray-dark absolute right-[0] lg:right-[-150px] top-6 transition-transform duration-500`}
+          } px-8 py-1 w-fit rounded-full bg-gray text-black  absolute right-[0] lg:right-[-150px] top-6 transition-transform duration-500`}
           onClick={signOut}
         >
           logout

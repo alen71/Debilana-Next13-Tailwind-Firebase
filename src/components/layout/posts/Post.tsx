@@ -73,18 +73,19 @@ const Post = ({
         managed ? 'translate-x-[-500%] absolute w-full mb-0' : ''
       } ${
         admin ? 'mb-6' : ''
-      } transition-transform duration-500 text-sm sm:text-base bg-main-gray dark:bg-gray-dark text-light-gray-text dark:text-main-gray rounded-md overflow-hidden cursor-pointer`}
+      } transition-transform duration-500 text-sm sm:text-base bg-white dark:bg-black dark:shadow-none
+      shadow-container-shadow text-light-gray-text dark:border-[1px] dark:border-gray dark:text-gray rounded-md overflow-hidden cursor-pointer`}
     >
       <div className="pt-2">
         <div
-          className="flex justify-between pb-2 px-8 border-b-[1px] mb-4 text-xs md:text-sm"
+          className="flex justify-between items-center pb-2 px-8 mb-4 text-xs md:text-sm"
           onClick={() => router.push(`/single-post/${id}`)}
         >
           <p>{category}</p>
           <p className="capitalize ">{dateFormat}</p>
           {loggedIn && !asPath.includes('admin-page') && (
             <div
-              className="text-red hover:scale-125 duration-200"
+              className="text-red scale-[0.8] hover:scale-90 duration-200"
               onClick={(e: any) => {
                 e.stopPropagation()
                 setOpenDelPopup(true)
@@ -95,7 +96,7 @@ const Post = ({
           )}
         </div>
         <p
-          className="text-black font-medium dark:text-primary-dark text-sm sm:text-lg px-8"
+          className="text-black dark:text-white text-sm sm:text-base px-8"
           onClick={() => router.push(`/single-post/${id}`)}
         >
           {content}
@@ -134,7 +135,7 @@ const Post = ({
         {!admin ? (
           <>
             <p
-              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
+              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-gray-bg dark:hover:bg-gray-dark`}
               onClick={likePost}
             >
               {isLiked ? (
@@ -145,7 +146,7 @@ const Post = ({
               <span>{likesNum}</span>
             </p>
             <p
-              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover`}
+              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-gray-bg dark:hover:bg-gray-dark`}
               onClick={dislikePost}
             >
               {isDisliked ? (
@@ -156,7 +157,7 @@ const Post = ({
               <span>{dislikesNum}</span>
             </p>
             <div
-              className="md:py-[10px] py-[6px] relative grid place-items-center col-start-3 col-end-5 hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover"
+              className="md:py-[10px] py-[6px] relative grid place-items-center col-start-3 col-end-5 hover:bg-gray-bg dark:hover:bg-gray-dark"
               onClick={copyToClipboard}
             >
               <ShareSvg

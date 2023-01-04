@@ -24,7 +24,7 @@ const SearchBar = ({ hide }: Props) => {
 
   return (
     <div
-      className={`${inputColor} ${isHide} rounded-lg w-full sm:max-w-[400px] h-8 xl:h-[38px] overflow-hidden border-2 flex items-center gap-[14px] pl-2 xl:pl-[14px] `}
+      className={`${inputColor} ${isHide} rounded-lg w-full sm:max-w-[400px] h-8 xl:h-[38px] overflow-hidden border-[1px] flex items-center gap-[14px] pl-2 xl:pl-[14px] `}
     >
       <button className="cursor-pointer">
         <LupaSvg className="scale-75 xl:scale-100" />

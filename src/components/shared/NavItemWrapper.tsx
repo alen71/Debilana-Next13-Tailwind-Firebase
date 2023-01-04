@@ -8,16 +8,14 @@ type Props = {
 
 const NavItemWrapper = ({ last, children, active }: Props) => {
   const isLast = last ? 'pr-0' : ''
-  const isActive = active
-    ? 'text-gray-text-hover dark:text-gray-text-hover-dark'
-    : ''
+  const isActive = active ? 'text-gray' : 'text-black dark:text-white'
 
   return (
     <div
-      className={`md:px-3 xl:px-[18px] ${isLast} flex items-center text-center h-fit  select-none uppercase font-semibold md:font-bold`}
+      className={`md:px-3 xl:px-[18px] ${isLast} flex items-center text-center h-fit select-none uppercase`}
     >
       <span
-        className={`${isActive} hover:text-gray-text-hover dark:hover:text-gray-text-hover-dark cursor-pointer`}
+        className={`${isActive} hover:text-gray dark:hover:text-gray cursor-pointer`}
       >
         {children}
       </span>

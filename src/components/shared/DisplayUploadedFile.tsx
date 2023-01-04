@@ -24,9 +24,9 @@ const DisplayUploadedFile = ({
                 setUploadFileNow({ URL: '', type: '' })
                 setUploadFile(null)
               }}
-              className="bg-[#ffffffb1] dark:bg-[#000000ad] md:w-full w-9 md:h-full h-9 absolute top-0 right-0 md:left-0 z-20 flex items-center justify-center  md:hidden group-hover:flex cursor-pointer"
+              className=" bg-[#000000ad] md:w-full w-9 md:h-full h-9 absolute top-0 right-0 md:left-0 z-20 flex items-center justify-center md:hidden group-hover:flex cursor-pointer"
             >
-              <p className="font-bold text-black text-4xl dark:text-primary-dark">
+              <p className="font-bold text-white text-4xl">
                 <XSvg />
               </p>
             </div>
@@ -41,15 +41,15 @@ const DisplayUploadedFile = ({
 
       {uploadFileNow.URL.length > 0 &&
         uploadFileNow.type.startsWith('video') && (
-          <div className="group w-full h-full absolute top-0 left-0">
+          <div className="group w-full h-full absolute top-0 left-0 bg-black">
             <div
               onClick={() => {
                 setUploadFileNow({ URL: '', type: '' })
                 setUploadFile(null)
               }}
-              className="bg-[#ffffffb1] dark:bg-[#000000ad] w-9 h-9 absolute top-0 right-0 z-20 flex items-center justify-center md:hidden group-hover:flex cursor-pointer"
+              className="bg-[#000000ad] w-9 h-9 absolute top-0 right-0 z-20 flex items-center justify-center md:hidden group-hover:flex cursor-pointer"
             >
-              <p className="font-bold text-black  dark:text-primary-dark">
+              <p className="font-bold text-gray">
                 <XSvg />
               </p>
             </div>

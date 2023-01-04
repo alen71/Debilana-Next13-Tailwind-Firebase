@@ -4,6 +4,17 @@ import SunSvg from '../../assets/sun.svg'
 import MoonSvg from '../../assets/moon.svg'
 import { ThemeContext } from '../../context/ThemeSwitch.context'
 
+const themeAccessories = [
+  {
+    type: 'sun',
+    icon: <SunSvg className="absolute w-6 h-6 " />
+  },
+  {
+    type: 'moon',
+    icon: <MoonSvg className="absolute scale-125" />
+  }
+]
+
 const ThemeSwitch = () => {
   const { theme, setTheme } = useContext(ThemeContext)
 
@@ -21,16 +32,18 @@ const ThemeSwitch = () => {
         onClick={switchTheme}
       >
         <div>
-          <div
-            className={`${sunPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] lg:top-0 flex items-center justify-center bg-yellow group-hover:bg-yellow-hover transition-transform transform-duration-500`}
-          >
-            <SunSvg className="absolute w-5 h-5 " />
-          </div>
-          <div
-            className={`${moonPosition} h-9 w-9 cursor-pointe rounded-full absolute top-[6px] lg:top-0 flex items-center justify-center bg-white group-hover:bg-gray-text-hover text-black transition-transform transform-duration-500`}
-          >
-            <MoonSvg className="absolute" />
-          </div>
+          {themeAccessories.map(({ icon, type }) => {
+            return (
+              <div
+                key={type}
+                className={`${
+                  type === 'sun' ? sunPosition : moonPosition
+                } h-9 w-9 cursor-pointe rounded-full absolute top-[6px] lg:top-0 flex items-center justify-center bg-primary group-hover:bg-primary-light transition-transform transform-duration-500`}
+              >
+                {icon}
+              </div>
+            )
+          })}
         </div>
 
         <div className=" pl-12 gap-3 group-hover:text-gray-text-hover dark:group-hover:text-gray-text-hover-dark">

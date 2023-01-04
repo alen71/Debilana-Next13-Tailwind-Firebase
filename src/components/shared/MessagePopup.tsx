@@ -26,7 +26,7 @@ const MessagePopup = ({
       <div
         className={`${
           isOpen ? 'flex' : 'hidden'
-        } w-80 h-96 bg-white dark:bg-gray-dark flex justify-center items-center flex-col gap-5 rounded-md fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-40 shadow-[0_0_20px_10px] shadow-main-gray`}
+        } w-80 h-96 bg-white dark:bg-black flex justify-center items-center flex-col gap-5 rounded-md fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-40 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray`}
       >
         <div
           className={`${
@@ -35,7 +35,7 @@ const MessagePopup = ({
         >
           {messageType ? <SuccessIcon /> : <ErrorIcon />}
         </div>
-        <p className="font-semibold text-lg md:text-xl">{message}</p>
+        <p className="text-lg md:text-xl">{message}</p>
         {messageType ? (
           <div className="flex flex-col justify-center gap-3">
             <p>Vratite se na početnu stranu.</p>

@@ -20,7 +20,7 @@ const ApproveOrDelPopup = ({ open, toggle, purpose, action }: Props) => {
       <div
         className={`${
           open ? 'block' : 'hidden'
-        } fixed max-w-lg p-6 rounded-md top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-50  bg-main-gray dark:bg-gray-dark border-2 border-black dark:border-white`}
+        } bg-white dark:bg-black fixed max-w-lg p-6 rounded-md top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-50 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-grays`}
       >
         <p className="text-black dark:text-white mb-6 text-center md:text-lg text-sm font-semibold">
           Jeste li sigurni da želite {purpose} obrisati ovaj post?
