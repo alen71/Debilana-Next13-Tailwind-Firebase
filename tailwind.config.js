@@ -22,20 +22,21 @@ module.exports = {
       'gray-bg': '#DADADA',
       'gray-dark': '#171717',
       'primary-light-hover': '#a4a4a4',
-
-      'gray-dark-hover': '#121212',
-      'gray-text-hover-dark': '#525252',
-      'main-gray': '#B7B7B7',
-      'light-gray-text': '#696969',
-      yellow: '#FFB800',
-      'light-yellow': '#FFD601',
-      'yellow-hover': '#FFDD85',
       green: '#1DCC00',
       red: '#FF0000'
     },
     extend: {
       boxShadow: {
         'container-shadow': '0px 0px 10px rgba(0,0,0,0.3)'
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' }
+        }
+      },
+      animation: {
+        wiggle: 'wiggle 0.7s ease-in-out infinite'
       }
     }
   },

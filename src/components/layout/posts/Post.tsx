@@ -74,7 +74,7 @@ const Post = ({
       } ${
         admin ? 'mb-6' : ''
       } transition-transform duration-500 text-sm sm:text-base bg-white dark:bg-black dark:shadow-none
-      shadow-container-shadow text-light-gray-text dark:border-[1px] dark:border-gray dark:text-gray rounded-md overflow-hidden cursor-pointer`}
+      shadow-container-shadow text-gray dark:border-[1px] dark:border-gray rounded-md overflow-hidden cursor-pointer`}
     >
       <div className="pt-2">
         <div
@@ -135,22 +135,22 @@ const Post = ({
         {!admin ? (
           <>
             <p
-              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-gray-bg dark:hover:bg-gray-dark`}
+              className={`group flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-gray-bg dark:hover:bg-gray-dark`}
               onClick={likePost}
             >
               {isLiked ? (
-                <LikeFillSvg className="scale-[0.7] sm:scale-[1]" />
+                <LikeFillSvg className="text-primary group-hover:animate-pulse scale-[0.7] sm:scale-[1]" />
               ) : (
                 <LikeSvg className="scale-[0.7] sm:scale-[1]" />
               )}
               <span>{likesNum}</span>
             </p>
             <p
-              className={`flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-gray-bg dark:hover:bg-gray-dark`}
+              className={`group flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-gray-bg dark:hover:bg-gray-dark`}
               onClick={dislikePost}
             >
               {isDisliked ? (
-                <DislikeFillSvg className="scale-[0.7] sm:scale-[1] translate-y-[2px]" />
+                <DislikeFillSvg className="text-primary group-hover:animate-pulse scale-[0.7] sm:scale-[1] translate-y-[2px]" />
               ) : (
                 <DislikeSvg className="scale-[0.7] sm:scale-[1] translate-y-[2px]" />
               )}
@@ -178,7 +178,7 @@ const Post = ({
           <>
             <span className="col-start-1 col-end-3 text-center ">
               <button
-                className="w-full uppercase font-semibold hover:bg-primary-light-hover dark:hover:bg-gray-dark-hover text-green md:py-[10px] py-[6px]"
+                className="w-full uppercase font-semibold hover:bg-gray-bg dark:hover:bg-gray-dark text-green md:py-[10px] py-[6px]"
                 onClick={() => setOpenApprovePopup(true)}
               >
                 Odobri
@@ -186,7 +186,7 @@ const Post = ({
             </span>
             <span className="col-start-3 col-end-5 text-center ">
               <button
-                className="w-full uppercase font-semibold hover:bg-primary-light-hover  dark:hover:bg-gray-dark-hover text-red md:py-[10px] py-[6px]"
+                className="w-full uppercase font-semibold hover:bg-gray-bg  dark:hover:bg-gray-dark text-red md:py-[10px] py-[6px]"
                 onClick={() => setOpenDelPopup(true)}
               >
                 Odbij

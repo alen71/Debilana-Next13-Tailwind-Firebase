@@ -23,7 +23,9 @@ const SortTable = ({ hide, toggle }: Props) => {
 
   return (
     <div className="text-center lg:text-left lg:absolute text-base lg:left-3 xl:left-14 lg:top-20 w-full xl:w-[15rem] lg:w-40 text-black dark:text-white py-1 rounded-md">
-      <div className={`${isHide} mb-2 text-sm capitalize pl-3`}>Sortiraj</div>
+      <div className={`${isHide} mb-2 text-sm capitalize lg:pl-3`}>
+        Sortiraj
+      </div>
       <div className={`${isHide} grid grid-rows-3 mt-2 mb-12 lg:mb-20`}>
         {tabs.map(({ icon, text, link }) => (
           <div
@@ -45,7 +47,7 @@ const SortTable = ({ hide, toggle }: Props) => {
                 router.asPath.includes(link)
                   ? 'lg:dark:text-gray lg:text-gray'
                   : ''
-              } flex items-center justify-center lg:justify-start pl-3 gap-3 text-black dark:text-white hover:text-gray dark:hover:text-gray`}
+              } flex items-center justify-center lg:justify-start lg:pl-3 gap-3 text-black dark:text-white hover:text-gray dark:hover:text-gray`}
             >
               {icon}
               <p className="py-2 uppercase text-center">{text}</p>
