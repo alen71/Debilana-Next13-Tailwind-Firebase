@@ -52,7 +52,11 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
                 key={name}
                 href={href}
                 className={`${
-                  asPath.includes(`/${name.toLowerCase()}`)
+                  (asPath.includes(href) && href !== '/') ||
+                  (href === '/' &&
+                    !asPath.includes('/debilana') &&
+                    !asPath.includes('/gastarbajter') &&
+                    !asPath.includes('/admin-page'))
                     ? 'text-primary dark:text-primary'
                     : 'text-black dark:text-white'
                 } cursor-pointer block py-2  hover:text-primary hover:dark:text-primary`}

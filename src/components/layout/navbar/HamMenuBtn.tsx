@@ -16,17 +16,17 @@ const HamMenuBtn = ({ toggle, isMenuOpen }: Props) => {
         <div
           className={`${
             isMenuOpen ? 'translate-y-[6px] rotate-45' : ''
-          } transition-transform transform-duration-300 w-full h-[2px] bg-black dark:bg-primary-light`}
+          } transition-transform transform-duration-300 w-full h-[2px] bg-primary dark:bg-primary-light`}
         ></div>
         <div
           className={`${
             isMenuOpen ? 'scale-x-0' : ''
-          } transition-transform transform-duration-300 w-full h-[2px] bg-black dark:bg-primary-light`}
+          } transition-transform transform-duration-300 w-full h-[2px] bg-primary dark:bg-primary-light`}
         ></div>
         <div
           className={`${
             isMenuOpen ? 'translate-y-[-6px] rotate-[-45deg]' : ''
-          } transition-transform transform-duration-300 w-full h-[2px] bg-black dark:bg-primary-light`}
+          } transition-transform transform-duration-300 w-full h-[2px] bg-primary dark:bg-primary-light`}
         ></div>
       </div>
       <HamburgerNavbar open={isMenuOpen} toggle={toggle} />
