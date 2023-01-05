@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
-import ShareSvg from '../../../assets/share.svg'
+import CopySvg from '../../../assets/copy.svg'
 import ErrorSvg from '../../../assets/error-icon.svg'
 import LikeSvg from '../../../assets/like.svg'
 import LikeFillSvg from '../../../assets/like-fill.svg'
@@ -76,9 +76,9 @@ const Post = ({
       } transition-transform duration-500 text-sm sm:text-base bg-white dark:bg-black dark:shadow-none
       shadow-container-shadow text-gray dark:border-[1px] dark:border-gray rounded-md overflow-hidden cursor-pointer`}
     >
-      <div className="pt-2">
+      <div className="pt-4">
         <div
-          className="flex justify-between items-center pb-2 px-8 mb-4 text-xs md:text-sm"
+          className="flex justify-between items-center pb-4 px-8 text-xs md:text-sm"
           onClick={() => router.push(`/single-post/${id}`)}
         >
           <p>{category}</p>
@@ -131,7 +131,7 @@ const Post = ({
           )}
         </div>
       </div>
-      <div className="w-full grid grid-cols-4 divide-x border-t-[1px] text-black dark:text-white ">
+      <div className="w-full grid grid-cols-4 divide-x border-t-[1px] border-gray text-gray  ">
         {!admin ? (
           <>
             <p
@@ -160,7 +160,7 @@ const Post = ({
               className="md:py-[10px] py-[6px] relative grid place-items-center col-start-3 col-end-5 hover:bg-gray-bg dark:hover:bg-gray-dark"
               onClick={copyToClipboard}
             >
-              <ShareSvg
+              <CopySvg
                 className={`${
                   copied ? 'opacity-0' : 'opacity-100'
                 } scale-[1.4] sm:scale-[1.8] duration-300`}

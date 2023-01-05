@@ -28,7 +28,7 @@ const ThemeSwitch = () => {
   return (
     <>
       <button
-        className="group bg-gray-bg lg:bg-transparent dark:bg-gray-dark lg:dark:bg-transparent lg:transparent uppercase w-full border-b-[1px] border-t-[1px] lg:border-t-0 flex justify-center lg:justify-start items-center lg:pl-3 py-1 lg:py-0 overflow-hidden relative"
+        className="group bg-gray-bg lg:bg-transparent dark:bg-gray-dark lg:dark:bg-transparent lg:transparent uppercase w-full border-b-[1px] border-t-[1px] border-gray lg:border-t-0 flex justify-center lg:justify-start items-center lg:pl-3 py-1 lg:py-0 overflow-hidden relative"
         onClick={switchTheme}
       >
         <div>
