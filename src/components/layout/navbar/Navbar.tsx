@@ -41,7 +41,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
   return (
     <motion.nav
       {...navAnimation}
-      className="flex items-center px-6 lg:px-4 xl:px-0  bg-white dark:bg-black min-h-[71px] w-full z-10 
+      className="flex items-center px-6 lg:px-4 xl:px-0  bg-white dark:bg-black min-h-[71px] w-full z-50 
       shadow-md dark:border-b-[1px] dark:shadow-none dark:border-gray sticky top-0"
     >
       <div className="xl:container w-full mx-auto flex justify-between items-center relative">

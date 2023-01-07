@@ -79,6 +79,8 @@ const CreatePost = () => {
       }
 
       setTextareaText('')
+      setUploadFileNow({ URL: '', type: '' })
+      setVideoURL('')
       setIsTyping(!isTyping)
       setDisplayMessage({
         message: 'Uspešno ste kreirali objavu!',

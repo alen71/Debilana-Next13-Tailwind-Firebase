@@ -14,14 +14,14 @@ type Props = {
 const hamburgerLinks = [
   {
     href: '/',
-    name: 'New'
+    name: 'Novo'
   },
   {
-    href: 'debilana/new',
+    href: '/debilana/new',
     name: 'Debilana'
   },
   {
-    href: 'gastarbajter/new',
+    href: '/gastarbajter/new',
     name: 'Gastarbajter'
   },
   {
@@ -40,7 +40,7 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
       <div
         className={`${
           open ? 'translate-x-0' : 'translate-x-[-100%]'
-        } w-full min-[450px]:w-[450px] transition-transform translate-duration-1000 min-h-screen z-40 fixed top-[71px] left-0  bg-white dark:bg-black py-5 block lg:hidden shadow-container-shadow dark:shadow-none dark:border-r-[1px] dark:border-gray`}
+        } w-full min-[450px]:w-[450px] transition-transform translate-duration-1000 min-h-screen z-20 fixed top-[71px] left-0  bg-white dark:bg-black py-5 block lg:hidden shadow-container-shadow dark:shadow-none  `}
       >
         <div className="w-full flex flex-col items-center">
           {/* <div className="px-4 w-full flex justify-center">

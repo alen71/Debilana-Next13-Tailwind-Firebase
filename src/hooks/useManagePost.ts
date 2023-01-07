@@ -11,8 +11,8 @@ const useManagePost = (id: string, fileName: string, fileType: string) => {
     try {
       if (fileName.length > 0) {
         const targetRef = fileType.startsWith('image')
-          ? ref(storage, `images/${fileName}`)
-          : ref(storage, `video/${fileName}`)
+          ? ref(storage, `images/${id}/${fileName}`)
+          : ref(storage, `video/${id}/${fileName}`)
 
         deleteObject(targetRef)
       }

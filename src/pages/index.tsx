@@ -56,7 +56,7 @@ export default function Home({ posts }: Props) {
             transition={{
               duration: 1,
               type: 'spring',
-              delay: 0.5 * index
+              delay: 0.3 * index
             }}
             className={`mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
           >

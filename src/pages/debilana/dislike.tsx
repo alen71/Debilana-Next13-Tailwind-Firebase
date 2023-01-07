@@ -46,7 +46,7 @@ const Sort: NextPage = () => {
             transition={{
               duration: 1,
               type: 'spring',
-              delay: (index + 2) / 2
+              delay: (index + 1) / 2
             }}
             className={`snap-start mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
           >
