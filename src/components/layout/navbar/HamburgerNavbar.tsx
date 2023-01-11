@@ -21,8 +21,12 @@ const hamburgerLinks = [
     name: 'Debilana'
   },
   {
-    href: '/gastarbajter/new',
-    name: 'Gastarbajter'
+    href: '/gastarbajteri/new',
+    name: 'Gastarbajteri'
+  },
+  {
+    href: '/ljudska-prava/new',
+    name: 'Ljudska prava'
   },
   {
     href: '/admin-page',
@@ -56,6 +60,7 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
                   (href === '/' &&
                     !asPath.includes('/debilana') &&
                     !asPath.includes('/gastarbajter') &&
+                    !asPath.includes('/ljudska-prava') &&
                     !asPath.includes('/admin-page'))
                     ? 'text-primary dark:text-primary'
                     : 'text-black dark:text-white'

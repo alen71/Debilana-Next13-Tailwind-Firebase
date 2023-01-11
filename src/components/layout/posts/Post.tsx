@@ -77,9 +77,11 @@ const Post = ({
       shadow-container-shadow text-gray dark:border-[1px] dark:border-gray rounded-md overflow-hidden cursor-pointer`}
     >
       <div className="pt-4">
-        <div
+        <a
           className="flex justify-between items-center pb-4 px-8 text-xs md:text-sm"
-          onClick={() => router.push(`/single-post/${id}`)}
+          href={`/single-post/${id}`}
+          target="_blank"
+          rel="noreferrer"
         >
           <p>{category}</p>
           <p className="capitalize ">{dateFormat}</p>
@@ -94,13 +96,12 @@ const Post = ({
               <ErrorSvg />
             </div>
           )}
-        </div>
-        <p
-          className="text-black dark:text-white text-sm sm:text-base px-8"
-          onClick={() => router.push(`/single-post/${id}`)}
-        >
-          {content}
-        </p>
+        </a>
+        <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
+          <p className="text-black dark:text-white text-sm sm:text-base px-8">
+            {content}
+          </p>
+        </a>
 
         {embedVideo && (
           <div className="mt-4">
@@ -108,18 +109,17 @@ const Post = ({
           </div>
         )}
 
-        <div
-          className="relative w-full mt-4"
-          onClick={() => router.push(`/single-post/${id}`)}
-        >
+        <div className="relative w-full mt-4">
           {fileName.length > 0 && fileType.startsWith('image') && (
-            <Image
-              src={url}
-              width={800}
-              height={300}
-              alt={fileName}
-              style={{ objectFit: 'cover' }}
-            />
+            <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
+              <Image
+                src={url}
+                width={800}
+                height={300}
+                alt={fileName}
+                style={{ objectFit: 'cover' }}
+              />
+            </a>
           )}
 
           {fileName.length > 0 && fileType.startsWith('video') && (

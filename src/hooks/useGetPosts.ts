@@ -79,16 +79,15 @@ const useGetPosts = ({
 
   const setCursor = useCallback(async () => {
     if (data.length > 0) {
-      console.log('vec ima elemenata')
       const lastDoc = await getDoc(doc(db, 'posts', data[data.length - 1].id))
       cursor.current = lastDoc
     } else {
-      console.log('nema elemenata')
       const posts = await getPosts(PostsStatus.APPROVED, sort, category)
+      // if (!posts) return
       const lastDoc = await getDoc(doc(db, 'posts', posts[posts.length - 1].id))
       cursor.current = lastDoc
     }
-  }, [data])
+  }, [data, category, sort])
 
   useEffect(() => {
     if (!cursor.current) {
@@ -97,9 +96,8 @@ const useGetPosts = ({
   }, [cursor, setCursor])
 
   useEffect(() => {
-    if (initialData) return
     next()
-  }, [cursor, category])
+  }, [cursor, category, initialData, next])
 
   return { next, data, cursor, loading, error }
 }

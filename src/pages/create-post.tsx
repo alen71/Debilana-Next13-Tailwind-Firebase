@@ -147,7 +147,13 @@ const CreatePost = () => {
               value={PostCategory.GASTARBAJTER}
               className="bg-transparent text-gray"
             >
-              Gastarbajter
+              Gastarbajteri
+            </option>
+            <option
+              value={PostCategory.LJUDSKA_PRAVA}
+              className="bg-transparent text-gray"
+            >
+              Ljudska prava
             </option>
           </select>
 

@@ -20,8 +20,9 @@ export enum PostsStatus {
 
 export enum PostCategory {
   OSTALO = 'ostalo',
-  GASTARBAJTER = 'gastarbajter',
-  DEBILANA = 'debilana'
+  GASTARBAJTER = 'gastarbajteri',
+  DEBILANA = 'debilana',
+  LJUDSKA_PRAVA = 'ljudska prava'
 }
 
 export enum PostSort {
