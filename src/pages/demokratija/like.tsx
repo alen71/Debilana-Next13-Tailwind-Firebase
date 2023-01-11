@@ -13,8 +13,8 @@ const Sort: NextPage = () => {
   const observer = useRef<any>()
 
   const { next, data, loading, error } = useGetPosts({
-    sort: PostSort.NEW,
-    category: PostCategory.LJUDSKA_PRAVA
+    sort: PostSort.LIKE,
+    category: PostCategory.DEMOKRATIJA
   })
 
   const lastElementRef = useCallback(

@@ -14,7 +14,7 @@ const Sort: NextPage = () => {
 
   const { next, data, loading, error } = useGetPosts({
     sort: PostSort.DISLIKE,
-    category: PostCategory.LJUDSKA_PRAVA
+    category: PostCategory.DEMOKRATIJA
   })
   console.log(data)
 

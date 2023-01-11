@@ -37,8 +37,8 @@ const SortTable = ({ hide, toggle }: Props) => {
                 router.push(`/debilana/${link}`)
               } else if (router.asPath.includes('gastarbajter')) {
                 router.push(`/gastarbajter/${link}`)
-              } else if (router.asPath.includes('ljudska-prava')) {
-                router.push(`/ljudska-prava/${link}`)
+              } else if (router.asPath.includes('demokratija')) {
+                router.push(`/demokratija/${link}`)
               } else {
                 router.push(`/${link}`)
               }

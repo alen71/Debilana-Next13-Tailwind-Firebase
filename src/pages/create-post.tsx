@@ -150,10 +150,10 @@ const CreatePost = () => {
               Gastarbajteri
             </option>
             <option
-              value={PostCategory.LJUDSKA_PRAVA}
+              value={PostCategory.DEMOKRATIJA}
               className="bg-transparent text-gray"
             >
-              Ljudska prava
+              demokratija
             </option>
           </select>
 
