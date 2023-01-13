@@ -23,8 +23,7 @@ export default function Home({ posts }: Props) {
   const observer = useRef<any>()
 
   const { next, data, loading, error } = useGetPosts({
-    sort: PostSort.NEW,
-    initialData: posts
+    sort: PostSort.NEW
   })
 
   const lastElementRef = useCallback(
