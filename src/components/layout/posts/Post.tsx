@@ -77,14 +77,20 @@ const Post = ({
       shadow-container-shadow text-gray dark:border-[1px] dark:border-gray rounded-md overflow-hidden cursor-pointer`}
     >
       <div className="pt-4">
-        <a
-          className="flex justify-between items-center pb-4 px-8 text-xs md:text-sm"
-          href={`/single-post/${id}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <p>{category}</p>
-          <p className="capitalize ">{dateFormat}</p>
+        <div className="flex justify-between items-center pb-4 px-8 text-xs md:text-sm">
+          <a
+            className="flex justify-between items-center"
+            href={`/single-post/${id}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <p>{category}</p>
+            <p
+              className={`capitalize ${loggedIn ? 'justify-self-center' : ''}`}
+            >
+              {dateFormat}
+            </p>
+          </a>
           {loggedIn && !asPath.includes('admin-page') && (
             <div
               className="text-red scale-[0.8] hover:scale-90 duration-200"
@@ -96,7 +102,7 @@ const Post = ({
               <ErrorSvg />
             </div>
           )}
-        </a>
+        </div>
         <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
           <p className="text-black dark:text-white text-sm sm:text-base px-8">
             {content}

@@ -32,7 +32,7 @@ const Sort: NextPage = () => {
   )
 
   return (
-    <div className="h-screen custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
+    <div className="h-screen custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24 ">
       <Navbar />
 
       {data.map((post, index) => {
@@ -46,7 +46,7 @@ const Sort: NextPage = () => {
               type: 'spring',
               delay: (index + 1) / 2
             }}
-            className={`snap-start mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
+            className="mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]"
           >
             <Post {...post} />
           </motion.div>
