@@ -29,6 +29,7 @@ const CreatePost = () => {
     URL: '',
     type: ''
   })
+  const [loading, isLoading] = useState(false)
   const { loggedIn } = useUserLogIn()
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
@@ -49,6 +50,8 @@ const CreatePost = () => {
     try {
       if (uploadFile && uploadFile.size > maxFileSize)
         throw new Error('Fajl je veći od 50mb!')
+
+      isLoading(true)
 
       const docRef = await addDoc(collection(db, 'posts'), {
         category: selectEl.current?.value,
@@ -77,6 +80,7 @@ const CreatePost = () => {
         await sendNotification('Imate novu objavu na čekanju!')
       }
 
+      isLoading(false)
       setTextareaText('')
       setUploadFileNow({ URL: '', type: '' })
       setVideoURL('')
@@ -137,19 +141,19 @@ const CreatePost = () => {
           >
             <option
               value={PostCategory.DEBILANA}
-              className="bg-transparent text-gray"
+              className="bg-transparent text-black"
             >
               Debilana
             </option>
             <option
               value={PostCategory.GASTARBAJTER}
-              className="bg-transparent text-gray"
+              className="bg-transparent text-black"
             >
               Gastarbajteri
             </option>
             <option
               value={PostCategory.DEMOKRATIJA}
-              className="bg-transparent text-gray"
+              className="bg-transparent text-black"
             >
               demokratija
             </option>
@@ -217,7 +221,7 @@ const CreatePost = () => {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-0 justify-end">
-            <CreatePostButton isTyping={isTyping} />
+            <CreatePostButton isTyping={isTyping} spinner={loading} />
           </div>
           <p
             className={`${
