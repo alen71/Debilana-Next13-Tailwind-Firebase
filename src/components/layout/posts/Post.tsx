@@ -74,7 +74,7 @@ const Post = ({
       } ${
         admin ? 'mb-6' : ''
       } transition-transform duration-500 text-sm sm:text-base bg-white dark:bg-black dark:shadow-none
-      shadow-container-shadow text-gray dark:border-[1px] dark:border-gray rounded-md overflow-hidden cursor-pointer`}
+      shadow-container-shadow text-gray dark:border-[1px] dark:border-gray rounded-md cursor-pointer`}
     >
       <div className="pt-4">
         <div className="flex justify-between items-center pb-4 px-8 text-xs md:text-sm">
