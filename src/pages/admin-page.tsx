@@ -122,25 +122,16 @@ const AdminLogin = () => {
           )}
           {loggedIn &&
             posts.map((post, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 1,
-                  type: 'spring',
-                  delay: (index + 1) / 2
-                }}
-              >
-                <Post {...post} admin />
-              </motion.div>
+              <div key={post.id}>
+                <Post index={index} {...post} admin />
+              </div>
             ))}
         </div>
 
         <button
           className={`${
             loggedIn ? 'translate-y-0' : 'translate-y-[-200px]'
-          } px-8 py-1 w-fit rounded-full bg-gray text-black  absolute right-[0] lg:right-[-150px] top-6 transition-transform duration-500`}
+          } px-8 py-1 w-fit rounded-full bg-gray text-black  absolute right-[0] lg:right-[-200px] top-6 transition-transform duration-500`}
           onClick={signOut}
         >
           logout
