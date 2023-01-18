@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth'
-import create from 'zustand'
+import { create } from 'zustand'
 
 type UserLoggedIn = {
   loggedIn: User | null

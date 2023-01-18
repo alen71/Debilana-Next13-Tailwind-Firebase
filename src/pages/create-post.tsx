@@ -13,6 +13,7 @@ import DisplayUploadedFile from '../components/shared/DisplayUploadedFile'
 import MessagePopup from '../components/shared/MessagePopup'
 import { maxFileSize } from '../utils/const'
 import useUserLogIn from '../store/useUserLogIn'
+import { sendNotification } from '../lib/api'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -28,6 +29,7 @@ const CreatePost = () => {
     URL: '',
     type: ''
   })
+  const [loading, isLoading] = useState(false)
   const { loggedIn } = useUserLogIn()
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
@@ -46,6 +48,11 @@ const CreatePost = () => {
     e.preventDefault()
 
     try {
+      if (uploadFile && uploadFile.size > maxFileSize)
+        throw new Error('Fajl je veći od 50mb!')
+
+      isLoading(true)
+
       const docRef = await addDoc(collection(db, 'posts'), {
         category: selectEl.current?.value,
         content: textareaText,
@@ -58,26 +65,22 @@ const CreatePost = () => {
         fileType: uploadFile ? uploadFile.type : ''
       })
 
-      if (uploadFile && uploadFile.size > maxFileSize)
-        throw new Error('Fajl je veći od 50mb!')
-
       if (uploadFile && uploadFile.size < maxFileSize) {
         const picRef = ref(storage, `images/${docRef.id}/${uploadFile.name}`)
         const videoRef = ref(storage, `video/${docRef.id}/${uploadFile.name}`)
 
         if (uploadFile.type.includes('image')) {
-          uploadBytes(picRef, uploadFile).then(res => {
-            console.log('radi photo')
-            console.log(res)
-          })
+          uploadBytes(picRef, uploadFile).then(res => {})
         } else if (uploadFile.type.includes('video')) {
-          uploadBytes(videoRef, uploadFile).then(res => {
-            console.log('radi video')
-            console.log(res)
-          })
+          uploadBytes(videoRef, uploadFile).then(res => {})
         }
       }
 
+      if (!loggedIn) {
+        await sendNotification('Imate novu objavu na čekanju!')
+      }
+
+      isLoading(false)
       setTextareaText('')
       setUploadFileNow({ URL: '', type: '' })
       setVideoURL('')
@@ -89,11 +92,10 @@ const CreatePost = () => {
       })
     } catch (e) {
       setDisplayMessage({
-        message: 'Objava nije kreirana!',
+        message: `${e}`,
         open: true,
         type: false
       })
-      console.log(e)
     }
   }
 
@@ -139,19 +141,19 @@ const CreatePost = () => {
           >
             <option
               value={PostCategory.DEBILANA}
-              className="bg-transparent text-gray"
+              className="bg-transparent text-black"
             >
               Debilana
             </option>
             <option
               value={PostCategory.GASTARBAJTER}
-              className="bg-transparent text-gray"
+              className="bg-transparent text-black"
             >
               Gastarbajteri
             </option>
             <option
               value={PostCategory.DEMOKRATIJA}
-              className="bg-transparent text-gray"
+              className="bg-transparent text-black"
             >
               demokratija
             </option>
@@ -219,7 +221,7 @@ const CreatePost = () => {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-0 justify-end">
-            <CreatePostButton isTyping={isTyping} />
+            <CreatePostButton isTyping={isTyping} spinner={loading} />
           </div>
           <p
             className={`${

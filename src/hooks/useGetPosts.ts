@@ -50,7 +50,7 @@ const useGetPosts = ({
       ]
 
       if (category) constrains.push(where('category', '==', category))
-      if (cursor.current) constrains.push(startAfter(cursor.current))
+      if (cursor.current) constrains.push(startAfter(cursor.current) as any)
 
       const colRef = collection(db, 'posts')
       const q = query(colRef, ...constrains)
