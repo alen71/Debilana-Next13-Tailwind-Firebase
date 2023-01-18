@@ -123,7 +123,7 @@ const AdminLogin = () => {
           {loggedIn &&
             posts.map((post, index) => (
               <div key={post.id}>
-                <Post index={index} {...post} />
+                <Post index={index} {...post} admin />
               </div>
             ))}
         </div>
@@ -131,7 +131,7 @@ const AdminLogin = () => {
         <button
           className={`${
             loggedIn ? 'translate-y-0' : 'translate-y-[-200px]'
-          } px-8 py-1 w-fit rounded-full bg-gray text-black  absolute right-[0] lg:right-[-150px] top-6 transition-transform duration-500`}
+          } px-8 py-1 w-fit rounded-full bg-gray text-black  absolute right-[0] lg:right-[-200px] top-6 transition-transform duration-500`}
           onClick={signOut}
         >
           logout

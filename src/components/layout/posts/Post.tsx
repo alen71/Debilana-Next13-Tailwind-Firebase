@@ -78,7 +78,6 @@ const Post = ({
           type: 'spring',
           delay: index && 0.3 * index
         }}
-        className={`mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
       >
         <div
           datatype={id}
@@ -92,17 +91,13 @@ const Post = ({
           <div className="pt-4">
             <div className="flex justify-between items-center pb-4 px-8 text-xs md:text-sm">
               <a
-                className="flex justify-between items-center"
+                className="flex justify-between items-center w-full"
                 href={`/single-post/${id}`}
                 target="_blank"
                 rel="noreferrer"
               >
                 <p>{category}</p>
-                <p
-                  className={`capitalize ${
-                    loggedIn ? 'justify-self-center' : ''
-                  }`}
-                >
+                <p className={`capitalize ${loggedIn ? 'mx-auto' : ''}`}>
                   {dateFormat}
                 </p>
               </a>

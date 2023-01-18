@@ -51,6 +51,7 @@ export default function Home({ posts }: Props) {
             ref={
               index && data.length === index + 1 ? lastElementRef : undefined
             }
+            className={`mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
           >
             <Post index={index} {...post} />
           </div>
