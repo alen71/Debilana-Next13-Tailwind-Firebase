@@ -122,18 +122,9 @@ const AdminLogin = () => {
           )}
           {loggedIn &&
             posts.map((post, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 1,
-                  type: 'spring',
-                  delay: (index + 1) / 2
-                }}
-              >
-                <Post {...post} admin />
-              </motion.div>
+              <div key={post.id}>
+                <Post index={index} {...post} />
+              </div>
             ))}
         </div>
 

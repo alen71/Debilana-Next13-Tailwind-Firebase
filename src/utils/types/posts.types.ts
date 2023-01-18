@@ -10,6 +10,7 @@ export type IPost = {
   videoURL: string
   fileName: string
   fileType: string
+  index?: number
 }
 
 export enum PostsStatus {

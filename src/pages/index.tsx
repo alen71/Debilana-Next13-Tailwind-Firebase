@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
 
 import Navbar from '../components/layout/navbar/Navbar'
 import { getPosts } from '../utils/firebase/firebase-utils'
@@ -47,20 +46,14 @@ export default function Home({ posts }: Props) {
 
       {data.map((post, index) => {
         return (
-          <motion.div
-            ref={data.length === index + 1 ? lastElementRef : undefined}
+          <div
             key={post.id}
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 1,
-              type: 'spring',
-              delay: 0.3 * index
-            }}
-            className={`mx-6 lg:mx-0 md:max-w-xl 2xl:max-w-3xl w-[95%] min-[768px]:min-w-[650px]`}
+            ref={
+              index && data.length === index + 1 ? lastElementRef : undefined
+            }
           >
-            <Post {...post} />
-          </motion.div>
+            <Post index={index} {...post} />
+          </div>
         )
       })}
       {loading && <p>Loading...</p>}
