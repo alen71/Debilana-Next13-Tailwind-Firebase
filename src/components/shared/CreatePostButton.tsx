@@ -15,7 +15,7 @@ const CreatePostButton = ({ isTyping, spinner = true }: Props) => {
     <button
       className={`${typing} rounded-full text-white w-[113px] h-[32px] flex items-center justify-center`}
     >
-      {spinner ? <Spinner /> : 'Postavi'}
+      {spinner ? <Spinner postButton /> : 'Postavi'}
     </button>
   )
 }
