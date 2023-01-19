@@ -5,6 +5,7 @@ import { getPosts } from '../utils/firebase/firebase-utils'
 import { IPost, PostSort, PostsStatus } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
 import Post from '../components/layout/posts/Post'
+import Spinner from '../components/shared/Spinner'
 
 export async function getServerSideProps() {
   const posts = await getPosts(PostsStatus.APPROVED)
@@ -57,7 +58,7 @@ export default function Home({ posts }: Props) {
           </div>
         )
       })}
-      {loading && <p>Loading...</p>}
+      <div>{loading && <Spinner />}</div>
       {error && <p>Error!</p>}
       <div ref={loader} />
     </div>

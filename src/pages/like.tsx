@@ -7,6 +7,7 @@ import Navbar from '../components/layout/navbar/Navbar'
 import Post from '../components/layout/posts/Post'
 import { IPost, PostCategory, PostSort } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
+import Spinner from '../components/shared/Spinner'
 
 const Sort: NextPage = () => {
   const loader = useRef(null)
@@ -48,7 +49,7 @@ const Sort: NextPage = () => {
           </div>
         )
       })}
-      {loading && <p>Loading...</p>}
+      {loading && <Spinner />}
       {error && <p>Error!</p>}
       <div ref={loader} />
     </div>

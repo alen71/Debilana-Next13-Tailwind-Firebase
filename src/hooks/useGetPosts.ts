@@ -21,17 +21,17 @@ import {
 } from '../utils/types/posts.types'
 
 type Params = {
-  sort?: PostSort
+  sort: PostSort
   category?: PostCategory
-  initialData?: IPost[]
+  mustBeCategory?: boolean
 }
 
 const useGetPosts = ({
   sort = PostSort.NEW,
   category,
-  initialData
+  mustBeCategory
 }: Params) => {
-  const [data, setData] = useState<IPost[]>(initialData ?? [])
+  const [data, setData] = useState<IPost[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string>()
 
@@ -39,21 +39,36 @@ const useGetPosts = ({
   const isEnd = useRef(false)
 
   const next = useCallback(async () => {
+    if (mustBeCategory && !category) return
+
+    console.log('isEnd' + isEnd.current)
     if (isEnd.current) return
     try {
       setLoading(true)
       setError(undefined)
-      const constrains = [
-        where('status', '==', PostsStatus.APPROVED),
-        orderBy(sort, 'desc'),
-        limit(limitPerPage)
-      ]
-
-      if (category) constrains.push(where('category', '==', category))
-      if (cursor.current) constrains.push(startAfter(cursor.current) as any)
 
       const colRef = collection(db, 'posts')
-      const q = query(colRef, ...constrains)
+
+      const lastEl = []
+
+      if (cursor.current) lastEl.push(startAfter(cursor.current) as any)
+
+      const q = !category
+        ? query(
+            colRef,
+            where('status', '==', PostsStatus.APPROVED),
+            orderBy(sort, 'desc'),
+            limit(limitPerPage),
+            ...lastEl
+          )
+        : query(
+            colRef,
+            where('status', '==', PostsStatus.APPROVED),
+            where('category', '==', category),
+            orderBy(sort, 'desc'),
+            limit(limitPerPage),
+            ...lastEl
+          )
 
       const postSnapshot = await getDocs(q)
 
@@ -75,29 +90,32 @@ const useGetPosts = ({
     } finally {
       setLoading(false)
     }
-  }, [sort, category, cursor])
+  }, [sort, category, mustBeCategory])
 
   const setCursor = useCallback(async () => {
-    if (data.length > 0) {
-      const lastDoc = await getDoc(doc(db, 'posts', data[data.length - 1].id))
-      cursor.current = lastDoc
-    } else {
-      const posts = await getPosts(PostsStatus.APPROVED, sort, category)
-      // if (!posts) return
-      const lastDoc = await getDoc(doc(db, 'posts', posts[posts.length - 1].id))
-      cursor.current = lastDoc
-    }
-  }, [data, category, sort])
+    if (mustBeCategory && !category) return
+
+    const posts = await getPosts(PostsStatus.APPROVED, sort, category)
+    // if (!posts) return
+    const lastDoc = await getDoc(doc(db, 'posts', posts[posts.length - 1].id))
+    cursor.current = lastDoc
+  }, [category, sort, mustBeCategory])
 
   useEffect(() => {
+    if (mustBeCategory && !category) return
     if (!cursor.current) {
       setCursor()
     }
-  }, [cursor, setCursor])
+  }, [cursor, setCursor, mustBeCategory, category])
 
   useEffect(() => {
+    if (mustBeCategory && !category) return
+
+    setData([])
+    isEnd.current = false
+    cursor.current = undefined
     next()
-  }, [cursor, category, initialData, next])
+  }, [cursor, category, sort, next, mustBeCategory])
 
   return { next, data, cursor, loading, error }
 }
