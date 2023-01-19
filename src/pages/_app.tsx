@@ -21,12 +21,16 @@ export default function App({ Component, pageProps }: AppProps) {
       })
     }
     authStateChange()
-  }, [])
+  }, [setLoggedIn])
 
   return (
     <ThemeProvider>
       <Head>
         <title>Debilana</title>
+        <meta
+          name="description"
+          content="Mesto gde možete da pogledate šta su demokratija, moderno školovanje i život gastarbajtera"
+        />
       </Head>
       <Component {...pageProps} />
     </ThemeProvider>
