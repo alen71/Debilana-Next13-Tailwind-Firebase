@@ -14,6 +14,7 @@ import MessagePopup from '../components/shared/MessagePopup'
 import { maxFileSize } from '../utils/const'
 import useUserLogIn from '../store/useUserLogIn'
 import { sendNotification } from '../lib/api'
+import useRenderTestFile from '../hooks/useRenderTestFile'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -99,21 +100,7 @@ const CreatePost = () => {
     }
   }
 
-  const renderTestFile = (e: any) => {
-    const file = e.target.files[0]
-
-    let url = null
-
-    if (window.createObjectURL != undefined) {
-      url = window.createObjectURL(file)
-    } else if (window.URL != undefined) {
-      url = window.URL.createObjectURL(file)
-    } else if (window.webkitURL != undefined) {
-      url = window.webkitURL.createObjectURL(file)
-    }
-
-    setUploadFileNow({ URL: url, type: file.type })
-  }
+  const { renderTestFile } = useRenderTestFile({ setUploadFileNow })
 
   return (
     <div className="h-screen pb-6 overflow-y-scroll overflow-x-hidden">
@@ -156,6 +143,12 @@ const CreatePost = () => {
               className="bg-transparent text-black"
             >
               demokratija
+            </option>
+            <option
+              value={PostCategory.AUDIO}
+              className="bg-transparent text-black"
+            >
+              Audio
             </option>
           </select>
 

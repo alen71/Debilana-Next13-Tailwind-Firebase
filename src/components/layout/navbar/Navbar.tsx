@@ -62,7 +62,8 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
                 !asPath.includes('/debilana') &&
                 !asPath.includes('/gastarbajteri') &&
                 !asPath.includes('/demokratija') &&
-                !asPath.includes('/admin-page')
+                !asPath.includes('/admin-page') &&
+                !asPath.includes('/audio')
               }
             >
               <Link href="/">Sve</Link>
@@ -75,6 +76,9 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/demokratija')}>
               <Link href="/demokratija/new">demokratija</Link>
+            </NavItemWrapper>
+            <NavItemWrapper active={asPath.includes('/audio')}>
+              <Link href="/audio/new">audio</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/admin-page')}>
               <Link href="/admin-page">admin stranica</Link>
