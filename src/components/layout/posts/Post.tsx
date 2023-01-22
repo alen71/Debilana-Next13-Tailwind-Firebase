@@ -91,7 +91,7 @@ const Post = ({
       shadow-container-shadow text-gray dark:border-[1px] dark:border-gray  rounded-md cursor-pointer`}
         >
           <div className="pt-3 sm:pt-4">
-            <div className="flex justify-between items-center pb-4 px-4 md:px-8 text-xs md:text-sm">
+            <div className="flex justify-between items-center pb-3 sm:pb-4 px-4 md:px-8 text-xs md:text-sm">
               <a
                 className="flex justify-between items-center w-full"
                 href={`/single-post/${id}`}

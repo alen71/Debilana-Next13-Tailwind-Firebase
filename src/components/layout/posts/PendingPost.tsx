@@ -91,16 +91,14 @@ const PendingPost = ({
       shadow-container-shadow text-gray dark:border-[1px] dark:border-gray  rounded-md cursor-pointer`}
         >
           <div className="pt-4">
-            <div className="flex justify-between items-center pb-4 px-3 md:px-8 text-xs md:text-sm">
+            <div className="flex justify-between items-center pb-3 sm:pb-4 px-3 md:px-8 text-xs md:text-sm">
               <div className="flex justify-between items-center w-full">
                 <p>{category}</p>
-                <p className={`capitalize ${loggedIn ? 'mx-auto' : ''}`}>
-                  {dateFormat}
-                </p>
+                <p className="capitalize">{dateFormat}</p>
               </div>
             </div>
 
-            <p className="text-black dark:text-white text-base md:text-lg px-3 md:px-8">
+            <p className="text-black dark:text-white text-base md:text-lg px-4 md:px-8">
               {content}
               <br />
             </p>
@@ -110,7 +108,7 @@ const PendingPost = ({
                 href={link}
                 target="_black"
                 rel="noreferrer"
-                className="text-primary underline text-base md:text-lg px-3 md:px-8"
+                className="text-primary underline text-base md:text-lg px-4 md:px-8"
               >
                 Audio link.
               </a>
