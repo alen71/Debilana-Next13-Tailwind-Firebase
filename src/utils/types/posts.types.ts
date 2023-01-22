@@ -11,6 +11,7 @@ export type IPost = {
   fileName: string
   fileType: string
   index?: number
+  link?: string
 }
 
 export enum PostsStatus {
@@ -23,7 +24,8 @@ export enum PostCategory {
   OSTALO = 'ostalo',
   GASTARBAJTER = 'gastarbajteri',
   DEBILANA = 'debilana',
-  DEMOKRATIJA = 'demokratija'
+  DEMOKRATIJA = 'demokratija',
+  AUDIO = 'audio'
 }
 
 export enum PostSort {

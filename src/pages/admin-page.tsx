@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import Navbar from '../components/layout/navbar/Navbar'
-import Post from '../components/layout/posts/Post'
 import InputCustom from '../components/shared/InputCustom'
 import {
   userSignIn,
@@ -14,6 +13,7 @@ import { IPost, PostsStatus } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
 import useUserLogIn from '../store/useUserLogIn'
 import MessagePopup from '../components/shared/MessagePopup'
+import PendingPost from '../components/layout/posts/PendingPost'
 
 const AdminLogin = () => {
   const [password, setPassword] = useState('')
@@ -123,7 +123,7 @@ const AdminLogin = () => {
           {loggedIn &&
             posts.map((post, index) => (
               <div key={post.id}>
-                <Post index={index} {...post} admin />
+                <PendingPost index={index} {...post} admin />
               </div>
             ))}
         </div>

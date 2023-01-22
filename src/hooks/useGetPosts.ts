@@ -96,7 +96,7 @@ const useGetPosts = ({
     if (mustBeCategory && !category) return
 
     const posts = await getPosts(PostsStatus.APPROVED, sort, category)
-    // if (!posts) return
+    if (posts.length === 0) return
     const lastDoc = await getDoc(doc(db, 'posts', posts[posts.length - 1].id))
     cursor.current = lastDoc
   }, [category, sort, mustBeCategory])

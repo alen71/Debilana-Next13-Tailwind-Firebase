@@ -29,6 +29,10 @@ const hamburgerLinks = [
     name: 'demokratija'
   },
   {
+    href: '/audio/new',
+    name: 'audio'
+  },
+  {
     href: '/admin-page',
     name: 'Admin stranica'
   }
@@ -61,6 +65,7 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
                     !asPath.includes('/debilana') &&
                     !asPath.includes('/gastarbajter') &&
                     !asPath.includes('/demokratija') &&
+                    !asPath.includes('/audio') &&
                     !asPath.includes('/admin-page'))
                     ? 'text-primary dark:text-primary'
                     : 'text-black dark:text-white'

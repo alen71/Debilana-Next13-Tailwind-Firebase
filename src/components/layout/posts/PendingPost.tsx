@@ -18,7 +18,7 @@ import useManagePost from '../../../hooks/useManagePost'
 import useUserLogIn from '../../../store/useUserLogIn'
 import useCopyToClipboard from '../../../hooks/useCopyToClipboard'
 
-const Post = ({
+const PendingPost = ({
   content,
   like,
   dislike,
@@ -92,39 +92,23 @@ const Post = ({
         >
           <div className="pt-4">
             <div className="flex justify-between items-center pb-4 px-3 md:px-8 text-xs md:text-sm">
-              <a
-                className="flex justify-between items-center w-full"
-                href={`/single-post/${id}`}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <div className="flex justify-between items-center w-full">
                 <p>{category}</p>
                 <p className={`capitalize ${loggedIn ? 'mx-auto' : ''}`}>
                   {dateFormat}
                 </p>
-              </a>
-              {loggedIn && !asPath.includes('admin-page') && (
-                <div
-                  className="text-red scale-[0.8] hover:scale-90 duration-200"
-                  onClick={(e: any) => {
-                    e.stopPropagation()
-                    setOpenDelPopup(true)
-                  }}
-                >
-                  <ErrorSvg />
-                </div>
-              )}
+              </div>
             </div>
-            <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
-              <p className="text-black dark:text-white text-base md:text-lg px-3 md:px-8">
-                {content}
-                <br />
-              </p>
-            </a>
+
+            <p className="text-black dark:text-white text-base md:text-lg px-3 md:px-8">
+              {content}
+              <br />
+            </p>
+
             {link && link.length > 0 && (
               <a
                 href={link}
-                target="_blank"
+                target="_black"
                 rel="noreferrer"
                 className="text-primary underline text-base md:text-lg px-3 md:px-8"
               >
@@ -242,4 +226,4 @@ const Post = ({
   )
 }
 
-export default Post
+export default PendingPost
