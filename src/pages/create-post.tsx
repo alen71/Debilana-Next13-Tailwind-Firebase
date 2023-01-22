@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ref, uploadBytes, uploadString } from 'firebase/storage'
 import { addDoc, collection } from 'firebase/firestore'
 import { db, storage } from '../utils/firebase/firebase-utils'
@@ -14,6 +14,8 @@ import MessagePopup from '../components/shared/MessagePopup'
 import { maxFileSize } from '../utils/const'
 import useUserLogIn from '../store/useUserLogIn'
 import { sendNotification } from '../lib/api'
+import useRenderTestFile from '../hooks/useRenderTestFile'
+import InputCustom from '../components/shared/InputCustom'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -24,15 +26,21 @@ const CreatePost = () => {
   })
   const [textareaText, setTextareaText] = useState('')
   const [videoURL, setVideoURL] = useState('')
+  const [link, setLink] = useState('')
   const [uploadFile, setUploadFile] = useState<any>(null)
   const [uploadFileNow, setUploadFileNow] = useState({
     URL: '',
     type: ''
   })
   const [loading, isLoading] = useState(false)
+  const [linkOpen, isLinkOpen] = useState(false)
   const { loggedIn } = useUserLogIn()
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
+
+  const selectChange = () => {
+    selectEl.current?.value === 'audio' ? isLinkOpen(true) : isLinkOpen(false)
+  }
 
   const checkTyping = (e: any) => {
     setTextareaText(e.target.value)
@@ -62,7 +70,8 @@ const CreatePost = () => {
         status: loggedIn ? PostsStatus.APPROVED : PostsStatus.PENDING,
         videoURL: videoURL ? videoURL : '',
         fileName: uploadFile ? uploadFile.name : '',
-        fileType: uploadFile ? uploadFile.type : ''
+        fileType: uploadFile ? uploadFile.type : '',
+        link: link.length > 0 ? link : ''
       })
 
       if (uploadFile && uploadFile.size < maxFileSize) {
@@ -91,6 +100,7 @@ const CreatePost = () => {
         type: true
       })
     } catch (e) {
+      isLoading(false)
       setDisplayMessage({
         message: `${e}`,
         open: true,
@@ -99,21 +109,7 @@ const CreatePost = () => {
     }
   }
 
-  const renderTestFile = (e: any) => {
-    const file = e.target.files[0]
-
-    let url = null
-
-    if (window.createObjectURL != undefined) {
-      url = window.createObjectURL(file)
-    } else if (window.URL != undefined) {
-      url = window.URL.createObjectURL(file)
-    } else if (window.webkitURL != undefined) {
-      url = window.webkitURL.createObjectURL(file)
-    }
-
-    setUploadFileNow({ URL: url, type: file.type })
-  }
+  const { renderTestFile } = useRenderTestFile({ setUploadFileNow })
 
   return (
     <div className="h-screen pb-6 overflow-y-scroll overflow-x-hidden">
@@ -137,6 +133,7 @@ const CreatePost = () => {
 
           <select
             ref={selectEl}
+            onChange={selectChange}
             className="text-center rounded-md py-1 border-[1px] bg-transparent text-gray"
           >
             <option
@@ -157,6 +154,14 @@ const CreatePost = () => {
             >
               demokratija
             </option>
+            {loggedIn && (
+              <option
+                value={PostCategory.AUDIO}
+                className="bg-transparent text-black"
+              >
+                Audio
+              </option>
+            )}
           </select>
 
           <TextareaCustom
@@ -167,6 +172,23 @@ const CreatePost = () => {
             value={textareaText}
             onChange={checkTyping}
           />
+
+          {loggedIn && (
+            <div
+              className={`${
+                linkOpen ? 'scale-100 h-fit' : 'scale-0 h-0'
+              } w-full duration-300`}
+            >
+              <InputCustom
+                type="text"
+                name="link"
+                placeholder="Nalepite audio link"
+                onChange={(e: any) => setLink(e.target.value)}
+                className={`${linkOpen ? 'scale-100' : 'scale-0'} duration-300`}
+              />
+            </div>
+          )}
+
           <div>
             <p className="pb-2 text-black dark:text-white">
               Polje za dodavanje slike ili video snimka nije obavezno.
