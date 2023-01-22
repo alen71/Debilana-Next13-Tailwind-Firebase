@@ -90,8 +90,8 @@ const Post = ({
           } transition-transform duration-500 text-sm sm:text-base bg-white dark:bg-black dark:shadow-none
       shadow-container-shadow text-gray dark:border-[1px] dark:border-gray  rounded-md cursor-pointer`}
         >
-          <div className="pt-4">
-            <div className="flex justify-between items-center pb-4 px-3 md:px-8 text-xs md:text-sm">
+          <div className="pt-3 sm:pt-4">
+            <div className="flex justify-between items-center pb-3 sm:pb-4 px-4 md:px-8 text-xs md:text-sm">
               <a
                 className="flex justify-between items-center w-full"
                 href={`/single-post/${id}`}
@@ -116,7 +116,7 @@ const Post = ({
               )}
             </div>
             <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
-              <p className="text-black dark:text-white text-base md:text-lg px-3 md:px-8">
+              <p className="text-black dark:text-white text-base md:text-lg px-4 md:px-8">
                 {content}
                 <br />
               </p>
