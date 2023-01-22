@@ -11,6 +11,7 @@ export type IPost = {
   fileName: string
   fileType: string
   index?: number
+  link?: string
 }
 
 export enum PostsStatus {
