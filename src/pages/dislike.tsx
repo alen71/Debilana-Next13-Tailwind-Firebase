@@ -16,7 +16,6 @@ const Sort: NextPage = () => {
   const { next, data, loading, error } = useGetPosts({
     sort: PostSort.DISLIKE
   })
-  console.log(data)
 
   const lastElementRef = useCallback(
     (node: any) => {
