@@ -41,7 +41,6 @@ const useGetPosts = ({
   const next = useCallback(async () => {
     if (mustBeCategory && !category) return
 
-    console.log('isEnd' + isEnd.current)
     if (isEnd.current) return
     try {
       setLoading(true)
