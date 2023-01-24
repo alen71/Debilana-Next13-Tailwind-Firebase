@@ -6,7 +6,7 @@ const useCopyToClipboard = (id: string) => {
   const copyToClipboard = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(
-        `debilana.vercel.app/single-post/${id}`
+        `https://debilana.info/single-post/${id}`
       )
       setCopied(true)
 
