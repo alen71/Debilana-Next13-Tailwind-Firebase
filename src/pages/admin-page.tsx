@@ -60,7 +60,6 @@ const AdminLogin = () => {
 
       if (!user.accessToken) throw new Error()
     } catch (err) {
-      console.log('radil')
       setDisplayMessage({
         message: 'Password ili email nisu tačni!',
         open: true,

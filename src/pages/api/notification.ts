@@ -10,7 +10,6 @@ type Data = {
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === 'POST') {
     const data = req.body
-    console.log(req.body)
 
     try {
       await transporter.sendMail({

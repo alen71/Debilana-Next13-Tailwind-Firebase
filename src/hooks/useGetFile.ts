@@ -13,7 +13,6 @@ const useGetFile = (
   const [embedVideo, setEmbedVideo] = useState(false)
 
   const getFile = useCallback(async () => {
-    console.log(videoURL.length > 0)
     videoURL.length > 0 && setEmbedVideo(true)
 
     if (fileName.length === 0 || fileType.length === 0) return

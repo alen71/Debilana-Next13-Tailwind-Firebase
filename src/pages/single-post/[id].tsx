@@ -17,7 +17,6 @@ const SinglePost = () => {
       const postData = await getPost(id as string)
 
       const post = postData.data() as IPost
-      console.log(post)
       setSinglePost({ ...post, id: id as string })
     }
     getSignlePost()
