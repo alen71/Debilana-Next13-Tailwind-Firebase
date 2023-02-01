@@ -108,9 +108,9 @@ const PendingPost = ({
                 href={link}
                 target="_black"
                 rel="noreferrer"
-                className="text-primary underline text-base md:text-lg px-4 md:px-8"
+                className="text-primary no-underline text-base md:text-lg px-3 md:px-8 hover:underline"
               >
-                Audio link.
+                Poseti link.
               </a>
             )}
 
