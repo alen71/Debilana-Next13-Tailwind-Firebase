@@ -16,6 +16,7 @@ import useUserLogIn from '../store/useUserLogIn'
 import { sendNotification } from '../lib/api'
 import useRenderTestFile from '../hooks/useRenderTestFile'
 import InputCustom from '../components/shared/InputCustom'
+import clsx from 'clsx'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -173,21 +174,16 @@ const CreatePost = () => {
             onChange={checkTyping}
           />
 
-          {loggedIn && (
-            <div
-              className={`${
-                linkOpen ? 'scale-100 h-fit' : 'scale-0 h-0'
-              } w-full duration-300`}
-            >
-              <InputCustom
-                type="text"
-                name="link"
-                placeholder="Nalepite audio link"
-                onChange={(e: any) => setLink(e.target.value)}
-                className={`${linkOpen ? 'scale-100' : 'scale-0'} duration-300`}
-              />
-            </div>
-          )}
+          <div className={clsx('w-full duration-300 scale-100 h-fit', {})}>
+            <InputCustom
+              type="text"
+              name="link"
+              placeholder={`${
+                linkOpen ? 'Nalepite audio link' : 'Nalepite link'
+              }`}
+              onChange={(e: any) => setLink(e.target.value)}
+            />
+          </div>
 
           <div>
             <p className="pb-2 text-black dark:text-white">
@@ -245,13 +241,11 @@ const CreatePost = () => {
           <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-0 justify-end">
             <CreatePostButton isTyping={isTyping} spinner={loading} />
           </div>
-          <p
-            className={`${
-              loggedIn ? 'block' : 'hidden'
-            } absolute bottom-4 left-0 w-full text-center uppercase text-black dark:text-white`}
-          >
-            Kao adminu, post će biti automatski odobren!
-          </p>
+          {loggedIn && (
+            <p className="absolute bottom-4 left-0 w-full text-center uppercase text-black dark:text-white">
+              Kao adminu, post će biti automatski odobren!
+            </p>
+          )}
         </form>
 
         <p className="text-black dark:text-white text-base sm:text-lg text-center">
