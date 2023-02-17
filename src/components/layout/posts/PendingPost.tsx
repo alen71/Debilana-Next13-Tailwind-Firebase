@@ -78,7 +78,6 @@ const PendingPost = ({
         transition={{
           duration: 1,
           type: 'spring'
-          // delay: index && 0.3 * index
         }}
       >
         <div
@@ -122,15 +121,13 @@ const PendingPost = ({
 
             <div className="relative w-full mt-4">
               {fileName.length > 0 && fileType.startsWith('image') && (
-                <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
-                  <Image
-                    src={url}
-                    width={800}
-                    height={300}
-                    alt={fileName}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </a>
+                <Image
+                  src={url}
+                  width={800}
+                  height={300}
+                  alt={fileName}
+                  style={{ objectFit: 'cover' }}
+                />
               )}
 
               {fileName.length > 0 && fileType.startsWith('video') && (

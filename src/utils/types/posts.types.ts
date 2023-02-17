@@ -24,8 +24,7 @@ export enum PostCategory {
   OSTALO = 'ostalo',
   GASTARBAJTER = 'gastarbajteri',
   DEBILANA = 'debilana',
-  DEMOKRATIJA = 'demokratija',
-  AUDIO = 'audio'
+  DEMOKRATIJA = 'demokratija'
 }
 
 export enum PostSort {
