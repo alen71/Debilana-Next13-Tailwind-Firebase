@@ -29,7 +29,7 @@ const hamburgerLinks = [
     name: 'demokratija'
   },
   {
-    href: '/audio/new',
+    href: '/audio',
     name: 'audio'
   },
   {
