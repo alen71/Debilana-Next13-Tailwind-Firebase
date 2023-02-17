@@ -34,14 +34,9 @@ const CreatePost = () => {
     type: ''
   })
   const [loading, isLoading] = useState(false)
-  const [linkOpen, isLinkOpen] = useState(false)
   const { loggedIn } = useUserLogIn()
 
   const selectEl = useRef<null | HTMLSelectElement>(null)
-
-  const selectChange = () => {
-    selectEl.current?.value === 'audio' ? isLinkOpen(true) : isLinkOpen(false)
-  }
 
   const checkTyping = (e: any) => {
     setTextareaText(e.target.value)
@@ -134,7 +129,6 @@ const CreatePost = () => {
 
           <select
             ref={selectEl}
-            onChange={selectChange}
             className="text-center rounded-md py-1 border-[1px] bg-transparent text-gray"
           >
             <option
@@ -155,14 +149,6 @@ const CreatePost = () => {
             >
               demokratija
             </option>
-            {loggedIn && (
-              <option
-                value={PostCategory.AUDIO}
-                className="bg-transparent text-black"
-              >
-                Audio
-              </option>
-            )}
           </select>
 
           <TextareaCustom
@@ -178,9 +164,7 @@ const CreatePost = () => {
             <InputCustom
               type="text"
               name="link"
-              placeholder={`${
-                linkOpen ? 'Nalepite audio link' : 'Nalepite link'
-              }`}
+              placeholder="Nalepite link"
               onChange={(e: any) => setLink(e.target.value)}
             />
           </div>

@@ -78,7 +78,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
               <Link href="/demokratija/new">demokratija</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/audio')}>
-              <Link href="/audio/new">audio</Link>
+              <Link href="/audio">audio</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/admin-page')}>
               <Link href="/admin-page">admin stranica</Link>
