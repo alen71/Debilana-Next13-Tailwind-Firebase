@@ -7,9 +7,11 @@ const ContactUsBtn = () => {
     <a
       href="mailto:debilana.info@gmail.com"
       rel="nofollow"
-      className=" w-16 h-16 fixed bottom-6 right-6 rounded-full hidden lg:flex items-center justify-center bg-primary cursor-pointer"
+      className=" w-14 h-14 fixed bottom-6 right-6 rounded-full hidden lg:flex items-center justify-center bg-primary cursor-pointer"
     >
-      <MessageIcon />
+      <div className="scale-90">
+        <MessageIcon />
+      </div>
     </a>
   )
 }
