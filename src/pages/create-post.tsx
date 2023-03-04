@@ -17,6 +17,7 @@ import { sendNotification } from '../lib/api'
 import useRenderTestFile from '../hooks/useRenderTestFile'
 import InputCustom from '../components/shared/InputCustom'
 import clsx from 'clsx'
+import PageLayout from '../components/layout/PageLayout'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -108,9 +109,7 @@ const CreatePost = () => {
   const { renderTestFile } = useRenderTestFile({ setUploadFileNow })
 
   return (
-    <div className="h-screen pb-6 overflow-y-scroll overflow-x-hidden">
-      <Navbar hideSortTable hideSearch />
-
+    <PageLayout>
       <MessagePopup
         isOpen={displayMessage.open}
         message={displayMessage.message}
@@ -120,7 +119,7 @@ const CreatePost = () => {
         }
       />
 
-      <div className="mx-6 pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
+      <div className="px-6 md:px-0 pt-6 md:mx-auto w-full md:w-[567px] 2xl:w-[700px]">
         <form
           className="relative flex gap-5 flex-col rounded-md text-sm sm:text-base bg-white dark:bg-black px-6 pt-8 pb-14 mb-6 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray"
           onSubmit={createPostFunction}
@@ -236,7 +235,7 @@ const CreatePost = () => {
           Pravila za objavljivanje sadržaja su 10 Božijih zapovesti!
         </p>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 
