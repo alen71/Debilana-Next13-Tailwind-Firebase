@@ -89,6 +89,16 @@ const HamburgerNavbar = ({ open, toggle }: Props) => {
           </div>
 
           <SortTable toggle={toggle} />
+
+          <div className="mt-10 text-lg mx-auto text-center">
+            Kontaktirajte nas:{' '}
+            <a
+              href="mailto:debilana.info@gmail.com"
+              className="text-primary underline"
+            >
+              debilana.info@gmail.com
+            </a>
+          </div>
         </div>
       </div>
     </>

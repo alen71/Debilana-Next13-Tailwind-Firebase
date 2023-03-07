@@ -8,6 +8,7 @@ import Post from '../components/layout/posts/Post'
 import { IPost, PostCategory, PostSort } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
 import Spinner from '../components/shared/Spinner'
+import PageLayout from '../components/layout/PageLayout'
 
 const Sort: NextPage = () => {
   const loader = useRef(null)
@@ -33,9 +34,7 @@ const Sort: NextPage = () => {
   )
 
   return (
-    <div className="h-screen custom-scrollbar overflow-y-auto overflow-x-hidden flex flex-col gap-6 items-center scroll-pt-24  md:snap-proximity md:snap-y">
-      <Navbar />
-
+    <PageLayout>
       {data.map((post, index) => {
         return (
           <div
@@ -52,7 +51,7 @@ const Sort: NextPage = () => {
       {loading && <Spinner />}
       {error && <p>Error!</p>}
       <div ref={loader} />
-    </div>
+    </PageLayout>
   )
 }
 
