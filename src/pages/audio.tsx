@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from '../components/layout/navbar/Navbar'
+import PageLayout from '../components/layout/PageLayout'
 
 const audioLinks = [
   {
@@ -20,34 +21,34 @@ const audioLinks = [
   }
 ]
 
-const audio = () => {
+const Audio = () => {
   return (
-    <div className="h-[100svh]">
-      <Navbar hideSortTable />
+    <PageLayout hideSortTable>
+      <div className="h-full w-full">
+        <div className="px-5 md:px-0 pt-6 md:mx-auto w-full md:w-[567px] 2xl:w-[700px]">
+          <div className="relative flex gap-5 flex-col rounded-md text-sm sm:text-base bg-white dark:bg-black px-6 pt-8 pb-14 mb-6 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray">
+            <h1 className="text-center font-bold text-3xl">
+              Poslušajte ispovesti
+            </h1>
 
-      <div className="mx-6 pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px]">
-        <div className="relative flex gap-5 flex-col rounded-md text-sm sm:text-base bg-white dark:bg-black px-6 pt-8 pb-14 mb-6 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray">
-          <h1 className="text-center font-bold text-3xl">
-            Poslušajte ispovesti
-          </h1>
-
-          <div className="flex flex-col justify-between items-center mt-8 gap-5">
-            {audioLinks.map(({ href, name }) => (
-              <a
-                key={name}
-                href={href}
-                target="_blank"
-                rel="noreferrer nofollow"
-                className="block font-semibold text-primary text-lg border-[1px] border-primary rounded-full py-1 px-5 duration-300 hover:text-white hover:bg-primary"
-              >
-                {name}
-              </a>
-            ))}
+            <div className="flex flex-col justify-between items-center mt-8 gap-5">
+              {audioLinks.map(({ href, name }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer nofollow"
+                  className="block font-semibold text-primary text-lg border-[1px] border-primary rounded-full py-1 px-5 duration-300 hover:text-white hover:bg-primary"
+                >
+                  {name}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 
-export default audio
+export default Audio

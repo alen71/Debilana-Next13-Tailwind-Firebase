@@ -6,6 +6,7 @@ import { IPost, PostSort, PostsStatus } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
 import Post from '../components/layout/posts/Post'
 import Spinner from '../components/shared/Spinner'
+import PageLayout from '../components/layout/PageLayout'
 
 export async function getServerSideProps() {
   const posts = await getPosts(PostsStatus.APPROVED)
@@ -42,9 +43,7 @@ export default function Home({ posts }: Props) {
   )
 
   return (
-    <div className="flex flex-col gap-6 items-center">
-      <Navbar isAnimate />
-
+    <PageLayout>
       {data.map((post, index) => {
         return (
           <div
@@ -61,6 +60,6 @@ export default function Home({ posts }: Props) {
       <div>{loading && <Spinner />}</div>
       {error && <p>Error!</p>}
       <div ref={loader} />
-    </div>
+    </PageLayout>
   )
 }

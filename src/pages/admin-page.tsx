@@ -14,6 +14,7 @@ import useGetPosts from '../hooks/useGetPosts'
 import useUserLogIn from '../store/useUserLogIn'
 import MessagePopup from '../components/shared/MessagePopup'
 import PendingPost from '../components/layout/posts/PendingPost'
+import PageLayout from '../components/layout/PageLayout'
 
 const AdminLogin = () => {
   const [password, setPassword] = useState('')
@@ -75,9 +76,7 @@ const AdminLogin = () => {
   }
 
   return (
-    <div className="h-screen pb-6 overflow-y-auto ">
-      <Navbar hideSortTable />
-
+    <PageLayout hideSortTable>
       <MessagePopup
         isOpen={displayMessage.open}
         message={displayMessage.message}
@@ -87,9 +86,9 @@ const AdminLogin = () => {
         }
       />
 
-      <div className="mx-6 pt-20 lg:pt-6 md:mx-auto md:max-w-xl 2xl:max-w-[700px] flex flex-col gap-6 relative">
+      <div className="px-5 md:px-0 pt-20 lg:pt-6  w-full md:w-[567px] 2xl:w-[700px] flex flex-col gap-6 relative">
         <form
-          className={`${hideForm} flex gap-5 flex-col rounded-md text-sm sm:text-base bg-transparent px-6 py-6 mb-6 transition-[position, transform] duration-700 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray`}
+          className={`${hideForm} w-full flex gap-5 flex-col rounded-md text-sm sm:text-base bg-transparent px-6 py-6 mb-6 transition-[position, transform] duration-700 shadow-container-shadow dark:shadow-none dark:border-[1px] dark:border-gray`}
           onSubmit={signIn}
         >
           <p className="text-base sm:text-lg text-center">Uloguj se</p>
@@ -136,7 +135,7 @@ const AdminLogin = () => {
           logout
         </button>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

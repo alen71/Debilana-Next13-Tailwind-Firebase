@@ -16,10 +16,9 @@ type Props = {
   hideSortTable?: boolean
   hideSearch?: boolean
   hideNav?: boolean
-  isAnimate?: boolean
 }
 
-const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
+const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
   const { asPath } = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { loggedIn, setLoggedIn } = useUserLogIn()
@@ -28,19 +27,10 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const idNavHidden = hideNav ? 'hidden' : ''
-
-  const navAnimation = isAnimate
-    ? {
-        initial: { y: '-100%' },
-        animate: { y: 0 },
-        transition: { duration: 0.5 }
-      }
-    : ''
+  const isNavHidden = hideNav ? 'hidden' : ''
 
   return (
-    <motion.nav
-      {...navAnimation}
+    <nav
       className="flex items-center px-6 lg:px-4 xl:px-0  bg-white dark:bg-black min-h-[71px] w-full z-50 
       shadow-md dark:border-b-[1px] dark:shadow-none dark:border-gray sticky top-0"
     >
@@ -55,7 +45,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
           <SearchBar hide={hideSearch} />
         </div> */}
 
-        <div className={`${idNavHidden} flex items-center lg:ml-auto`}>
+        <div className={`${isNavHidden} flex items-center lg:ml-auto`}>
           <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray dark:divide-gray text-xs xl:text-sm mr-3 xl:mr-6">
             <NavItemWrapper
               active={
@@ -96,7 +86,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav, isAnimate }: Props) => {
           <SortTable hide={hideSortTable} />
         </div>
       </div>
-    </motion.nav>
+    </nav>
   )
 }
 
