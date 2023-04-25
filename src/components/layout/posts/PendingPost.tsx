@@ -5,17 +5,17 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 import CopySvg from '../../../assets/copy.svg'
-import ErrorSvg from '../../../assets/error-icon.svg'
 import LikeSvg from '../../../assets/like.svg'
 import LikeFillSvg from '../../../assets/like-fill.svg'
 import DislikeSvg from '../../../assets/dislike.svg'
 import DislikeFillSvg from '../../../assets/dislike-fill.svg'
+
 import { IPost } from '../../../utils/types/posts.types'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
+
 import useInteraction from '../../../hooks/useInteraction'
 import useGetFile from '../../../hooks/useGetFile'
 import useManagePost from '../../../hooks/useManagePost'
-import useUserLogIn from '../../../store/useUserLogIn'
 import useCopyToClipboard from '../../../hooks/useCopyToClipboard'
 
 const PendingPost = ({
@@ -28,7 +28,6 @@ const PendingPost = ({
   videoURL,
   admin,
   fileName,
-  index,
   fileType,
   link
 }: IPost) => {
@@ -36,7 +35,6 @@ const PendingPost = ({
   const [openApprovePopup, setOpenApprovePopup] = useState(false)
 
   const { copied, copyToClipboard } = useCopyToClipboard(id)
-  const { loggedIn } = useUserLogIn()
 
   const dateFormat = new Intl.DateTimeFormat('sr-Latn', {
     day: 'numeric',

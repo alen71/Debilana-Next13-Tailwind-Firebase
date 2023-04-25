@@ -1,17 +1,15 @@
-import { DocumentData } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 
-import Navbar from '../components/layout/navbar/Navbar'
-import InputCustom from '../components/shared/InputCustom'
 import {
   userSignIn,
   userSignOut,
   getPosts
 } from '../utils/firebase/firebase-utils'
 import { IPost, PostsStatus } from '../utils/types/posts.types'
-import useGetPosts from '../hooks/useGetPosts'
+
 import useUserLogIn from '../store/useUserLogIn'
+
+import InputCustom from '../components/shared/InputCustom'
 import MessagePopup from '../components/shared/MessagePopup'
 import PendingPost from '../components/layout/posts/PendingPost'
 import PageLayout from '../components/layout/PageLayout'

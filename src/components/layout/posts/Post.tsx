@@ -10,8 +10,10 @@ import LikeSvg from '../../../assets/like.svg'
 import LikeFillSvg from '../../../assets/like-fill.svg'
 import DislikeSvg from '../../../assets/dislike.svg'
 import DislikeFillSvg from '../../../assets/dislike-fill.svg'
+
 import { IPost } from '../../../utils/types/posts.types'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
+
 import useInteraction from '../../../hooks/useInteraction'
 import useGetFile from '../../../hooks/useGetFile'
 import useManagePost from '../../../hooks/useManagePost'
@@ -28,7 +30,6 @@ const Post = ({
   videoURL,
   admin,
   fileName,
-  index,
   fileType,
   link
 }: IPost) => {
