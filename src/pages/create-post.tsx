@@ -1,23 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ref, uploadBytes, uploadString } from 'firebase/storage'
+import React, { useRef, useState } from 'react'
+import { ref, uploadBytes } from 'firebase/storage'
 import { addDoc, collection } from 'firebase/firestore'
 import { db, storage } from '../utils/firebase/firebase-utils'
+import ReactPlayer from 'react-player'
+import clsx from 'clsx'
 
-import Navbar from '../components/layout/navbar/Navbar'
-import ImageSvg from '../assets/image.svg'
 import TextareaCustom from '../components/shared/TextareaCustom'
 import CreatePostButton from '../components/shared/CreatePostButton'
-import { PostCategory, PostsStatus } from '../utils/types/posts.types'
-import ReactPlayer from 'react-player'
 import DisplayUploadedFile from '../components/shared/DisplayUploadedFile'
 import MessagePopup from '../components/shared/MessagePopup'
-import { maxFileSize } from '../utils/const'
-import useUserLogIn from '../store/useUserLogIn'
-import { sendNotification } from '../lib/api'
-import useRenderTestFile from '../hooks/useRenderTestFile'
 import InputCustom from '../components/shared/InputCustom'
-import clsx from 'clsx'
 import PageLayout from '../components/layout/PageLayout'
+
+import ImageSvg from '../assets/image.svg'
+
+import useUserLogIn from '../store/useUserLogIn'
+import useRenderTestFile from '../hooks/useRenderTestFile'
+
+import { PostCategory, PostsStatus } from '../utils/types/posts.types'
+import { maxFileSize } from '../utils/const'
+
+import { sendNotification } from '../lib/api'
 
 const CreatePost = () => {
   const [isTyping, setIsTyping] = useState(false)
@@ -83,7 +86,12 @@ const CreatePost = () => {
       }
 
       if (!loggedIn) {
-        await sendNotification('Imate novu objavu na čekanju!')
+        await sendNotification({
+          content: textareaText,
+          link,
+          image: uploadFile ? uploadFile : undefined,
+          message: 'Imate novu objavu na čekanju!'
+        })
       }
 
       isLoading(false)

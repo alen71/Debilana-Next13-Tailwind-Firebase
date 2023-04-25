@@ -1,4 +1,4 @@
-export const sendNotification = async (data: string) =>
+export const sendNotification = async (data: any) =>
   fetch('/api/notification', {
     method: 'POST',
     body: JSON.stringify(data),
