@@ -161,10 +161,10 @@ const Post = ({
               )}
             </div>
           </div>
-          <div className="w-full grid grid-cols-4 divide-x border-t-[1px] border-gray text-gray  ">
+          <div className="w-full grid grid-cols-4 divide-x border-t-[1px] border-gray text-gray">
             {!admin ? (
               <>
-                <p
+                {/* <p
                   className={`group flex items-center justify-center md:py-[10px] py-[6px] gap-2 text-center hover:bg-gray-bg dark:hover:bg-gray-dark`}
                   onClick={likePost}
                 >
@@ -185,9 +185,9 @@ const Post = ({
                     <DislikeSvg className="scale-[0.7] sm:scale-[1] translate-y-[2px]" />
                   )}
                   <span>{dislikesNum}</span>
-                </p>
+                </p> */}
                 <div
-                  className="md:py-[10px] py-[6px] relative grid place-items-center col-start-3 col-end-5 hover:bg-gray-bg dark:hover:bg-gray-dark"
+                  className="md:py-[10px] py-[6px] relative grid place-items-center border-l col-start-3 col-end-5 hover:bg-gray-bg dark:hover:bg-gray-dark border-gray"
                   onClick={copyToClipboard}
                 >
                   <CopySvg
@@ -200,7 +200,7 @@ const Post = ({
                       copied ? 'opacity-100' : 'opacity-0'
                     } duration-300 font-semibold absolute md:text-xl`}
                   >
-                    Copied to clipboard!
+                    Tekst kopiran
                   </p>
                 </div>
               </>
