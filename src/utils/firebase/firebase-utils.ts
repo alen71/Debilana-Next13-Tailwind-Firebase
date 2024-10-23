@@ -26,7 +26,7 @@ import {
   ref
 } from 'firebase/storage'
 import { limitPerPage } from '../const'
-import { PostSort, PostsStatus } from '../types/posts.types'
+import { PostSort } from '../types/posts.types'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_VERCEL_API_KEY,
