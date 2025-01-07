@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../utils/firebase/firebase-utils'
 import useUserLogIn from '../store/useUserLogIn'
 import { useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/next'
 
 export default function App({ Component, pageProps }: AppProps) {
   const { setLoggedIn } = useUserLogIn()
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
+      <Analytics />
     </ThemeProvider>
   )
 }
