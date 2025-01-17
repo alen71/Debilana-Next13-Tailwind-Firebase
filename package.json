@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,tx,tsx}\""
   },
   "dependencies": {
+    "@next/third-parties": "^15.1.4",
     "@svgr/webpack": "^6.5.1",
     "@types/node": "18.11.9",
     "@types/nodemailer": "^6.4.7",

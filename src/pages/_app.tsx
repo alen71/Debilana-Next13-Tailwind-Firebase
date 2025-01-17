@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../utils/firebase/firebase-utils'
 import useUserLogIn from '../store/useUserLogIn'
 import { useEffect } from 'react'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export default function App({ Component, pageProps }: AppProps) {
   const { setLoggedIn } = useUserLogIn()
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_VERCEL_GTAG_ID || ''} />
     </ThemeProvider>
   )
 }
