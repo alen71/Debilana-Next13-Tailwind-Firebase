@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_VERCEL_GTAG_ID || ''} />
+      <GoogleAnalytics gaId="G-FP7QVC8R79" />
     </ThemeProvider>
   )
 }
