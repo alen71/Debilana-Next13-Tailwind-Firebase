@@ -19,6 +19,7 @@ import {
   PostSort,
   PostsStatus
 } from '../utils/types/posts.types'
+import { useSearchStore } from '@/store/useSearchStore'
 
 type Params = {
   sort: PostSort
@@ -31,6 +32,8 @@ const useGetPosts = ({
   category,
   mustBeCategory
 }: Params) => {
+  const search = useSearchStore(state => state.searchResults)
+
   const [data, setData] = useState<IPost[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string>()
@@ -52,7 +55,7 @@ const useGetPosts = ({
 
       if (cursor.current) lastEl.push(startAfter(cursor.current) as any)
 
-      const q = !category
+      let q = !category
         ? query(
             colRef,
             where('status', '==', PostsStatus.APPROVED),
@@ -68,6 +71,16 @@ const useGetPosts = ({
             limit(limitPerPage),
             ...lastEl
           )
+
+      console.log(search)
+
+      if (search) {
+        q = query(q, where('content', 'in', search))
+      }
+
+      console.log(search)
+
+      console.log(q)
 
       const postSnapshot = await getDocs(q)
 
@@ -89,7 +102,7 @@ const useGetPosts = ({
     } finally {
       setLoading(false)
     }
-  }, [sort, category, mustBeCategory])
+  }, [sort, category, mustBeCategory, search])
 
   const setCursor = useCallback(async () => {
     if (mustBeCategory && !category) return
@@ -114,9 +127,9 @@ const useGetPosts = ({
     isEnd.current = false
     cursor.current = undefined
     next()
-  }, [cursor, category, sort, next, mustBeCategory])
+  }, [cursor, category, sort, next, mustBeCategory, search])
 
-  return { next, data, cursor, loading, error }
+  return { next, data: search ?? data, cursor, loading, error }
 }
 
 export default useGetPosts

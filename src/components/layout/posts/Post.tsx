@@ -6,15 +6,10 @@ import { motion } from 'framer-motion'
 
 import CopySvg from '../../../assets/copy.svg'
 import ErrorSvg from '../../../assets/error-icon.svg'
-import LikeSvg from '../../../assets/like.svg'
-import LikeFillSvg from '../../../assets/like-fill.svg'
-import DislikeSvg from '../../../assets/dislike.svg'
-import DislikeFillSvg from '../../../assets/dislike-fill.svg'
 
 import { IPost } from '../../../utils/types/posts.types'
 import ApproveOrDelPopup from './ApproveOrDelPopup'
 
-import useInteraction from '../../../hooks/useInteraction'
 import useGetFile from '../../../hooks/useGetFile'
 import useManagePost from '../../../hooks/useManagePost'
 import useUserLogIn from '../../../store/useUserLogIn'
@@ -59,8 +54,8 @@ const Post = ({
     fileType
   )
 
-  const { likesNum, dislikesNum, isLiked, isDisliked, dislikePost, likePost } =
-    useInteraction(id, like, dislike)
+  // const { likesNum, dislikesNum, isLiked, isDisliked, dislikePost, likePost } =
+  //   useInteraction(id, like, dislike)
 
   const { url, embedVideo, setEmbedVideo } = useGetFile(
     fileName,
@@ -69,6 +64,8 @@ const Post = ({
     id,
     asPath
   )
+
+  const [question, answer] = content.split('ODGOVOR:')
 
   return (
     <>
@@ -118,7 +115,11 @@ const Post = ({
             </div>
             <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
               <p className="text-black dark:text-white text-base md:text-lg px-4 md:px-8">
-                {content}
+                {question}
+                <br />
+                <br />
+                <span className="text-gray-text-hover">ODGOVOR:</span>
+                {answer}
                 <br />
               </p>
             </a>
