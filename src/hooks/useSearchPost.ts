@@ -8,7 +8,19 @@ export const useSearchPost = () => {
   const getSearchResults = useCallback(
     async (query: string) => {
       const res = await searchRequest(query)
-      setSearchResults(res.hits)
+
+      console.log('res', res)
+
+      const formattedHits = res.hits.map(hit => {
+        return {
+          ...hit,
+          content: hit?._highlightResult?.content?.value
+        }
+      })
+
+      console.log(formattedHits)
+
+      setSearchResults(formattedHits)
     },
     [setSearchResults]
   )

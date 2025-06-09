@@ -115,11 +115,11 @@ const Post = ({
             </div>
             <a href={`/single-post/${id}`} target="_blank" rel="noreferrer">
               <p className="text-black dark:text-white text-base md:text-lg px-4 md:px-8">
-                {question}
+                <p dangerouslySetInnerHTML={{ __html: question }} />
                 <br />
                 <br />
-                <span className="text-gray-text-hover">ODGOVOR:</span>
-                {answer}
+                <p className="text-gray-text-hover rounded-sm">ODGOVOR:</p>
+                <p dangerouslySetInnerHTML={{ __html: answer }} />
                 <br />
               </p>
             </a>

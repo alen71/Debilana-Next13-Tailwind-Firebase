@@ -1,12 +1,10 @@
 import { algoliasearch, SearchResponse } from 'algoliasearch'
 import { IPost } from '../types/posts.types'
 
-const appId = process.env.NEXT_PUBLIC_VERCEL_APP_ID ?? ''
-const apiKey = process.env.NEXT_PUBLIC_VERCEL_API_KEY ?? ''
+const appId = process.env.NEXT_PUBLIC_VERCEL_ALGOLIA_APP_ID ?? ''
+const apiKey = process.env.NEXT_PUBLIC_VERCEL_ALGOLIA_API_KEY ?? ''
 
 const client = algoliasearch(appId, apiKey)
-
-console.log(apiKey)
 
 client.setSettings({
   indexName: 'debilana_content',
