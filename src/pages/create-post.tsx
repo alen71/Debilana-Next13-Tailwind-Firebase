@@ -85,14 +85,14 @@ const CreatePost = () => {
         }
       }
 
-      if (!loggedIn) {
-        await sendNotification({
-          content: textareaText,
-          link,
-          image: uploadFile ? uploadFile : undefined,
-          message: 'Imate novu objavu na čekanju!'
-        })
-      }
+      // if (!loggedIn) {
+      //   await sendNotification({
+      //     content: textareaText,
+      //     link,
+      //     image: uploadFile ? uploadFile : undefined,
+      //     message: 'Imate novu objavu na čekanju!'
+      //   })
+      // }
 
       isLoading(false)
       setTextareaText('')
