@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HamburgerNavbar from './HamburgerNavbar'
 
 type Props = {
@@ -10,7 +10,7 @@ const HamMenuBtn = ({ toggle, isMenuOpen }: Props) => {
   return (
     <>
       <div
-        className="flex flex-col justify-between  w-6 h-[14px] cursor-pointer"
+        className="flex flex-col justify-between lg:hidden w-6 h-[14px] cursor-pointer"
         onClick={toggle}
       >
         <div
