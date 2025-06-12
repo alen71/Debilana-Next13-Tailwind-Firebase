@@ -20,10 +20,14 @@ type Props = {
 
 const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { asPath } = useRouter()
+  const { loggedIn, setLoggedIn } = useUserLogIn()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+
+  const isNavHidden = hideNav ? 'hidden' : ''
 
   return (
     <nav
@@ -35,13 +39,13 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
           <Logo />
         </div>
 
-        <div className="hidden lg:block mx-auto">
+        {/* <div className="hidden lg:block mx-auto">
           <SearchBar hide={hideSearch} />
-        </div>
+        </div> */}
 
         <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
 
-        {/* <div className={`${isNavHidden} flex items-center lg:ml-auto`}>
+        <div className={`${isNavHidden} flex items-center lg:ml-auto`}>
           <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray dark:divide-gray text-xs xl:text-sm mr-3 xl:mr-6">
             <NavItemWrapper
               active={
@@ -75,8 +79,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
               </NavItemWrapper>
             )}
           </div>
-
-          </div> */}
+        </div>
         <div className="hidden lg:block">
           <SortTable hide={hideSortTable} />
         </div>
