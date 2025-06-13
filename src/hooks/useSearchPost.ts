@@ -19,10 +19,12 @@ export const useSearchPost = () => {
         const res = await searchRequest(query, page)
 
         const formattedHits = res.hits.map(hit => {
+          const content = (hit?._highlightResult?.content as any).value
+
           return {
             ...hit,
             id: hit.objectID,
-            content: hit?._highlightResult?.content?.value
+            content
           }
         })
 
