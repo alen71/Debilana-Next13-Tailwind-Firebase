@@ -42,14 +42,20 @@ const hamburgerLinks = [
 const HamburgerNavbar = ({ open, toggle }: Props) => {
   const { asPath } = useRouter()
   const { loggedIn } = useUserLogIn()
-  const [height, setHeight] = useState(window.innerHeight - 71)
-
-  console.log(window.innerHeight - 71)
+  const [height, setHeight] = useState(0)
 
   useEffect(() => {
+    setHeight(window?.innerHeight - 71)
+
     window.addEventListener('resize', () => {
-      setHeight(window.innerHeight - 71)
+      setHeight(window?.innerHeight - 71)
     })
+
+    return () => {
+      window.removeEventListener('resize', () => {
+        setHeight(window?.innerHeight - 71)
+      })
+    }
   }, [])
 
   return (
