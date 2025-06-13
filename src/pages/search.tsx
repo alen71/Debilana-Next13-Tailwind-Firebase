@@ -9,7 +9,6 @@ const Search = () => {
   const loader = useRef(null)
   const observer = useRef<any>()
   const [searchText, setSearchText] = useState('')
-
   const { searchResults, loading, error, next, clearSearch } = useSearchPost()
 
   const lastElementRef = useCallback(
