@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 
-import Navbar from '../components/layout/navbar/Navbar'
 import { getPosts } from '../utils/firebase/firebase-utils'
-import { IPost, PostSort, PostsStatus } from '../utils/types/posts.types'
+import { PostSort, PostsStatus } from '../utils/types/posts.types'
 import useGetPosts from '../hooks/useGetPosts'
 import Post from '../components/layout/posts/Post'
 import Spinner from '../components/shared/Spinner'
@@ -15,11 +14,7 @@ export async function getServerSideProps() {
   }
 }
 
-type Props = {
-  posts: IPost[]
-}
-
-export default function Home({ posts }: Props) {
+export default function Home() {
   const loader = useRef(null)
   const observer = useRef<any>()
 

@@ -1,29 +1,46 @@
 import { searchRequest } from '@/utils/firebase/algolia'
-import { useSearchStore } from '@/store/useSearchStore'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+import { IPost } from '@/utils/types/posts.types'
 
 export const useSearchPost = () => {
-  const setSearchResults = useSearchStore(state => state.setSearchResults)
+  const [searchResults, setSearchResults] = useState<IPost[] | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string>()
+  const [page, setPage] = useState(1)
 
-  const getSearchResults = useCallback(
+  const next = useCallback(
     async (query: string) => {
-      const res = await searchRequest(query)
+      if (query.length < 2) return
 
-      console.log('res', res)
+      setLoading(true)
+      setError(undefined)
 
-      const formattedHits = res.hits.map(hit => {
-        return {
-          ...hit,
-          content: hit?._highlightResult?.content?.value
-        }
-      })
+      try {
+        const res = await searchRequest(query, page)
 
-      console.log(formattedHits)
+        const formattedHits = res.hits.map(hit => {
+          return {
+            ...hit,
+            id: hit.objectID,
+            content: hit?._highlightResult?.content?.value
+          }
+        })
 
-      setSearchResults(formattedHits)
+        setSearchResults(prev => [...(prev || []), ...formattedHits])
+        setPage(page + 1)
+
+        setLoading(false)
+      } catch (error) {
+        setError(error as string)
+      }
     },
-    [setSearchResults]
+    [page]
   )
 
-  return { getSearchResults }
+  const clearSearch = useCallback(() => {
+    setSearchResults(null)
+    setPage(1)
+  }, [])
+
+  return { searchResults, loading, error, next, clearSearch }
 }

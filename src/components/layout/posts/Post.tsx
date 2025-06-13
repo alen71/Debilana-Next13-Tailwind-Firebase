@@ -14,6 +14,7 @@ import useGetFile from '../../../hooks/useGetFile'
 import useManagePost from '../../../hooks/useManagePost'
 import useUserLogIn from '../../../store/useUserLogIn'
 import useCopyToClipboard from '../../../hooks/useCopyToClipboard'
+import { cn } from '@/lib/utils/common'
 
 const Post = ({
   content,
@@ -65,7 +66,13 @@ const Post = ({
     asPath
   )
 
+  if (id === 'p1H2hWWDkepV04OyRG5K') {
+    console.log(content)
+  }
+
   const [question, answer] = content.split('ODGOVOR:')
+
+  console.log(id)
 
   return (
     <>
@@ -81,12 +88,11 @@ const Post = ({
       >
         <div
           datatype={id}
-          className={`${
-            managed ? 'translate-x-[-500%] absolute w-full mb-0' : ''
-          } ${
-            admin ? 'mb-6' : ''
-          } transition-transform duration-500 text-sm sm:text-base bg-white dark:bg-black dark:shadow-none
-      shadow-container-shadow text-gray dark:border-[1px] dark:border-gray  rounded-md cursor-pointer`}
+          className={cn(
+            'transition-transform duration-500 text-sm sm:text-base bg-white dark:bg-black dark:shadow-none shadow-container-shadow text-gray dark:border-[1px] dark:border-gray  rounded-md cursor-pointer',
+            managed && 'translate-x-[-500%] absolute w-full mb-0',
+            admin && 'mb-6'
+          )}
         >
           <div className="pt-3 sm:pt-4">
             <div className="flex justify-between items-center pb-3 sm:pb-4 px-4 md:px-8 text-xs md:text-sm">
@@ -117,10 +123,14 @@ const Post = ({
               <p className="text-black dark:text-white text-base md:text-lg px-4 md:px-8">
                 <p dangerouslySetInnerHTML={{ __html: question }} />
                 <br />
-                <br />
-                <p className="text-gray-text-hover rounded-sm">ODGOVOR:</p>
-                <p dangerouslySetInnerHTML={{ __html: answer }} />
-                <br />
+                {answer && (
+                  <>
+                    <br />
+                    <p className="text-gray-text-hover rounded-sm">ODGOVOR:</p>
+                    <p dangerouslySetInnerHTML={{ __html: answer }} />
+                    <br />
+                  </>
+                )}
               </p>
             </a>
             {link && link.length > 0 && (

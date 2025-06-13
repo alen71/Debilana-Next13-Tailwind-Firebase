@@ -14,13 +14,15 @@ client.setSettings({
 })
 
 export const searchRequest = (
-  query: string
+  query: string,
+  page: number
 ): Promise<SearchResponse<IPost>> => {
   return client.searchSingleIndex({
     indexName: 'debilana_content',
     searchParams: {
       facetFilters: ['content'],
-      query
+      query,
+      page
     }
   })
 }

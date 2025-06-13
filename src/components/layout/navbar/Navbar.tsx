@@ -1,11 +1,9 @@
-import { motion } from 'framer-motion'
 import Link from 'next/link'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { useState } from 'react'
 
 import HamMenuBtn from './HamMenuBtn'
 import Logo from '../../shared/Logo'
 import NavItemWrapper from '../../shared/NavItemWrapper'
-import SearchBar from '../../shared/SearchBar'
 import WriteExperience from '../../shared/WriteExperience'
 import SortTable from '../SortTable'
 import { useRouter } from 'next/router'
@@ -14,14 +12,13 @@ import { userSignOut } from '../../../utils/firebase/firebase-utils'
 
 type Props = {
   hideSortTable?: boolean
-  hideSearch?: boolean
   hideNav?: boolean
 }
 
-const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
+const Navbar = ({ hideSortTable, hideNav }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { asPath } = useRouter()
-  const { loggedIn, setLoggedIn } = useUserLogIn()
+  const { loggedIn } = useUserLogIn()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -35,15 +32,11 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
       shadow-md dark:border-b-[1px] dark:shadow-none dark:border-gray sticky top-0"
     >
       <div className="xl:container w-full mx-auto flex justify-between items-center relative">
+        <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
+
         <div className="px-3 xl:px-[18px] mx-auto lg:mx-0">
           <Logo />
         </div>
-
-        {/* <div className="hidden lg:block mx-auto">
-          <SearchBar hide={hideSearch} />
-        </div> */}
-
-        <HamMenuBtn isMenuOpen={isMenuOpen} toggle={toggleMenu} />
 
         <div className={`${isNavHidden} flex items-center lg:ml-auto`}>
           <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray dark:divide-gray text-xs xl:text-sm mr-3 xl:mr-6">
@@ -53,6 +46,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
                 !asPath.includes('/gastarbajteri') &&
                 !asPath.includes('/demokratija') &&
                 !asPath.includes('/admin-page') &&
+                !asPath.includes('/search') &&
                 !asPath.includes('/audio')
               }
             >
@@ -79,6 +73,8 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
               </NavItemWrapper>
             )}
           </div>
+
+          <WriteExperience />
         </div>
         <div className="hidden lg:block">
           <SortTable hide={hideSortTable} />

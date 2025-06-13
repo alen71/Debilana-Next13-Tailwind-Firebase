@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils/common'
 import React, { ReactNode } from 'react'
 
 type Props = {
@@ -7,15 +8,21 @@ type Props = {
 }
 
 const NavItemWrapper = ({ last, children, active }: Props) => {
-  const isLast = last ? 'pr-0' : ''
   const isActive = active ? 'text-gray' : 'text-black dark:text-white'
 
   return (
     <div
-      className={`md:px-3 xl:px-[18px] ${isLast} flex items-center text-center h-fit select-none uppercase`}
+      className={cn(
+        `md:px-3 xl:px-[18px] flex items-center text-center h-fit select-none uppercase`,
+        last && 'pr-0',
+        isActive
+      )}
     >
       <span
-        className={`${isActive} hover:text-gray dark:hover:text-gray cursor-pointer`}
+        className={cn(
+          'hover:text-gray dark:hover:text-gray cursor-pointer',
+          isActive
+        )}
       >
         {children}
       </span>
