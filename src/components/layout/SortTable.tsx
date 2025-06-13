@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import LikeSvg from '@/assets/like.svg'
-import DislikeSvg from '@/assets/dislike.svg'
 import ThemeSwitch from '../shared/ThemeSwitch'
 import ArrowUpSvg from '@/assets/arrowup.svg'
 import { useRouter } from 'next/router'
@@ -17,8 +15,11 @@ type Props = {
 const SortTable = ({ hide, toggle }: Props) => {
   const [tabs, setTabs] = useState([
     { icon: <ArrowUpSvg />, text: 'najnovije', link: 'new' },
-    { icon: <LikeSvg />, text: 'lajkovi', link: 'like' },
-    { icon: <DislikeSvg />, text: 'dislajkovi', link: 'dislike' }
+    {
+      icon: <ArrowUpSvg className="rotate-180" />,
+      text: 'najstarije',
+      link: 'old'
+    }
   ])
   const router = useRouter()
   const asPath = router.asPath
@@ -49,10 +50,10 @@ const SortTable = ({ hide, toggle }: Props) => {
             <div
               className={`${
                 (router.asPath.includes(link) &&
-                  (link === 'dislike' || link === 'new')) ||
-                (!router.asPath.includes('dislike') &&
-                  router.asPath.includes('like') &&
-                  link === 'like')
+                  (link === 'old' || link === 'new')) ||
+                (!router.asPath.includes('old') &&
+                  !router.asPath.includes('new') &&
+                  link === 'old')
                   ? 'lg:dark:text-gray lg:text-gray'
                   : ''
               } flex items-center justify-center lg:justify-start lg:pl-3 gap-3 text-black dark:text-white hover:text-gray dark:hover:text-gray`}

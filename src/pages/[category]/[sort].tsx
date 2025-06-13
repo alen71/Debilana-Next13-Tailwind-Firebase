@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useCallback, useRef } from 'react'
+
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 
-import Navbar from '../../components/layout/navbar/Navbar'
 import Post from '../../components/layout/posts/Post'
-import { IPost, PostCategory, PostSort } from '../../utils/types/posts.types'
+
 import useGetPosts from '../../hooks/useGetPosts'
 import Spinner from '../../components/shared/Spinner'
 import PageLayout from '../../components/layout/PageLayout'
+import { PostSort } from '@/utils/types/posts.types'
 
 const Sort: NextPage = () => {
   const loader = useRef(null)
@@ -17,11 +17,16 @@ const Sort: NextPage = () => {
   const router = useRouter()
   const { category, sort }: any = router.query
 
+  console.log(sort)
+
   const { next, data, loading, error } = useGetPosts({
-    sort: sort === 'new' ? 'created_at' : sort,
+    sort: PostSort.NEW,
+    order: sort === 'new' ? 'desc' : 'asc',
     category: category,
     mustBeCategory: true
   })
+
+  console.log(error)
 
   const lastElementRef = useCallback(
     (node: any) => {

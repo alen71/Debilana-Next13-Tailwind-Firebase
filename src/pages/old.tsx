@@ -13,7 +13,8 @@ const Sort: NextPage = () => {
   const observer = useRef<any>()
 
   const { next, data, loading, error } = useGetPosts({
-    sort: PostSort.NEW
+    sort: PostSort.NEW,
+    order: 'asc'
   })
 
   const lastElementRef = useCallback(

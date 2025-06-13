@@ -24,12 +24,14 @@ type Params = {
   sort: PostSort
   category?: PostCategory
   mustBeCategory?: boolean
+  order?: 'asc' | 'desc'
 }
 
 const useGetPosts = ({
   sort = PostSort.NEW,
   category,
-  mustBeCategory
+  mustBeCategory,
+  order = 'desc'
 }: Params) => {
   const [data, setData] = useState<IPost[]>([])
   const [loading, setLoading] = useState(false)
@@ -56,7 +58,7 @@ const useGetPosts = ({
         ? query(
             colRef,
             where('status', '==', PostsStatus.APPROVED),
-            orderBy(sort, 'desc'),
+            orderBy(sort, order),
             limit(limitPerPage),
             ...lastEl
           )
@@ -64,7 +66,7 @@ const useGetPosts = ({
             colRef,
             where('status', '==', PostsStatus.APPROVED),
             where('category', '==', category),
-            orderBy(sort, 'desc'),
+            orderBy(sort, order),
             limit(limitPerPage),
             ...lastEl
           )
@@ -89,7 +91,7 @@ const useGetPosts = ({
     } finally {
       setLoading(false)
     }
-  }, [sort, category, mustBeCategory])
+  }, [sort, category, mustBeCategory, order])
 
   const setCursor = useCallback(async () => {
     if (mustBeCategory && !category) return

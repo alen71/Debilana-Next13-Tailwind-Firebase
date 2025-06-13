@@ -26,6 +26,8 @@ const Navbar = ({ hideSortTable, hideNav }: Props) => {
 
   const isNavHidden = hideNav ? 'hidden' : ''
 
+  console.log(asPath)
+
   return (
     <nav
       className="flex items-center px-6 lg:px-4 xl:px-0  bg-white dark:bg-black min-h-[71px] w-full z-50 
@@ -43,7 +45,7 @@ const Navbar = ({ hideSortTable, hideNav }: Props) => {
             <NavItemWrapper
               active={
                 !asPath.includes('/debilana') &&
-                !asPath.includes('/gastarbajteri') &&
+                !asPath.includes('/gastarbajter') &&
                 !asPath.includes('/demokratija') &&
                 !asPath.includes('/admin-page') &&
                 !asPath.includes('/search') &&
@@ -55,7 +57,7 @@ const Navbar = ({ hideSortTable, hideNav }: Props) => {
             <NavItemWrapper active={asPath.includes('/debilana')}>
               <Link href="/debilana/new">Debilana</Link>
             </NavItemWrapper>
-            <NavItemWrapper active={asPath.includes('/gastarbajteri')}>
+            <NavItemWrapper active={asPath.includes('/gastarbajter')}>
               <Link href="/gastarbajteri/new">Gastarbajteri</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/demokratija')}>
