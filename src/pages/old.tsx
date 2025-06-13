@@ -1,25 +1,20 @@
-import { useCallback, useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 
-import { getPosts } from '../utils/firebase/firebase-utils'
-import { PostSort, PostsStatus } from '../utils/types/posts.types'
-import useGetPosts from '../hooks/useGetPosts'
+import { NextPage } from 'next'
+
 import Post from '../components/layout/posts/Post'
+import { PostSort } from '../utils/types/posts.types'
+import useGetPosts from '../hooks/useGetPosts'
 import Spinner from '../components/shared/Spinner'
 import PageLayout from '../components/layout/PageLayout'
 
-export async function getServerSideProps() {
-  const posts = await getPosts(PostsStatus.APPROVED)
-  return {
-    props: { posts: posts }
-  }
-}
-
-export default function Home() {
+const Sort: NextPage = () => {
   const loader = useRef(null)
   const observer = useRef<any>()
 
   const { next, data, loading, error } = useGetPosts({
-    sort: PostSort.NEW
+    sort: PostSort.NEW,
+    order: 'asc'
   })
 
   const lastElementRef = useCallback(
@@ -52,9 +47,11 @@ export default function Home() {
           </div>
         )
       })}
-      <div>{loading && <Spinner />}</div>
+      {loading && <Spinner />}
       {error && <p>Error!</p>}
       <div ref={loader} />
     </PageLayout>
   )
 }
+
+export default Sort

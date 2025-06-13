@@ -23,7 +23,7 @@ const useGetFile = (
     const listRef = fileType.startsWith('image') ? imageListRef : videoListRef
     const filesList = await listAll(listRef)
 
-    if (!filesList) return
+    if (!filesList || filesList.items.length === 0) return
 
     const fileUrl = await getDownloadURL(filesList.items[0])
 

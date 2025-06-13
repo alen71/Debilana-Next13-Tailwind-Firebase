@@ -1,11 +1,9 @@
-import { motion } from 'framer-motion'
 import Link from 'next/link'
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { useState } from 'react'
 
 import HamMenuBtn from './HamMenuBtn'
 import Logo from '../../shared/Logo'
 import NavItemWrapper from '../../shared/NavItemWrapper'
-import SearchBar from '../../shared/SearchBar'
 import WriteExperience from '../../shared/WriteExperience'
 import SortTable from '../SortTable'
 import { useRouter } from 'next/router'
@@ -14,20 +12,21 @@ import { userSignOut } from '../../../utils/firebase/firebase-utils'
 
 type Props = {
   hideSortTable?: boolean
-  hideSearch?: boolean
   hideNav?: boolean
 }
 
-const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
-  const { asPath } = useRouter()
+const Navbar = ({ hideSortTable, hideNav }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { loggedIn, setLoggedIn } = useUserLogIn()
+  const { asPath } = useRouter()
+  const { loggedIn } = useUserLogIn()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
   const isNavHidden = hideNav ? 'hidden' : ''
+
+  console.log(asPath)
 
   return (
     <nav
@@ -41,18 +40,15 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
           <Logo />
         </div>
 
-        {/* <div className="hidden lg:block mx-auto">
-          <SearchBar hide={hideSearch} />
-        </div> */}
-
         <div className={`${isNavHidden} flex items-center lg:ml-auto`}>
           <div className="h-8 hidden lg:flex items-center justify-center divide-x divide-gray dark:divide-gray text-xs xl:text-sm mr-3 xl:mr-6">
             <NavItemWrapper
               active={
                 !asPath.includes('/debilana') &&
-                !asPath.includes('/gastarbajteri') &&
+                !asPath.includes('/gastarbajter') &&
                 !asPath.includes('/demokratija') &&
                 !asPath.includes('/admin-page') &&
+                !asPath.includes('/search') &&
                 !asPath.includes('/audio')
               }
             >
@@ -61,7 +57,7 @@ const Navbar = ({ hideSortTable, hideSearch, hideNav }: Props) => {
             <NavItemWrapper active={asPath.includes('/debilana')}>
               <Link href="/debilana/new">Debilana</Link>
             </NavItemWrapper>
-            <NavItemWrapper active={asPath.includes('/gastarbajteri')}>
+            <NavItemWrapper active={asPath.includes('/gastarbajter')}>
               <Link href="/gastarbajteri/new">Gastarbajteri</Link>
             </NavItemWrapper>
             <NavItemWrapper active={asPath.includes('/demokratija')}>

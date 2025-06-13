@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useUserLogIn from '../../../store/useUserLogIn'
 import { userSignOut } from '../../../utils/firebase/firebase-utils'
 import BackgroundBlur from '../../shared/BackgroundBlur'
 import SortTable from '../SortTable'
+import { cn } from '@/lib/utils/common'
 
 type Props = {
   open: boolean
@@ -41,19 +42,35 @@ const hamburgerLinks = [
 const HamburgerNavbar = ({ open, toggle }: Props) => {
   const { asPath } = useRouter()
   const { loggedIn } = useUserLogIn()
+  const [height, setHeight] = useState(0)
+
+  useEffect(() => {
+    setHeight(window?.innerHeight - 71)
+
+    window.addEventListener('resize', () => {
+      setHeight(window?.innerHeight - 71)
+    })
+
+    return () => {
+      window.removeEventListener('resize', () => {
+        setHeight(window?.innerHeight - 71)
+      })
+    }
+  }, [])
 
   return (
     <>
       <BackgroundBlur open={open} toggle={toggle} />
       <div
-        className={`${
+        className={cn(
+          'w-full min-[450px]:w-[450px] transition-transform translate-duration-1000 z-20 fixed top-[71px] left-0  bg-white dark:bg-black py-5 block lg:hidden shadow-container-shadow dark:shadow-none overflow-y-auto',
           open ? 'translate-x-0' : 'translate-x-[-100%]'
-        } w-full min-[450px]:w-[450px] transition-transform translate-duration-1000 min-h-screen z-20 fixed top-[71px] left-0  bg-white dark:bg-black py-5 block lg:hidden shadow-container-shadow dark:shadow-none  `}
+        )}
+        style={{
+          height
+        }}
       >
-        <div className="w-full flex flex-col items-center">
-          {/* <div className="px-4 w-full flex justify-center">
-            <SearchBar />
-          </div> */}
+        <div className="w-full flex flex-col items-center min-h-screen">
           <div className="w-full border-y-[1px] divide-y-[1px] divide-gray dark:text-white text-center uppercase text-base mt-10 mb-4">
             {hamburgerLinks.map(({ href, name }) => (
               <Link
