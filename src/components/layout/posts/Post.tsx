@@ -66,13 +66,7 @@ const Post = ({
     asPath
   )
 
-  if (id === 'p1H2hWWDkepV04OyRG5K') {
-    console.log(content)
-  }
-
-  const [question, answer] = content.split('ODGOVOR:')
-
-  console.log(id)
+  const [question, answer] = content.split(/ODGOVOR[:;]/)
 
   return (
     <>

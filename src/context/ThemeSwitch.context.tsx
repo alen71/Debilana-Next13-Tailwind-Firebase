@@ -9,7 +9,6 @@ export const ThemeProvider = ({ children }: any) => {
   const [theme, setTheme] = useState('')
 
   useEffect(() => {
-    // console.log(window.matchMedia('(prefer-color-schema: dark)'))
     if (window.matchMedia('(color-schema: dark)').matches) {
       setTheme('dark')
     } else {
