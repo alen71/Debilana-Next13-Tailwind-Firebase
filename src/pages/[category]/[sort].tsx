@@ -17,8 +17,6 @@ const Sort: NextPage = () => {
   const router = useRouter()
   const { category, sort }: any = router.query
 
-  console.log(sort)
-
   const { next, data, loading, error } = useGetPosts({
     sort: PostSort.NEW,
     order: sort === 'new' ? 'desc' : 'asc',

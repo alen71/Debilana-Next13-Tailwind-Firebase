@@ -26,8 +26,6 @@ const Navbar = ({ hideSortTable, hideNav }: Props) => {
 
   const isNavHidden = hideNav ? 'hidden' : ''
 
-  console.log(asPath)
-
   return (
     <nav
       className="flex items-center px-6 lg:px-4 xl:px-0  bg-white dark:bg-black min-h-[71px] w-full z-50 
